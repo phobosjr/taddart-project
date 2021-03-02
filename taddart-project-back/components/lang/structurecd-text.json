@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_lang_structurecd_texts",
+  "info": {
+    "name": "Structurecd_text",
+    "icon": "adjust"
+  },
+  "options": {},
+  "attributes": {
+    "fr": {
+      "type": "richtext"
+    },
+    "kb": {
+      "type": "richtext"
+    }
+  }
+}
