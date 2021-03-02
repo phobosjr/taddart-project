@@ -1,0 +1,8 @@
+query{
+  header {
+    logo_title
+    big_title {
+      fr
+    }
+  }
+}
