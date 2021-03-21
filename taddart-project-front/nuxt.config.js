@@ -43,8 +43,6 @@ export default {
     'bootstrap-vue/nuxt',
     '@nuxtjs/strapi',
     '@nuxtjs/apollo',
-    '@nuxtjs/markdownit'
-
   ],
   apollo: {
     clientConfigs: {
@@ -57,16 +55,6 @@ export default {
   strapi: {
     entities: ['header'],
     url: process.env.BACKEND_URL || 'http://localhost:1337'
-  },
-
-  markdownit: {
-    preset: 'default',
-    linkify: true,
-    breaks: true,
-    use: [
-      'markdown-it-div',
-      'markdown-it-attrs'
-    ]
   },
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify

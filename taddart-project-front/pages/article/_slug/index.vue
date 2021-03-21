@@ -10,7 +10,6 @@
 
         <v-list-item class="grow">
           <v-row
-            :justify="end"
             class="w-100"
           >
             <v-col
@@ -69,7 +68,7 @@ export default {
   },
   computed: {
     article () {
-      return this.articles ? this.articles[0] : {}
+     return this.articles ? this.articles[0] : {}
     }
   }
 
