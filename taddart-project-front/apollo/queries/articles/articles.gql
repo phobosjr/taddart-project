@@ -1,0 +1,6 @@
+query {
+  articles {
+    title
+    slug
+  }
+}

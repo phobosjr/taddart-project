@@ -1,15 +1,20 @@
 <template>
-<div>
-<Header></Header>
- <nuxt/>
-</div>
+  <div>
+    <!--<Header></Header>-->
+    <div>
+      <v-container>
+        <nuxt/>
+      </v-container>
+    </div>
+  </div>
 </template>
 
 <script>
 import Header from '../components/Header.vue'
+
 export default {
-  components: { Header },
-  data () {
+  components: {Header},
+  data() {
     return {
       clipped: false,
       drawer: false,

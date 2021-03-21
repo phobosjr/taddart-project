@@ -4,9 +4,9 @@ export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     titleTemplate: '%s - taddart-project-front',
-    title: 'taddart-project-front',
+    title: 'taddart-iw',
     htmlAttrs: {
-      lang: 'en'
+      lang: 'fr'
     },
     meta: [
       { charset: 'utf-8' },
@@ -22,12 +22,11 @@ export default {
   css: [
     '@/assets/css/styles.css',
     '@/assets/css/magnific-popup.css',
-    //'@/assets/css/swiper.css',
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    
+    { src: '~/plugins/filters/dateTimeFilter/DateTimeFilter.js' },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -41,14 +40,40 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
-    'bootstrap-vue/nuxt'
+    'bootstrap-vue/nuxt',
+    '@nuxtjs/strapi',
+    '@nuxtjs/apollo',
+    '@nuxtjs/markdownit'
+
   ],
+  apollo: {
+    clientConfigs: {
+      default: {
+        httpEndpoint: process.env.BACKEND_URL || 'http://localhost:1337/graphql'
+      }
+    }
+  },
+
+  strapi: {
+    entities: ['header'],
+    url: process.env.BACKEND_URL || 'http://localhost:1337'
+  },
+
+  markdownit: {
+    preset: 'default',
+    linkify: true,
+    breaks: true,
+    use: [
+      'markdown-it-div',
+      'markdown-it-attrs'
+    ]
+  },
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
     customVariables: ['~/assets/variables.scss'],
     theme: {
-      dark: true,
+      dark: false,
       themes: {
         dark: {
           primary: colors.blue.darken2,

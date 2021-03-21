@@ -1,0 +1,7 @@
+query getArticle ($slug: String){
+  articles(where: {slug: $slug}) {
+    title
+    content
+    created_at
+  }
+}
