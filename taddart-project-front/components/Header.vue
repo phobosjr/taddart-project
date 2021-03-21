@@ -29,8 +29,7 @@
 
       <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav ml-auto">
-          <menu-item menu-label="INTRO" menu-link="#"></menu-item>
-          <menu-item menu-label="SERVICES" menu-link="#"></menu-item>
+          <menu-item menu-label="Accueil" menu-link="/"></menu-item>
         </ul>
         <span class="lang nav-item social-icons">
           <span class="fa-stack" v-if="lang === 'fr'">
@@ -46,7 +45,7 @@
         </span>
       </div>
     </nav>
-    <header id="header" class="header">
+    <header v-if="false" id="header" class="header">
       <div class="header-content">
         <div class="container">
           <div class="row">
@@ -67,19 +66,17 @@
 </template>
 <script>
 import menuItem from "~/components/menu-item/MenuItem";
-import headerQuery from '@/apollo/queries.header/header.gql'
+import headerQuery from '@/apollo/queries/header/header.gql'
 export default {
   components: { menuItem},
   async fetch (){
     this.header = await this.$strapi.find('header');
-    console.log(this.header);
-
   },
   data: () => {
     return {
       header: {},
       lang: 'kb',
-      isScrolled: false,
+      isScrolled: true,
       bigTitle: "Taddart-iw",
       subTitle:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus in urna ultricies, aliquam tortor eu, volutpat nibh. In facilisis, velit eget fermentum lobortis, lorem tellus pretium mauris, sed porttitor nulla odio eu ligula. Aenean metus arcu, suscipit a luctus et, volutpat eu est. Vivamus mi ex, malesuada eu tincidunt eget, placerat vitae ex. Suspendisse efficitur non lectus eget accumsan. Etiam sit amet erat at eros efficitur tempus. Nunc maximus porta eros eu placerat. Sed semper sagittis ex eu viverra. Maecenas consequat, sapien ut tincidunt fringilla, purus orci placerat urna, eget iaculis erat dolor et tortor.",
@@ -114,6 +111,8 @@ export default {
 <style lang="scss" scoped>
 
 .Header {
+
+  display: inline-block;
 
   .lang {
     .lang_kb {
