@@ -14,6 +14,7 @@ const Editor = ({ onChange, name, value }) => {
       ['link', 'image'],
       ['clean']
     ],
+    imageResize: ImageResize
   }
 
   return (
