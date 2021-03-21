@@ -1250,6 +1250,49 @@
                 "type": "string"
               }
             }
+          },
+          "articles": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id",
+                "title",
+                "langue"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "slug": {
+                  "type": "uid"
+                },
+                "content": {
+                  "type": "string"
+                },
+                "langue": {
+                  "type": "string",
+                  "enum": [
+                    "KB",
+                    "FR"
+                  ]
+                },
+                "author": {
+                  "type": "string"
+                },
+                "published_at": {
+                  "type": "string"
+                },
+                "created_by": {
+                  "type": "string"
+                },
+                "updated_by": {
+                  "type": "string"
+                }
+              }
+            }
           }
         }
       },
@@ -1291,6 +1334,12 @@
           },
           "role": {
             "type": "string"
+          },
+          "articles": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           },
           "created_by": {
             "type": "string"
