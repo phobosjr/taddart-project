@@ -8,7 +8,7 @@
       >{{ article.title }}</v-banner>
     </div>
     <div>
-      <v-container tag="p" v-html="$md.render(article.content)">
+      <v-container tag="p" v-html="article.content">
       </v-container>
     </div>
     <div class="d-flex flex-row-reverse">
