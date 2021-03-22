@@ -1,0 +1,8 @@
+query {
+  notFoundPage {
+    subTitle {
+      fr
+      kb
+    }
+  }
+}

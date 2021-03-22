@@ -1,58 +1,45 @@
 <template>
-  <v-container v-if="article">
-    <v-card
-      tile
-    >
-      <v-card-title class="font-weight-bolder text-uppercase mb-4">{{ article.title }}</v-card-title>
-      <v-card-text class="text-justify w-75 m-auto" v-html="article.content"></v-card-text>
-      <v-card-actions
-        class="d-flex">
-
-        <v-list-item class="grow">
-          <v-row
-            class="w-100"
+  <v-container
+    class="Article" v-if="article">
+    <div>
+      <h1  class="font-weight-bolder text-uppercase mb-4">{{ article.title }}</h1>
+      <div
+        class="info-tags w-100">
+        <div>
+          <v-icon
+          color="5F9EA0"
+          size="45"
           >
-            <v-col
-              class="d-inline-flex"
-            md="2"
-            >
-              <v-list-item-avatar color="grey darken-3">
-                <v-img
-                  class="elevation-6"
-                  alt=""
-                  src="https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"
-                ></v-img>
-              </v-list-item-avatar>
-              <v-list-item-content>
-                <v-list-item-title>Evan You</v-list-item-title>
-              </v-list-item-content>
-            </v-col>
-            <v-col class="d-inline-flex"
-            md="2">
-              <v-icon class="mr-1">
-                mdi-calendar-range
-              </v-icon>
-              <v-list-item-content>
-                <v-list-item-title>{{ article.created_at | formatDate }}</v-list-item-title>
-              </v-list-item-content>
-            </v-col>
+            mdi-account-circle
+          </v-icon>
+        </div>
+
+        <div class="grow">
+          <v-row
+            class="w-100 justify-content-end d-flex flex-column"
+          >
+            <div class="tag d-inline-flex">
+              <span>By :</span>
+              <span>
+                <strong>Evan You</strong>
+              </span>
+            </div>
+            <div class="tag d-inline-flex">
+                <span>{{ article.created_at | formatDate }}</span>
+            </div>
 
           </v-row>
-
-          <v-row
-            align="center"
-            justify="end"
-          >
-
-          </v-row>
-        </v-list-item>
-      </v-card-actions>
-    </v-card>
+        </div>
+      </div>
+      <div class="text-justify w-75" v-html="article.content"></div>
+    </div>
   </v-container>
+  <not-found-error v-else ></not-found-error>
 </template>
 
 <script>
 import articleQuery from '@/apollo/queries/article/article.gql'
+
 
 export default {
   name: "index",
@@ -75,6 +62,24 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+.Article {
+  div {
+    box-shadow: none !important;
+
+    .info-tags {
+      display: grid;
+      grid-template-columns: 1fr 6fr 11fr;
+
+      padding: 5px;
+      margin-bottom: 15px;
+
+      .tag {
+        margin: 5px;
+      }
+    }
+  }
+}
+
 
 </style>
