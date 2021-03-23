@@ -35,8 +35,7 @@
     "author": {
       "columnName": "author",
       "plugin": "users-permissions",
-      "model": "user",
-      "via": "articles"
+      "model": "user"
     }
   }
 }
