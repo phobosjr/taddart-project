@@ -1,9 +1,9 @@
 <template>
 <div>
   <v-list>
-    <v-list-item v-for="article in articles" link :href="'/article/' + article.slug" :key="article.title">
+    <nuxt-link v-for="article in articles" link :to="'article/'+article.slug" :key="article.title">
       <v-list-item-title>{{ article.title }}</v-list-item-title>
-    </v-list-item>
+    </nuxt-link>
   </v-list>
 
 </div>

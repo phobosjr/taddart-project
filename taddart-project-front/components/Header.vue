@@ -1,10 +1,10 @@
 <template>
-  <div :class="['Header', {'scrolled': isScrolled}, 'td-transition']"
+  <div :class="['Header', {'scrolled': isScrolled}, 'td-transition', {'small-height': smallHeader}]"
        :style="{backgroundImage: 'url(http://localhost:1337'+header.background_image[0].url+')'}">
     <nav class="Header__navbar navbar navbar-light position-fixed td-transition">
-      <a class="Header__navbar__logo navbar-brand" href="/">
+      <nuxt-link class="Header__navbar__logo navbar-brand" to="/">
         <img :src="'http://localhost:1337'+header.logo_image.url" width="30" height="30" class="d-inline-block align-top td-transition" alt="">
-      </a>
+      </nuxt-link>
     </nav>
 
   </div>
@@ -12,6 +12,9 @@
 <script>
 import headerQuery from '@/apollo/queries/header/header.gql'
 export default {
+props: {
+  smallHeader: {type: Boolean, required: false, default: false}
+},
 
   data: ()=>{
     return {
@@ -76,6 +79,10 @@ export default {
 }
 .td-transition {
   transition: all 0.25s cubic-bezier(.6,.04,.98,.34);
+}
+
+.small-height {
+  height: 16em;
 }
 
 

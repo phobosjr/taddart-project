@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Header></Header>
+    <Header :small-header="true"></Header>
     <div>
         <nuxt/>
     </div>
