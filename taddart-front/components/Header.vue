@@ -9,10 +9,14 @@
 
       <div class="Header__navbar__lang">
         <span>
-          <img class="Header__navbar__lang__img Header__navbar__lang__img_current" src="~/assets/images/header/kb-lang-32-32.png" alt="KB">
-          </span>
+          <img :class="['Header__navbar__lang__img', {'Header__navbar__lang__img_current': locale === 'kb'}]"
+               src="~/assets/images/header/kb-lang-32-32.png" alt="KB"
+          @click="switchLocale('kb')">
+        </span>
         <span>
-          <img class="Header__navbar__lang__img" src="~/assets/images/header/fr-lang.svg" alt="FR">
+          <img :class="['Header__navbar__lang__img', {'Header__navbar__lang__img_current': locale === 'fr'}]"
+               src="~/assets/images/header/fr-lang.svg" alt="FR"
+               @click="switchLocale('fr')">
         </span>
       </div>
     </nav>
@@ -20,6 +24,7 @@
 </template>
 <script>
 import headerQuery from '@/apollo/queries/header/header.gql'
+import {mapGetters} from 'vuex'
 
 export default {
   props: {
@@ -30,6 +35,11 @@ export default {
     return {
       isScrolled: false
     }
+  },
+  computed: {
+    ...mapGetters({
+      locale: 'locale'
+    })
   },
   apollo: {
     header: {
@@ -43,6 +53,9 @@ export default {
         ? (this.isScrolled = false)
         : (this.isScrolled = true);
     },
+    switchLocale (lang) {
+      this.$store.dispatch('switchLocale', lang);
+    }
   },
   beforeMount() {
     window.addEventListener('scroll', this.handleScroll);
@@ -97,6 +110,7 @@ export default {
         height: 20px;
         cursor: pointer;
         opacity: .25;
+
         &.Header__navbar__lang__img_current {
           opacity: 1;
           cursor: default;

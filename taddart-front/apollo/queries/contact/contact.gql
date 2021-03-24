@@ -19,5 +19,9 @@ query {
     background_image {
       url
     }
+    title_label {
+      fr
+      kb
+    }
   }
 }

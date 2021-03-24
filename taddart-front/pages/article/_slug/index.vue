@@ -1,6 +1,6 @@
 <template>
-  <v-container
-    class="Article" v-if="article">
+  <div
+    :class="['Article', 'p-5']" v-if="article">
     <div>
       <h1  class="font-weight-bolder text-uppercase mb-4">{{ article.title }}</h1>
       <div
@@ -33,7 +33,7 @@
       </div>
       <div class="text-justify w-75" v-html="article.content"></div>
     </div>
-  </v-container>
+  </div>
   <not-found-error v-else ></not-found-error>
 </template>
 
@@ -58,15 +58,12 @@ export default {
      return this.articles ? this.articles[0] : {}
     }
   }
-
 }
 </script>
 
 <style lang="scss" scoped>
 .Article {
   div {
-    box-shadow: none !important;
-
     .info-tags {
       display: grid;
       grid-template-columns: 1fr 6fr 11fr;
