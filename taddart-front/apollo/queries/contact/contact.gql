@@ -1,0 +1,23 @@
+query {
+  contact{
+    name_label {
+      fr
+      kb
+    }
+    email_label {
+      fr
+      kb
+    }
+    message_label{
+      fr
+      kb
+    }
+    button_label {
+      fr
+      kb
+    }
+    background_image {
+      url
+    }
+  }
+}
