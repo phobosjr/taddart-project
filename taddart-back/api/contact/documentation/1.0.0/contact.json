@@ -453,6 +453,23 @@
               }
             }
           },
+          "title_label": {
+            "type": "object",
+            "required": [
+              "id"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "fr": {
+                "type": "string"
+              },
+              "kb": {
+                "type": "string"
+              }
+            }
+          },
           "published_at": {
             "type": "string",
             "format": "date-time"
@@ -513,6 +530,23 @@
             }
           },
           "message_label": {
+            "type": "object",
+            "required": [
+              "id"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "fr": {
+                "type": "string"
+              },
+              "kb": {
+                "type": "string"
+              }
+            }
+          },
+          "title_label": {
             "type": "object",
             "required": [
               "id"
