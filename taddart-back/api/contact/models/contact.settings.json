@@ -1,0 +1,51 @@
+{
+  "kind": "singleType",
+  "collectionName": "contacts",
+  "info": {
+    "name": "contact",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "name_label": {
+      "type": "component",
+      "repeatable": false,
+      "component": "lang.simple-text"
+    },
+    "email_label": {
+      "type": "component",
+      "repeatable": false,
+      "component": "lang.simple-text"
+    },
+    "button_label": {
+      "type": "component",
+      "repeatable": false,
+      "component": "lang.simple-text"
+    },
+    "background_image": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ],
+      "plugin": "upload",
+      "required": false
+    },
+    "message_label": {
+      "type": "component",
+      "repeatable": false,
+      "component": "lang.simple-text"
+    },
+    "title_label": {
+      "type": "component",
+      "repeatable": false,
+      "component": "lang.simple-text"
+    }
+  }
+}

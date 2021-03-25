@@ -1,0 +1,10 @@
+query{
+  header {
+    background_image {
+      url
+    }
+    logo_image {
+      url
+    }
+  }
+}
