@@ -46,6 +46,16 @@
       "type": "component",
       "repeatable": false,
       "component": "lang.simple-text"
+    },
+    "alert_success_label": {
+      "type": "component",
+      "repeatable": false,
+      "component": "lang.simple-text"
+    },
+    "alert_failed_label": {
+      "type": "component",
+      "repeatable": false,
+      "component": "lang.simple-text"
     }
   }
 }
