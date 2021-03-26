@@ -1,0 +1,13 @@
+query {
+  gallery{
+    images {
+      picture {
+        formats
+      }
+      caption {
+        title
+        description
+      }
+    }
+  }
+}

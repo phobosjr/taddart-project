@@ -19,7 +19,7 @@ export default {
 <style lang="scss" scoped>
 .Default-layout {
   .Default-layout__main {
-    height: 100vh;
+    height: 100%;
   }
 }
 </style>

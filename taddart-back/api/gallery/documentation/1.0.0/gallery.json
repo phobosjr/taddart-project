@@ -1,18 +1,18 @@
 {
   "paths": {
-    "/contact": {
+    "/gallery": {
       "get": {
         "deprecated": false,
-        "description": "Find all the contact's records",
+        "description": "Find all the gallery's records",
         "responses": {
           "200": {
-            "description": "Retrieve contact document(s)",
+            "description": "Retrieve gallery document(s)",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Contact"
+                    "$ref": "#/components/schemas/Gallery"
                   }
                 }
               }
@@ -51,7 +51,7 @@
         },
         "summary": "",
         "tags": [
-          "Contact"
+          "Gallery"
         ],
         "parameters": [
           {
@@ -194,14 +194,14 @@
       },
       "put": {
         "deprecated": false,
-        "description": "Update a single contact record",
+        "description": "Update a single gallery record",
         "responses": {
           "200": {
-            "description": "Retrieve contact document(s)",
+            "description": "Retrieve gallery document(s)",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Contact"
+                  "$ref": "#/components/schemas/Gallery"
                 }
               }
             }
@@ -239,7 +239,7 @@
         },
         "summary": "",
         "tags": [
-          "Contact"
+          "Gallery"
         ],
         "requestBody": {
           "description": "",
@@ -247,7 +247,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewContact"
+                "$ref": "#/components/schemas/NewGallery"
               }
             }
           }
@@ -256,10 +256,10 @@
       },
       "delete": {
         "deprecated": false,
-        "description": "Delete a single contact record",
+        "description": "Delete a single gallery record",
         "responses": {
           "200": {
-            "description": "deletes a single contact based on the ID supplied",
+            "description": "deletes a single gallery based on the ID supplied",
             "content": {
               "application/json": {
                 "schema": {
@@ -302,7 +302,7 @@
         },
         "summary": "",
         "tags": [
-          "Contact"
+          "Gallery"
         ],
         "parameters": []
       }
@@ -310,197 +310,111 @@
   },
   "components": {
     "schemas": {
-      "Contact": {
+      "Gallery": {
         "required": [
-          "id"
+          "id",
+          "images"
         ],
         "properties": {
           "id": {
             "type": "string"
           },
-          "name_label": {
-            "type": "object",
-            "required": [
-              "id"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "fr": {
-                "type": "string"
-              },
-              "kb": {
-                "type": "string"
-              }
-            }
-          },
-          "email_label": {
-            "type": "object",
-            "required": [
-              "id"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "fr": {
-                "type": "string"
-              },
-              "kb": {
-                "type": "string"
-              }
-            }
-          },
-          "button_label": {
-            "type": "object",
-            "required": [
-              "id"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "fr": {
-                "type": "string"
-              },
-              "kb": {
-                "type": "string"
-              }
-            }
-          },
-          "background_image": {
-            "required": [
-              "id",
-              "name",
-              "hash",
-              "mime",
-              "size",
-              "url",
-              "provider"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "name": {
-                "type": "string"
-              },
-              "alternativeText": {
-                "type": "string"
-              },
-              "caption": {
-                "type": "string"
-              },
-              "width": {
-                "type": "integer"
-              },
-              "height": {
-                "type": "integer"
-              },
-              "formats": {
-                "type": "object"
-              },
-              "hash": {
-                "type": "string"
-              },
-              "ext": {
-                "type": "string"
-              },
-              "mime": {
-                "type": "string"
-              },
-              "size": {
-                "type": "number"
-              },
-              "url": {
-                "type": "string"
-              },
-              "previewUrl": {
-                "type": "string"
-              },
-              "provider": {
-                "type": "string"
-              },
-              "provider_metadata": {
-                "type": "object"
-              },
-              "related": {
-                "type": "string"
-              },
-              "created_by": {
-                "type": "string"
-              },
-              "updated_by": {
-                "type": "string"
-              }
-            }
-          },
-          "message_label": {
-            "type": "object",
-            "required": [
-              "id"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "fr": {
-                "type": "string"
-              },
-              "kb": {
-                "type": "string"
-              }
-            }
-          },
-          "title_label": {
-            "type": "object",
-            "required": [
-              "id"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "fr": {
-                "type": "string"
-              },
-              "kb": {
-                "type": "string"
-              }
-            }
-          },
-          "alert_success_label": {
-            "type": "object",
-            "required": [
-              "id"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "fr": {
-                "type": "string"
-              },
-              "kb": {
-                "type": "string"
-              }
-            }
-          },
-          "alert_failed_label": {
-            "type": "object",
-            "required": [
-              "id"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "fr": {
-                "type": "string"
-              },
-              "kb": {
-                "type": "string"
+          "images": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "id",
+                "picture"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "picture": {
+                  "required": [
+                    "id",
+                    "name",
+                    "hash",
+                    "mime",
+                    "size",
+                    "url",
+                    "provider"
+                  ],
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "alternativeText": {
+                      "type": "string"
+                    },
+                    "caption": {
+                      "type": "string"
+                    },
+                    "width": {
+                      "type": "integer"
+                    },
+                    "height": {
+                      "type": "integer"
+                    },
+                    "formats": {
+                      "type": "object"
+                    },
+                    "hash": {
+                      "type": "string"
+                    },
+                    "ext": {
+                      "type": "string"
+                    },
+                    "mime": {
+                      "type": "string"
+                    },
+                    "size": {
+                      "type": "number"
+                    },
+                    "url": {
+                      "type": "string"
+                    },
+                    "previewUrl": {
+                      "type": "string"
+                    },
+                    "provider": {
+                      "type": "string"
+                    },
+                    "provider_metadata": {
+                      "type": "object"
+                    },
+                    "related": {
+                      "type": "string"
+                    },
+                    "created_by": {
+                      "type": "string"
+                    },
+                    "updated_by": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "caption": {
+                  "type": "object",
+                  "required": [
+                    "id"
+                  ],
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "title": {
+                      "type": "string"
+                    },
+                    "description": {
+                      "type": "string"
+                    }
+                  }
+                }
               }
             }
           },
@@ -510,124 +424,107 @@
           }
         }
       },
-      "NewContact": {
+      "NewGallery": {
+        "required": [
+          "images"
+        ],
         "properties": {
-          "name_label": {
-            "type": "object",
-            "required": [
-              "id"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "fr": {
-                "type": "string"
-              },
-              "kb": {
-                "type": "string"
-              }
-            }
-          },
-          "email_label": {
-            "type": "object",
-            "required": [
-              "id"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "fr": {
-                "type": "string"
-              },
-              "kb": {
-                "type": "string"
-              }
-            }
-          },
-          "button_label": {
-            "type": "object",
-            "required": [
-              "id"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "fr": {
-                "type": "string"
-              },
-              "kb": {
-                "type": "string"
-              }
-            }
-          },
-          "message_label": {
-            "type": "object",
-            "required": [
-              "id"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "fr": {
-                "type": "string"
-              },
-              "kb": {
-                "type": "string"
-              }
-            }
-          },
-          "title_label": {
-            "type": "object",
-            "required": [
-              "id"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "fr": {
-                "type": "string"
-              },
-              "kb": {
-                "type": "string"
-              }
-            }
-          },
-          "alert_success_label": {
-            "type": "object",
-            "required": [
-              "id"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "fr": {
-                "type": "string"
-              },
-              "kb": {
-                "type": "string"
-              }
-            }
-          },
-          "alert_failed_label": {
-            "type": "object",
-            "required": [
-              "id"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "fr": {
-                "type": "string"
-              },
-              "kb": {
-                "type": "string"
+          "images": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "id",
+                "picture"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "picture": {
+                  "required": [
+                    "id",
+                    "name",
+                    "hash",
+                    "mime",
+                    "size",
+                    "url",
+                    "provider"
+                  ],
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "alternativeText": {
+                      "type": "string"
+                    },
+                    "caption": {
+                      "type": "string"
+                    },
+                    "width": {
+                      "type": "integer"
+                    },
+                    "height": {
+                      "type": "integer"
+                    },
+                    "formats": {
+                      "type": "object"
+                    },
+                    "hash": {
+                      "type": "string"
+                    },
+                    "ext": {
+                      "type": "string"
+                    },
+                    "mime": {
+                      "type": "string"
+                    },
+                    "size": {
+                      "type": "number"
+                    },
+                    "url": {
+                      "type": "string"
+                    },
+                    "previewUrl": {
+                      "type": "string"
+                    },
+                    "provider": {
+                      "type": "string"
+                    },
+                    "provider_metadata": {
+                      "type": "object"
+                    },
+                    "related": {
+                      "type": "string"
+                    },
+                    "created_by": {
+                      "type": "string"
+                    },
+                    "updated_by": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "caption": {
+                  "type": "object",
+                  "required": [
+                    "id"
+                  ],
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "title": {
+                      "type": "string"
+                    },
+                    "description": {
+                      "type": "string"
+                    }
+                  }
+                }
               }
             }
           },
@@ -647,7 +544,7 @@
   },
   "tags": [
     {
-      "name": "Contact"
+      "name": "Gallery"
     }
   ]
 }

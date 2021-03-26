@@ -18,7 +18,9 @@
     "graphql": "^15.5.0",
     "nuxt": "^2.14.12",
     "ufo": "^0.6.10",
-    "vue": "^2.6.12"
+    "vee-validate": "^4.2.3",
+    "vue": "^2.6.12",
+    "vue-cool-lightbox": "^2.7.1"
   },
   "devDependencies": {
     "@nuxtjs/vuetify": "^1.11.3",

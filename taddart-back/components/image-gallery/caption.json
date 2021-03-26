@@ -1,0 +1,17 @@
+{
+  "collectionName": "components_image_gallery_captions",
+  "info": {
+    "name": "caption",
+    "icon": "angry",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    }
+  }
+}
