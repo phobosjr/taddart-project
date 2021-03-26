@@ -6,18 +6,32 @@
         <img :src="'http://localhost:1337'+header.logo_image.url" width="30" height="30"
              class="Header__navbar__logo__img d-inline-block align-top td-transition" alt="">
       </nuxt-link>
+      <div class="Header__menu d-flex justify-content-end">
+        <div class="Header__menu__item">
+          <a href="/">
+            Accueil
+          </a>
 
-      <div class="Header__navbar__lang">
+          <a href="/gallery">
+            Gallery
+          </a>
+
+          <a href="/contact">
+            Contact
+          </a>
+        </div>
+        <div class="Header__navbar__lang">
         <span>
           <img :class="['Header__navbar__lang__img', {'Header__navbar__lang__img_current': locale === 'kb'}]"
                src="~/assets/images/header/kb-lang-32-32.png" alt="KB"
-          @click="switchLocale('kb')">
+               @click="switchLocale('kb')">
         </span>
-        <span>
+          <span>
           <img :class="['Header__navbar__lang__img', {'Header__navbar__lang__img_current': locale === 'fr'}]"
                src="~/assets/images/header/fr-lang.svg" alt="FR"
                @click="switchLocale('fr')">
         </span>
+        </div>
       </div>
     </nav>
   </div>
@@ -97,6 +111,10 @@ export default {
     background-color: rgba(96, 168, 239, 0.38) !important;
     width: 100%;
 
+    @media screen and (max-width: 992px){
+      padding: 0 53px;
+    }
+
     .Header__navbar__logo {
       .Header__navbar__logo__img {
         width: 100px;
@@ -110,6 +128,7 @@ export default {
         height: 20px;
         cursor: pointer;
         opacity: .25;
+        border-radius: 10px;
 
         &.Header__navbar__lang__img_current {
           opacity: 1;
@@ -117,6 +136,11 @@ export default {
         }
       }
     }
+  }
+
+  &__menu__item {
+    margin-right: 10px;
+    text-transform: uppercase;
   }
 }
 
