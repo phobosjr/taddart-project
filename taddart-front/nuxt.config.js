@@ -25,6 +25,7 @@ export default {
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     { src: '~/plugins/filters/dateTimeFilter/DateTimeFilter.js' },
+    { src: '~/plugins/gallery.js', ssr:true },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -46,8 +47,7 @@ export default {
     clientConfigs: {
       default: {
         httpEndpoint: process.env.BACKEND_URL || 'http://localhost:1337/graphql'
-      },
-      errorHandler: '~/plugins/apolloErrorHandler/errorHandler.js'
+      }
     }
   },
 
@@ -67,6 +67,6 @@ export default {
   },
 
   server: {
-    // host: '0.0.0.0',
+    host: '0.0.0.0',
   }
 }

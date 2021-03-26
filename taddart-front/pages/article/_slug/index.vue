@@ -63,6 +63,7 @@ export default {
 
 <style lang="scss" scoped>
 .Article {
+  min-height: 100vh;
   div {
     .info-tags {
       display: grid;
