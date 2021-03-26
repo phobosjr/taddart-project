@@ -5,16 +5,21 @@
       <h1>{{ contact.title_label[locale] }}</h1>
     </div>
 
-    <form class="Contact__form m-auto p-3">
+    <v-form class="Contact__form m-auto p-3"
+            ref="form"
+            v-model="valid"
+            lazy-validation>
       <v-text-field
         v-model="name"
         :label="contact.name_label[locale]"
+        :rules="nameRules"
         required
       ></v-text-field>
 
       <v-text-field
         v-model="email"
         :label="contact.email_label[locale]"
+        :rules="emailRules"
         required
       ></v-text-field>
 
@@ -29,11 +34,29 @@
           elevation="2"
           large
           class=""
+          @click="submit()"
         >
           {{contact.button_label[locale]}}
         </v-btn>
       </div>
-    </form>
+      <div class="Contact__form__alert p-2">
+        <v-alert
+          dense
+          outlined
+          type="success"
+          dismissible
+          v-if="alertSuccess"
+        >{{contact.alert_success_label[locale]}}</v-alert>
+
+        <v-alert
+          dense
+          outlined
+          type="success"
+          dismissible
+          v-if="alertFailed"
+        >{{contact.alert_failed_label[locale]}}</v-alert>
+      </div>
+    </v-form>
 
   </div>
 
@@ -54,13 +77,43 @@ export default {
     return {
       name: '',
       email: '',
-      message: ''
+      message: '',
+      alertSuccess: false,
+      alertFailed: false,
+      nameRules: [
+        v => !!v || 'Name is required',
+        v => v.length <= 10 || 'Name must be less than 10 characters',
+      ],
+      emailRules: [
+        v => !!v || 'E-mail is required',
+        v => /.+@.+/.test(v) || 'E-mail must be valid',
+      ],
+      valid: true
     }
   },
   apollo: {
     contact: {
       prefetch: true,
-      query: contactQuery
+      query: contactQuery,
+      error(error){
+        console.log('error tetstsst',error);
+      }
+    }
+  },
+  methods: {
+    submit () {
+      if (! this.$refs.form.validate()){
+        return;
+      }
+      this.$strapi.create('contact-messages',{
+        name:this.name,
+        email: this.email,
+        message: this.message,
+      }).then(()=>{
+        this.alertSuccess = true;
+      }).catch(()=> {
+        this.alertFailed = true;
+      })
     }
   }
 }

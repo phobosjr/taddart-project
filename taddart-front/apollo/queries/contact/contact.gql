@@ -23,5 +23,9 @@ query {
       fr
       kb
     }
+    alert_success_label {
+      fr
+      kb
+    }
   }
 }

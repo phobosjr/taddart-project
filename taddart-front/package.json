@@ -18,6 +18,7 @@
     "graphql": "^15.5.0",
     "nuxt": "^2.14.12",
     "ufo": "^0.6.10",
+    "vee-validate": "^4.2.3",
     "vue": "^2.6.12"
   },
   "devDependencies": {
