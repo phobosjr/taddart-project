@@ -1,0 +1,27 @@
+{
+  "collectionName": "components_image_gallery_images",
+  "info": {
+    "name": "image",
+    "icon": "chalkboard-teacher",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "picture": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "files",
+        "images",
+        "videos"
+      ],
+      "plugin": "upload",
+      "required": true
+    },
+    "caption": {
+      "type": "component",
+      "repeatable": false,
+      "component": "image-gallery.caption"
+    }
+  }
+}
