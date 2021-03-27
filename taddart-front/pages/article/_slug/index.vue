@@ -39,8 +39,6 @@
 
 <script>
 import articleQuery from '@/apollo/queries/article/article.gql'
-
-
 export default {
   name: "index",
   layout: 'layoutWithSmallHeader',

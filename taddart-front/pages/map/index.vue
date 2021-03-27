@@ -7,6 +7,12 @@
                class="Map__svg__polygon"></polygon>
       <polygon points="864,505,808,659,495,658,491,450,677,336,724,460" v-tooltip="'Tassoukit'"
                class="Map__svg__polygon"></polygon>
+      <polygon points="705,396,672,312,498,237,519,92,648,81,853,92,821,327,728,314,711,372" v-tooltip="'Taddart oufella'"
+               class="Map__svg__polygon"></polygon>
+      <polygon points="824,326,852,95,1155,105,1108,325,945,353" v-tooltip="'Tighilt umezzir'"
+               class="Map__svg__polygon"></polygon>
+      <polygon points="496,238,354,287,491,449,678,336,667,312" v-tooltip="'Igherbiyen'"
+               class="Map__svg__polygon"></polygon>
     </svg>
   </div>
 </template>
