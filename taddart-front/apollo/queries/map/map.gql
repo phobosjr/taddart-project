@@ -1,0 +1,8 @@
+query {
+  map {
+    title {
+      fr
+      kb
+    }
+  }
+}
