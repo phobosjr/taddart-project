@@ -1,6 +1,6 @@
 <template>
   <div :class="['Header', {'scrolled': isScrolled}, 'td-transition', {'small-height': smallHeader}]"
-       :style="{backgroundImage: 'url(http://localhost:1337'+header.background_image[0].url+')'}">
+       :style="{backgroundImage: 'url()'}">
     <nav class="Header__navbar navbar navbar-light position-fixed td-transition">
       <nuxt-link class="Header__navbar__logo navbar-brand" to="/">
         <img :src="'http://localhost:1337'+header.logo_image.url" width="30" height="30"
@@ -34,6 +34,11 @@
         </div>
       </div>
     </nav>
+    <ul class="Header__slider">
+      <li v-for="(imageSlider, index) in this.header.background_image"
+          :style="{backgroundImage: 'url(http://localhost:1337'+imageSlider.url+')', animationDelay: (index+1)*2 +'s'}"
+          class="Header__slider__img"></li>
+    </ul>
   </div>
 </template>
 <script>
@@ -67,7 +72,7 @@ export default {
         ? (this.isScrolled = false)
         : (this.isScrolled = true);
     },
-    switchLocale (lang) {
+    switchLocale(lang) {
       this.$store.dispatch('switchLocale', lang);
     }
   },
@@ -76,7 +81,7 @@ export default {
   },
   beforeDestroy() {
     window.removeEventListener('scroll', this.handleScroll);
-  },
+  }
 };
 </script>
 <style lang="scss" scoped>
@@ -105,18 +110,19 @@ export default {
     }
   }
 
-  .Header__navbar {
+  &__navbar {
     height: 120px;
     padding: 0 204px;
     background-color: rgba(96, 168, 239, 0.38) !important;
     width: 100%;
+    z-index: 999;
 
-    @media screen and (max-width: 992px){
+    @media screen and (max-width: 992px) {
       padding: 0 53px;
     }
 
-    .Header__navbar__logo {
-      .Header__navbar__logo__img {
+    &__logo {
+      &__img {
         width: 100px;
         height: 100px;
       }
@@ -138,6 +144,27 @@ export default {
     }
   }
 
+  &__slider {
+    position: relative;
+    margin-bottom: 0;
+    width: 100%;
+    height: 100%;
+
+    &__img {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      background-size: cover;
+      list-style-type: none;
+      z-index: 1;
+      opacity: 0;
+      animation-name: fade;
+      animation-iteration-count: infinite;
+      left: 0;
+      right: 0;
+    }
+  }
+
   &__menu__item {
     margin-right: 10px;
     text-transform: uppercase;
@@ -151,6 +178,22 @@ export default {
 .small-height {
   height: 16em;
 }
-
+@-webkit-keyframes fade {
+  0%{
+    opacity: 1;
+  }
+  15% {
+    opacity:1;
+  }
+  25%{
+    opacity: 0;
+  }
+  90% {
+    opacity:0;
+  }
+  100% {
+    opacity:1;
+  }
+}
 
 </style>
