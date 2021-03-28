@@ -1,5 +1,3 @@
-import colors from 'vuetify/es5/util/colors'
-
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
@@ -9,12 +7,12 @@ export default {
       lang: 'fr'
     },
     meta: [
-      { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' }
+      {charset: 'utf-8'},
+      {name: 'viewport', content: 'width=device-width, initial-scale=1'},
+      {hid: 'description', name: 'description', content: ''}
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      {rel: 'icon', type: 'image/x-icon', href: '/favicon.ico'}
     ]
   },
 
@@ -26,9 +24,9 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    { src: '~/plugins/filters/dateTimeFilter/DateTimeFilter.js' },
-    { src: '~/plugins/gallery.js', ssr:true },
-    { src: '~/plugins/tooltip.js', ssr:true },
+    {src: '~/plugins/filters/dateTimeFilter/DateTimeFilter.js'},
+    {src: '~/plugins/gallery.js', ssr: true},
+    {src: '~/plugins/tooltip.js', ssr: true},
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -45,7 +43,29 @@ export default {
     'bootstrap-vue/nuxt',
     '@nuxtjs/strapi',
     '@nuxtjs/apollo',
+    ['nuxt-i18n', {
+      strategy: 'prefix_except_default',
+      defaultLocale: 'kb',
+    }]
   ],
+  i18n: {
+    locales: [
+      {
+        code: 'kb',
+        file: 'kb-KB.js'
+      },
+      {
+        code: 'fr',
+        file: 'fr-FR.js'
+      }
+    ],
+    lazy: true,
+    langDir: 'lang/',
+    defaultLocale: 'kb',
+    vueI18n: {
+      fallbackLocale: 'kb',
+    }
+  },
   apollo: {
     clientConfigs: {
       default: {
@@ -66,8 +86,7 @@ export default {
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {
-  },
+  build: {},
 
   server: {
     host: '0.0.0.0',
