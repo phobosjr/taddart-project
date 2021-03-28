@@ -20,12 +20,14 @@ export default {
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
+    '@/assets/css/tooltip.scss',
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     { src: '~/plugins/filters/dateTimeFilter/DateTimeFilter.js' },
     { src: '~/plugins/gallery.js', ssr:true },
+    { src: '~/plugins/tooltip.js', ssr:true },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
