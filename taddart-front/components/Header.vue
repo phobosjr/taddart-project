@@ -1,5 +1,5 @@
 <template>
-  <div :class="['Header', {'scrolled': isScrolled}, 'td-transition', {'small-height': smallHeader}]"
+  <div :class="['Header', {'scrolled': isScrolled}, 'td-transition', {'Header--small-height': smallHeader}]"
        :style="{backgroundImage: 'url()'}">
     <nav class="Header__navbar navbar navbar-light position-fixed td-transition">
       <nuxt-link class="Header__navbar__logo navbar-brand" to="/">
@@ -22,23 +22,34 @@
         </div>
         <div class="Header__navbar__lang">
         <span>
-          <img :class="['Header__navbar__lang__img', {'Header__navbar__lang__img_current': locale === 'kb'}]"
+          <img :class="['Header__navbar__lang__img', {'Header__navbar__lang__img--current': locale === 'kb'}]"
                src="~/assets/images/header/kb-lang-32-32.png" alt="KB"
                @click="switchLocale('kb')">
         </span>
           <span>
-          <img :class="['Header__navbar__lang__img', {'Header__navbar__lang__img_current': locale === 'fr'}]"
+          <img :class="['Header__navbar__lang__img', {'Header__navbar__lang__img--current': locale === 'fr'}]"
                src="~/assets/images/header/fr-lang.svg" alt="FR"
                @click="switchLocale('fr')">
         </span>
         </div>
       </div>
     </nav>
-    <ul class="Header__slider">
-      <li v-for="(imageSlider, index) in this.header.background_image"
-          :style="{backgroundImage: 'url(http://localhost:1337'+imageSlider.url+')', animationDelay: (index+1)*2 +'s'}"
-          class="Header__slider__img"></li>
-    </ul>
+    <b-carousel
+      :interval="20000"
+      fade
+      indicators
+      style="height: 100%"
+      v-if="!smallHeader"
+    >
+      <b-carousel-slide v-for="(image, index) in header.background_image" :key="index" class="Header__slider">
+        <template v-slot:img>
+          <img
+            class="d-block Header__slider__img"
+            :src="'http://localhost:1337'+image.url"
+            alt="image slot">
+        </template>
+      </b-carousel-slide>
+    </b-carousel>
   </div>
 </template>
 <script>
@@ -94,20 +105,8 @@ export default {
   background-repeat: no-repeat;
   background-size: cover;
 
-  &.scrolled {
-    height: 13em;
-
-    .Header__navbar {
-      height: 60px;
-      background-color: rgba(96, 168, 239, 0.85) !important;
-
-      .Header__navbar__logo {
-        .Header__navbar__logo__img {
-          width: 50px;
-          height: 50px;
-        }
-      }
-    }
+  &--small-height {
+    height: 120px;
   }
 
   &__navbar {
@@ -128,17 +127,16 @@ export default {
       }
     }
 
-    .Header__navbar__lang {
-      .Header__navbar__lang__img {
+    &__lang {
+      &__img {
         width: 20px;
         height: 20px;
         cursor: pointer;
         opacity: .25;
         border-radius: 10px;
-
-        &.Header__navbar__lang__img_current {
-          opacity: 1;
-          cursor: default;
+        &--current {
+          opacity: 1 !important;
+          cursor: default !important;
         }
       }
     }
@@ -152,16 +150,11 @@ export default {
 
     &__img {
       width: 100%;
-      height: 100%;
-      position: absolute;
+      height: 37em;
       background-size: cover;
       list-style-type: none;
       z-index: 1;
-      opacity: 0;
-      animation-name: fade;
-      animation-iteration-count: infinite;
-      left: 0;
-      right: 0;
+      object-fit: cover;
     }
   }
 
@@ -169,31 +162,25 @@ export default {
     margin-right: 10px;
     text-transform: uppercase;
   }
+
+  &.scrolled {
+    height: 13em;
+
+    .Header__navbar {
+      height: 60px;
+      background-color: rgba(96, 168, 239, 0.85) !important;
+
+      .Header__navbar__logo {
+        .Header__navbar__logo__img {
+          width: 50px;
+          height: 50px;
+        }
+      }
+    }
+  }
 }
 
 .td-transition {
   transition: all 0.25s cubic-bezier(.6, .04, .98, .34);
 }
-
-.small-height {
-  height: 16em;
-}
-@-webkit-keyframes fade {
-  0%{
-    opacity: 1;
-  }
-  15% {
-    opacity:1;
-  }
-  25%{
-    opacity: 0;
-  }
-  90% {
-    opacity:0;
-  }
-  100% {
-    opacity:1;
-  }
-}
-
 </style>
