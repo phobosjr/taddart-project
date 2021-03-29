@@ -5,13 +5,66 @@ schema {
     mutation: Mutation
 }
 
-union Morph = Article | ArticleAggregator | ArticleConnection | ArticleConnectionAuthor | ArticleConnectionContent | ArticleConnectionCreated_at | ArticleConnectionId | ArticleConnectionLangue | ArticleConnectionPublished_at | ArticleConnectionSlug | ArticleConnectionTitle | ArticleConnectionUpdated_at | ArticleGroupBy | ComponentImageGalleryCaption | ComponentImageGalleryImage | ComponentLangSimpleText | ComponentLangStructurecdText | ComponentMenuMenuItem | Contact | ContactMessage | ContactMessageAggregator | ContactMessageConnection | ContactMessageConnectionCreated_at | ContactMessageConnectionEmail | ContactMessageConnectionId | ContactMessageConnectionMessage | ContactMessageConnectionName | ContactMessageConnectionUpdated_at | ContactMessageGroupBy | Gallery | Header | Map | NotFoundPage | UploadFile | UploadFileAggregator | UploadFileAggregatorAvg | UploadFileAggregatorMax | UploadFileAggregatorMin | UploadFileAggregatorSum | UploadFileConnection | UploadFileConnectionAlternativeText | UploadFileConnectionCaption | UploadFileConnectionCreated_at | UploadFileConnectionExt | UploadFileConnectionFormats | UploadFileConnectionHash | UploadFileConnectionHeight | UploadFileConnectionId | UploadFileConnectionMime | UploadFileConnectionName | UploadFileConnectionPreviewUrl | UploadFileConnectionProvider | UploadFileConnectionProvider_metadata | UploadFileConnectionSize | UploadFileConnectionUpdated_at | UploadFileConnectionUrl | UploadFileConnectionWidth | UploadFileGroupBy | UserPermissionsPasswordPayload | UsersPermissionsLoginPayload | UsersPermissionsMe | UsersPermissionsMeRole | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsRoleAggregator | UsersPermissionsRoleConnection | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionId | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionType | UsersPermissionsRoleGroupBy | UsersPermissionsUser | UsersPermissionsUserAggregator | UsersPermissionsUserConnection | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionCreated_at | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionId | UsersPermissionsUserConnectionProvider | UsersPermissionsUserConnectionRole | UsersPermissionsUserConnectionUpdated_at | UsersPermissionsUserConnectionUsername | UsersPermissionsUserGroupBy | createArticlePayload | createContactMessagePayload | createRolePayload | createUserPayload | deleteArticlePayload | deleteContactMessagePayload | deleteContactPayload | deleteFilePayload | deleteGalleryPayload | deleteHeaderPayload | deleteMapPayload | deleteNotFoundPagePayload | deleteRolePayload | deleteUserPayload | updateArticlePayload | updateContactMessagePayload | updateContactPayload | updateGalleryPayload | updateHeaderPayload | updateMapPayload | updateNotFoundPagePayload | updateRolePayload | updateUserPayload
+union Morph = Album | AlbumAggregator | AlbumConnection | AlbumConnectionAlbum_title | AlbumConnectionCreated_at | AlbumConnectionId | AlbumConnectionPublished_at | AlbumConnectionUpdated_at | AlbumGroupBy | Article | ArticleAggregator | ArticleConnection | ArticleConnectionAuthor | ArticleConnectionContent | ArticleConnectionCreated_at | ArticleConnectionId | ArticleConnectionLangue | ArticleConnectionPublished_at | ArticleConnectionSlug | ArticleConnectionTitle | ArticleConnectionUpdated_at | ArticleGroupBy | ComponentImageGalleryCaption | ComponentImageGalleryImage | ComponentLangSimpleText | ComponentLangStructurecdText | ComponentMenuMenuItem | Contact | ContactMessage | ContactMessageAggregator | ContactMessageConnection | ContactMessageConnectionCreated_at | ContactMessageConnectionEmail | ContactMessageConnectionId | ContactMessageConnectionMessage | ContactMessageConnectionName | ContactMessageConnectionUpdated_at | ContactMessageGroupBy | Header | Map | NotFoundPage | UploadFile | UploadFileAggregator | UploadFileAggregatorAvg | UploadFileAggregatorMax | UploadFileAggregatorMin | UploadFileAggregatorSum | UploadFileConnection | UploadFileConnectionAlternativeText | UploadFileConnectionCaption | UploadFileConnectionCreated_at | UploadFileConnectionExt | UploadFileConnectionFormats | UploadFileConnectionHash | UploadFileConnectionHeight | UploadFileConnectionId | UploadFileConnectionMime | UploadFileConnectionName | UploadFileConnectionPreviewUrl | UploadFileConnectionProvider | UploadFileConnectionProvider_metadata | UploadFileConnectionSize | UploadFileConnectionUpdated_at | UploadFileConnectionUrl | UploadFileConnectionWidth | UploadFileGroupBy | UserPermissionsPasswordPayload | UsersPermissionsLoginPayload | UsersPermissionsMe | UsersPermissionsMeRole | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsRoleAggregator | UsersPermissionsRoleConnection | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionId | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionType | UsersPermissionsRoleGroupBy | UsersPermissionsUser | UsersPermissionsUserAggregator | UsersPermissionsUserConnection | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionCreated_at | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionId | UsersPermissionsUserConnectionProvider | UsersPermissionsUserConnectionRole | UsersPermissionsUserConnectionUpdated_at | UsersPermissionsUserConnectionUsername | UsersPermissionsUserGroupBy | createAlbumPayload | createArticlePayload | createContactMessagePayload | createRolePayload | createUserPayload | deleteAlbumPayload | deleteArticlePayload | deleteContactMessagePayload | deleteContactPayload | deleteFilePayload | deleteHeaderPayload | deleteMapPayload | deleteNotFoundPagePayload | deleteRolePayload | deleteUserPayload | updateAlbumPayload | updateArticlePayload | updateContactMessagePayload | updateContactPayload | updateHeaderPayload | updateMapPayload | updateNotFoundPagePayload | updateRolePayload | updateUserPayload
 
 type AdminUser {
     firstname: String!
     id: ID!
     lastname: String!
     username: String
+}
+
+type Album {
+    album_title: ComponentLangSimpleText
+    created_at: DateTime!
+    id: ID!
+    images: [ComponentImageGalleryImage]
+    published_at: DateTime
+    updated_at: DateTime!
+}
+
+type AlbumAggregator {
+    count: Int
+    totalCount: Int
+}
+
+type AlbumConnection {
+    aggregate: AlbumAggregator
+    groupBy: AlbumGroupBy
+    values: [Album]
+}
+
+type AlbumConnectionAlbum_title {
+    connection: AlbumConnection
+    key: ID
+}
+
+type AlbumConnectionCreated_at {
+    connection: AlbumConnection
+    key: DateTime
+}
+
+type AlbumConnectionId {
+    connection: AlbumConnection
+    key: ID
+}
+
+type AlbumConnectionPublished_at {
+    connection: AlbumConnection
+    key: DateTime
+}
+
+type AlbumConnectionUpdated_at {
+    connection: AlbumConnection
+    key: DateTime
+}
+
+type AlbumGroupBy {
+    album_title: [AlbumConnectionAlbum_title]
+    created_at: [AlbumConnectionCreated_at]
+    id: [AlbumConnectionId]
+    published_at: [AlbumConnectionPublished_at]
+    updated_at: [AlbumConnectionUpdated_at]
 }
 
 type Article {
@@ -199,14 +252,6 @@ type ContactMessageGroupBy {
     updated_at: [ContactMessageConnectionUpdated_at]
 }
 
-type Gallery {
-    created_at: DateTime!
-    id: ID!
-    images: [ComponentImageGalleryImage]
-    published_at: DateTime
-    updated_at: DateTime!
-}
-
 type Header {
     background_image(limit: Int, sort: String, start: Int, where: JSON): [UploadFile]
     big_title: ComponentLangSimpleText
@@ -223,24 +268,24 @@ type Header {
 type Map {
     created_at: DateTime!
     id: ID!
-    published_at: DateTime
     title: ComponentLangSimpleText
     updated_at: DateTime!
 }
 
 type Mutation {
+    createAlbum(input: createAlbumInput): createAlbumPayload
     createArticle(input: createArticleInput): createArticlePayload
     createContactMessage(input: createContactMessageInput): createContactMessagePayload
     "Create a new role"
     createRole(input: createRoleInput): createRolePayload
     "Create a new user"
     createUser(input: createUserInput): createUserPayload
+    deleteAlbum(input: deleteAlbumInput): deleteAlbumPayload
     deleteArticle(input: deleteArticleInput): deleteArticlePayload
     deleteContact: deleteContactPayload
     deleteContactMessage(input: deleteContactMessageInput): deleteContactMessagePayload
     "Delete one file"
     deleteFile(input: deleteFileInput): deleteFilePayload
-    deleteGallery: deleteGalleryPayload
     deleteHeader: deleteHeaderPayload
     deleteMap: deleteMapPayload
     deleteNotFoundPage: deleteNotFoundPagePayload
@@ -254,11 +299,11 @@ type Mutation {
     multipleUpload(field: String, files: [Upload]!, ref: String, refId: ID, source: String): [UploadFile]!
     register(input: UsersPermissionsRegisterInput!): UsersPermissionsLoginPayload!
     resetPassword(code: String!, password: String!, passwordConfirmation: String!): UsersPermissionsLoginPayload
+    updateAlbum(input: updateAlbumInput): updateAlbumPayload
     updateArticle(input: updateArticleInput): updateArticlePayload
     updateContact(input: updateContactInput): updateContactPayload
     updateContactMessage(input: updateContactMessageInput): updateContactMessagePayload
     updateFileInfo(id: ID!, info: FileInfoInput!): UploadFile!
-    updateGallery(input: updateGalleryInput): updateGalleryPayload
     updateHeader(input: updateHeaderInput): updateHeaderPayload
     updateMap(input: updateMapInput): updateMapPayload
     updateNotFoundPage(input: updateNotFoundPageInput): updateNotFoundPagePayload
@@ -278,6 +323,9 @@ type NotFoundPage {
 }
 
 type Query {
+    album(id: ID!, publicationState: PublicationState): Album
+    albums(limit: Int, publicationState: PublicationState, sort: String, start: Int, where: JSON): [Album]
+    albumsConnection(limit: Int, sort: String, start: Int, where: JSON): AlbumConnection
     article(id: ID!, publicationState: PublicationState): Article
     articles(limit: Int, publicationState: PublicationState, sort: String, start: Int, where: JSON): [Article]
     articlesConnection(limit: Int, sort: String, start: Int, where: JSON): ArticleConnection
@@ -287,7 +335,6 @@ type Query {
     contactMessagesConnection(limit: Int, sort: String, start: Int, where: JSON): ContactMessageConnection
     files(limit: Int, publicationState: PublicationState, sort: String, start: Int, where: JSON): [UploadFile]
     filesConnection(limit: Int, sort: String, start: Int, where: JSON): UploadFileConnection
-    gallery(publicationState: PublicationState): Gallery
     header(publicationState: PublicationState): Header
     map(publicationState: PublicationState): Map
     me: UsersPermissionsMe
@@ -628,6 +675,10 @@ type UsersPermissionsUserGroupBy {
     username: [UsersPermissionsUserConnectionUsername]
 }
 
+type createAlbumPayload {
+    album: Album
+}
+
 type createArticlePayload {
     article: Article
 }
@@ -644,6 +695,10 @@ type createUserPayload {
     user: UsersPermissionsUser
 }
 
+type deleteAlbumPayload {
+    album: Album
+}
+
 type deleteArticlePayload {
     article: Article
 }
@@ -658,10 +713,6 @@ type deleteContactPayload {
 
 type deleteFilePayload {
     file: UploadFile
-}
-
-type deleteGalleryPayload {
-    gallery: Gallery
 }
 
 type deleteHeaderPayload {
@@ -684,6 +735,10 @@ type deleteUserPayload {
     user: UsersPermissionsUser
 }
 
+type updateAlbumPayload {
+    album: Album
+}
+
 type updateArticlePayload {
     article: Article
 }
@@ -694,10 +749,6 @@ type updateContactMessagePayload {
 
 type updateContactPayload {
     contact: Contact
-}
-
-type updateGalleryPayload {
-    gallery: Gallery
 }
 
 type updateHeaderPayload {
@@ -728,6 +779,14 @@ enum ENUM_ARTICLE_LANGUE {
 enum PublicationState {
     LIVE
     PREVIEW
+}
+
+input AlbumInput {
+    album_title: ComponentLangSimpleTextInput
+    created_by: ID
+    images: [ComponentImageGalleryImageInput]
+    published_at: DateTime
+    updated_by: ID
 }
 
 input ArticleInput {
@@ -815,13 +874,6 @@ input FileInput {
     width: Int
 }
 
-input GalleryInput {
-    created_by: ID
-    images: [ComponentImageGalleryImageInput!]
-    published_at: DateTime
-    updated_by: ID
-}
-
 input HeaderInput {
     background_image: [ID]
     big_title: ComponentLangSimpleTextInput
@@ -840,7 +892,6 @@ input InputID {
 
 input MapInput {
     created_by: ID
-    published_at: DateTime
     title: ComponentLangSimpleTextInput
     updated_by: ID
 }
@@ -888,6 +939,10 @@ input UsersPermissionsRegisterInput {
     username: String!
 }
 
+input createAlbumInput {
+    data: AlbumInput
+}
+
 input createArticleInput {
     data: ArticleInput
 }
@@ -902,6 +957,10 @@ input createRoleInput {
 
 input createUserInput {
     data: UserInput
+}
+
+input deleteAlbumInput {
+    where: InputID
 }
 
 input deleteArticleInput {
@@ -922,6 +981,14 @@ input deleteRoleInput {
 
 input deleteUserInput {
     where: InputID
+}
+
+input editAlbumInput {
+    album_title: editComponentLangSimpleTextInput
+    created_by: ID
+    images: [editComponentImageGalleryImageInput]
+    published_at: DateTime
+    updated_by: ID
 }
 
 input editArticleInput {
@@ -1008,13 +1075,6 @@ input editFileInput {
     width: Int
 }
 
-input editGalleryInput {
-    created_by: ID
-    images: [editComponentImageGalleryImageInput]
-    published_at: DateTime
-    updated_by: ID
-}
-
 input editHeaderInput {
     background_image: [ID]
     big_title: editComponentLangSimpleTextInput
@@ -1029,7 +1089,6 @@ input editHeaderInput {
 
 input editMapInput {
     created_by: ID
-    published_at: DateTime
     title: editComponentLangSimpleTextInput
     updated_by: ID
 }
@@ -1065,6 +1124,11 @@ input editUserInput {
     username: String
 }
 
+input updateAlbumInput {
+    data: editAlbumInput
+    where: InputID
+}
+
 input updateArticleInput {
     data: editArticleInput
     where: InputID
@@ -1077,10 +1141,6 @@ input updateContactInput {
 input updateContactMessageInput {
     data: editContactMessageInput
     where: InputID
-}
-
-input updateGalleryInput {
-    data: editGalleryInput
 }
 
 input updateHeaderInput {

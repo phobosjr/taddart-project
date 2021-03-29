@@ -1,12 +1,45 @@
 <template>
   <div class="Gallery container-fluid p-2">
-    <div class="Gallery__panel d-flex flex-wrap p-1 justify-content-center">
-      <img v-for="(item, index) in pictureThumbnails"
-           :key="index"
-           :src="item"
-           class="Gallery__panel__image"
-           @click="pictureIndex = index">
+    <div class="Gallery__tags d-flex flex-wrap justify-content-center m-4">
+      <v-btn
+        depressed
+        elevation="2"
+        outlined
+        raised
+        rounded
+        small
+        text
+        :class="{'active-tag': albumId === null}"
+        @click="albumId = null"
+      > {{ $t('all_albums_title') }}
+      </v-btn>
+      <v-btn
+        v-for="(album, index) in albums"
+        :key="index"
+        depressed
+        elevation="2"
+        outlined
+        raised
+        rounded
+        small
+        text
+        :class="{'active-tag': albumId === album.id}"
+        @click="albumId = album.id"
+      > {{ album.album_title[$i18n.locale] }}
+      </v-btn>
     </div>
+
+
+    <transition-group name="fade" mode="out-in" tag="div" class="Gallery__panel p-1 justify-content-center">
+
+      <div v-for="(item, index) in pictureThumbnails"
+           :key="item"
+           :style="{backgroundImage: 'url('+item+')'}"
+           class="Gallery__panel__image"
+           @click="pictureIndex = index"
+      ></div>
+    </transition-group>
+
     <CoolLightBox
       :items="pictureItems"
       :index="pictureIndex"
@@ -18,45 +51,37 @@
 </template>
 
 <script>
-import galleryQuery from "@/apollo/queries/gallery/gallery.gql";
+import albumsQuery from "@/apollo/queries/gallery/albums.gql";
 
 export default {
   name: "gellery",
   layout: 'layoutWithSmallHeader',
   data: () => {
     return {
-      pictureIndex: null
+      pictureIndex: null,
+      albumId: null
     }
   },
   computed: {
     pictureItems() {
-      return this.gallery
-        .images
-        .map(item => this.buildPictureItems(item.picture.formats, item.caption) )
+      return this.getAlbumPictures()
+        .map(item => this.$options.filters.defaultImage(item.formats))
     },
     pictureThumbnails() {
-      return this.gallery
-        .images
-        .map(item => 'http://192.168.1.93:1337' + item.picture.formats.thumbnail.url)
+      return this.getAlbumPictures()
+        .map(item => this.$options.filters.thumbnailImage(item.formats))
     }
   },
   apollo: {
-    gallery: {
+    albums: {
       prefetch: true,
-      query: galleryQuery
+      query: albumsQuery,
     }
   },
   methods: {
-    getPictureUrl (formats) {
-      return formats.medium ? formats.medium.url : formats.small.url;
-    },
-    buildPictureItems (formats, caption) {
-      const item = {
-        src: 'http://192.168.1.93:1337' + this.getPictureUrl(formats),
-        title: caption?.title,
-        description: caption?.description
-      }
-      return item;
+    getAlbumPictures() {
+      return this.albumId ? this.albums[this.albumId - 1].images : this.albums
+        .flatMap(album => album.images)
     }
   }
 }
@@ -66,18 +91,65 @@ export default {
 .Gallery {
   min-height: 100vh;
 
+  &__tags {
+    button {
+      margin: 2px;
+    }
+  }
+
   &__panel {
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(3, 210px);
+    grid-column-gap: 46px;
+    grid-row-gap: 4px;
+    overflow: hidden;
+    position: relative;
+
+    @media screen and (max-width: 669px) {
+      grid-template-columns: repeat(2, 210px);
+    }
+
+    @media screen and (max-width: 472px) {
+      grid-template-columns: 210px;
+    }
+
     &__image {
-     cursor: pointer;
-      &:hover{
-        -ms-transform:scale(1.2);
-        -webkit-transform:scale(1.2);
-        transform:scale(1.2);
-        -webkit-transition:all 0.4s cubic-bezier(.68,-0.55,.27,1.55);
-        transition: all 0.4s cubic-bezier(.68,-0.55,.27,1.55);
+      cursor: pointer;
+      width: 250px;
+      background-color: #a5a4a4;
+      background-position: center;
+      background-size: cover;
+      min-height: 200px;
+
+      &:hover {
+        -ms-transform: scale(1.2);
+        -webkit-transform: scale(1.2);
+        transform: scale(1.2);
+        -webkit-transition: all 0.8s cubic-bezier(.68, -0.55, .27, 1.55);
+        transition: all 0.8s cubic-bezier(.68, -0.55, .27, 1.55);
       }
     }
   }
+
+  .active-tag {
+    background-color: #1867c0;
+    color: white;
+  }
+
+  .fade-enter-active, .fade-leave-active {
+    transition: all .5s ease-out;
+  }
+  .fade-enter {
+    opacity: 0;
+    transform: translateX(120px);
+  }
+  .fade-leave-to {
+    opacity: 0;
+    transform: translateX(-120px);
+  }
+  .fade-enter-active {
+    transition-delay: .5s;
+  }
+
 }
 </style>

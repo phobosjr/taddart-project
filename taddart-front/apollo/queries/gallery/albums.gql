@@ -1,0 +1,12 @@
+query {
+  albums {
+    id
+    album_title {
+      fr
+      kb
+    }
+    images {
+      formats
+    }
+  }
+}

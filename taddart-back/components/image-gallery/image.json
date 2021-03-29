@@ -17,11 +17,6 @@
       ],
       "plugin": "upload",
       "required": true
-    },
-    "caption": {
-      "type": "component",
-      "repeatable": false,
-      "component": "image-gallery.caption"
     }
   }
 }
