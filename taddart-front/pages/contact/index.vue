@@ -2,7 +2,7 @@
   <div :class="['Contact', 'position-relative', 'p-5']" :style="{backgroundImage: 'url(http://localhost:1337'+contact.background_image.url+')'}">
 
     <div class="Contact__title d-flex justify-content-center">
-      <h1>{{ contact.title_label[locale] }}</h1>
+      <h1>{{ contact.title_label[$i18n.locale] }}</h1>
     </div>
 
     <v-form class="Contact__form m-auto p-3"
@@ -11,14 +11,14 @@
             lazy-validation>
       <v-text-field
         v-model="name"
-        :label="contact.name_label[locale]"
+        :label="contact.name_label[$i18n.locale]"
         :rules="nameRules"
         required
       ></v-text-field>
 
       <v-text-field
         v-model="email"
-        :label="contact.email_label[locale]"
+        :label="contact.email_label[$i18n.locale]"
         :rules="emailRules"
         required
       ></v-text-field>
@@ -26,7 +26,7 @@
       <v-textarea
         v-model="message"
         :counter="120"
-        :label="contact.message_label[locale]"
+        :label="contact.message_label[$i18n.locale]"
         value=""
       ></v-textarea>
       <div class="Contact__form__btn d-flex justify-content-end">
@@ -36,7 +36,7 @@
           class=""
           @click="submit()"
         >
-          {{contact.button_label[locale]}}
+          {{contact.button_label[$i18n.locale]}}
         </v-btn>
       </div>
       <div class="Contact__form__alert p-2">
@@ -46,7 +46,7 @@
           type="success"
           dismissible
           v-if="alertSuccess"
-        >{{contact.alert_success_label[locale]}}</v-alert>
+        >{{contact.alert_success_label[$i18n.locale]}}</v-alert>
 
         <v-alert
           dense
@@ -54,7 +54,7 @@
           type="success"
           dismissible
           v-if="alertFailed"
-        >{{contact.alert_failed_label[locale]}}</v-alert>
+        >{{contact.alert_failed_label[$i18n.locale]}}</v-alert>
       </div>
     </v-form>
 
@@ -68,11 +68,6 @@ import {mapGetters} from "vuex";
 export default {
   name: "contact",
   layout: 'layoutWithSmallHeader',
-  computed: {
-    ...mapGetters({
-      locale: 'locale'
-    })
-  },
   data: ()=> {
     return {
       name: '',
@@ -95,9 +90,6 @@ export default {
     contact: {
       prefetch: true,
       query: contactQuery,
-      error(error){
-        console.log('error tetstsst',error);
-      }
     }
   },
   methods: {

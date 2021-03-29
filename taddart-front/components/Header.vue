@@ -8,28 +8,31 @@
       </nuxt-link>
       <div class="Header__menu d-flex justify-content-end">
         <div class="Header__menu__item">
-          <a href="/">
-            Accueil
+          <a :href="localePath('index', $i18n.locale)">
+            {{ $t('home_title') }}
           </a>
 
-          <a href="/gallery">
-            Gallery
+          <a :href="localePath('/gallery', $i18n.locale)">
+            {{ $t('gallery_title') }}
           </a>
 
-          <a href="/contact">
-            Contact
+          <a :href="localePath({name: 'contact'})">
+            {{ $t('contact_title') }}
+          </a>
+          <a :href="localePath('/map', $i18n.locale)">
+            {{ $t('map_title') }}
           </a>
         </div>
         <div class="Header__navbar__lang">
         <span>
-          <img :class="['Header__navbar__lang__img', {'Header__navbar__lang__img--current': locale === 'kb'}]"
+          <img :class="['Header__navbar__lang__img', {'Header__navbar__lang__img--current': $i18n.locale === 'kb'}]"
                src="~/assets/images/header/kb-lang-32-32.png" alt="KB"
-               @click="switchLocale('kb')">
+               @click="$i18n.setLocale('kb')">
         </span>
           <span>
-          <img :class="['Header__navbar__lang__img', {'Header__navbar__lang__img--current': locale === 'fr'}]"
+          <img :class="['Header__navbar__lang__img', {'Header__navbar__lang__img--current': $i18n.locale === 'fr'}]"
                src="~/assets/images/header/fr-lang.svg" alt="FR"
-               @click="switchLocale('fr')">
+               @click="$i18n.setLocale('fr')">
         </span>
         </div>
       </div>
@@ -82,9 +85,6 @@ export default {
       window.scrollY === 0
         ? (this.isScrolled = false)
         : (this.isScrolled = true);
-    },
-    switchLocale(lang) {
-      this.$store.dispatch('switchLocale', lang);
     }
   },
   beforeMount() {
@@ -164,8 +164,6 @@ export default {
   }
 
   &.scrolled {
-    height: 13em;
-
     .Header__navbar {
       height: 60px;
       background-color: rgba(96, 168, 239, 0.85) !important;
