@@ -1,7 +1,11 @@
 query getArticle ($slug: String){
-  articles(where: {slug: $slug}) {
+  fetchedArticle: articles(where: {slug: $slug}, limit: 1) {
+    id
     title
     content
     created_at
+    image {
+      formats
+    }
   }
 }

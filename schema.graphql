@@ -5,7 +5,7 @@ schema {
     mutation: Mutation
 }
 
-union Morph = Album | AlbumAggregator | AlbumConnection | AlbumConnectionAlbum_title | AlbumConnectionCreated_at | AlbumConnectionId | AlbumConnectionPublished_at | AlbumConnectionUpdated_at | AlbumGroupBy | Article | ArticleAggregator | ArticleConnection | ArticleConnectionAuthor | ArticleConnectionContent | ArticleConnectionCreated_at | ArticleConnectionId | ArticleConnectionLangue | ArticleConnectionPublished_at | ArticleConnectionSlug | ArticleConnectionTitle | ArticleConnectionUpdated_at | ArticleGroupBy | ComponentImageGalleryCaption | ComponentImageGalleryImage | ComponentLangSimpleText | ComponentLangStructurecdText | ComponentMenuMenuItem | Contact | ContactMessage | ContactMessageAggregator | ContactMessageConnection | ContactMessageConnectionCreated_at | ContactMessageConnectionEmail | ContactMessageConnectionId | ContactMessageConnectionMessage | ContactMessageConnectionName | ContactMessageConnectionUpdated_at | ContactMessageGroupBy | Header | Map | NotFoundPage | UploadFile | UploadFileAggregator | UploadFileAggregatorAvg | UploadFileAggregatorMax | UploadFileAggregatorMin | UploadFileAggregatorSum | UploadFileConnection | UploadFileConnectionAlternativeText | UploadFileConnectionCaption | UploadFileConnectionCreated_at | UploadFileConnectionExt | UploadFileConnectionFormats | UploadFileConnectionHash | UploadFileConnectionHeight | UploadFileConnectionId | UploadFileConnectionMime | UploadFileConnectionName | UploadFileConnectionPreviewUrl | UploadFileConnectionProvider | UploadFileConnectionProvider_metadata | UploadFileConnectionSize | UploadFileConnectionUpdated_at | UploadFileConnectionUrl | UploadFileConnectionWidth | UploadFileGroupBy | UserPermissionsPasswordPayload | UsersPermissionsLoginPayload | UsersPermissionsMe | UsersPermissionsMeRole | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsRoleAggregator | UsersPermissionsRoleConnection | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionId | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionType | UsersPermissionsRoleGroupBy | UsersPermissionsUser | UsersPermissionsUserAggregator | UsersPermissionsUserConnection | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionCreated_at | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionId | UsersPermissionsUserConnectionProvider | UsersPermissionsUserConnectionRole | UsersPermissionsUserConnectionUpdated_at | UsersPermissionsUserConnectionUsername | UsersPermissionsUserGroupBy | createAlbumPayload | createArticlePayload | createContactMessagePayload | createRolePayload | createUserPayload | deleteAlbumPayload | deleteArticlePayload | deleteContactMessagePayload | deleteContactPayload | deleteFilePayload | deleteHeaderPayload | deleteMapPayload | deleteNotFoundPagePayload | deleteRolePayload | deleteUserPayload | updateAlbumPayload | updateArticlePayload | updateContactMessagePayload | updateContactPayload | updateHeaderPayload | updateMapPayload | updateNotFoundPagePayload | updateRolePayload | updateUserPayload
+union Morph = Album | AlbumAggregator | AlbumConnection | AlbumConnectionAlbum_title | AlbumConnectionCreated_at | AlbumConnectionId | AlbumConnectionPublished_at | AlbumConnectionUpdated_at | AlbumGroupBy | Article | ArticleAggregator | ArticleConnection | ArticleConnectionContent | ArticleConnectionCreated_at | ArticleConnectionId | ArticleConnectionImage | ArticleConnectionLangue | ArticleConnectionPublished_at | ArticleConnectionSlug | ArticleConnectionTitle | ArticleConnectionUpdated_at | ArticleGroupBy | ComponentImageGalleryCaption | ComponentImageGalleryImage | ComponentLangSimpleText | ComponentLangStructurecdText | ComponentMenuMenuItem | Contact | ContactMessage | ContactMessageAggregator | ContactMessageConnection | ContactMessageConnectionCreated_at | ContactMessageConnectionEmail | ContactMessageConnectionId | ContactMessageConnectionMessage | ContactMessageConnectionName | ContactMessageConnectionUpdated_at | ContactMessageGroupBy | Header | Map | NotFoundPage | UploadFile | UploadFileAggregator | UploadFileAggregatorAvg | UploadFileAggregatorMax | UploadFileAggregatorMin | UploadFileAggregatorSum | UploadFileConnection | UploadFileConnectionAlternativeText | UploadFileConnectionCaption | UploadFileConnectionCreated_at | UploadFileConnectionExt | UploadFileConnectionFormats | UploadFileConnectionHash | UploadFileConnectionHeight | UploadFileConnectionId | UploadFileConnectionMime | UploadFileConnectionName | UploadFileConnectionPreviewUrl | UploadFileConnectionProvider | UploadFileConnectionProvider_metadata | UploadFileConnectionSize | UploadFileConnectionUpdated_at | UploadFileConnectionUrl | UploadFileConnectionWidth | UploadFileGroupBy | UserPermissionsPasswordPayload | UsersPermissionsLoginPayload | UsersPermissionsMe | UsersPermissionsMeRole | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsRoleAggregator | UsersPermissionsRoleConnection | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionId | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionType | UsersPermissionsRoleGroupBy | UsersPermissionsUser | UsersPermissionsUserAggregator | UsersPermissionsUserConnection | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionCreated_at | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionId | UsersPermissionsUserConnectionProvider | UsersPermissionsUserConnectionRole | UsersPermissionsUserConnectionUpdated_at | UsersPermissionsUserConnectionUsername | UsersPermissionsUserGroupBy | createAlbumPayload | createArticlePayload | createContactMessagePayload | createRolePayload | createUserPayload | deleteAlbumPayload | deleteArticlePayload | deleteContactMessagePayload | deleteContactPayload | deleteFilePayload | deleteHeaderPayload | deleteMapPayload | deleteNotFoundPagePayload | deleteRolePayload | deleteUserPayload | updateAlbumPayload | updateArticlePayload | updateContactMessagePayload | updateContactPayload | updateHeaderPayload | updateMapPayload | updateNotFoundPagePayload | updateRolePayload | updateUserPayload
 
 type AdminUser {
     firstname: String!
@@ -18,7 +18,7 @@ type Album {
     album_title: ComponentLangSimpleText
     created_at: DateTime!
     id: ID!
-    images: [ComponentImageGalleryImage]
+    images(limit: Int, sort: String, start: Int, where: JSON): [UploadFile]
     published_at: DateTime
     updated_at: DateTime!
 }
@@ -68,10 +68,10 @@ type AlbumGroupBy {
 }
 
 type Article {
-    author: UsersPermissionsUser
     content: String
     created_at: DateTime!
     id: ID!
+    image: UploadFile
     langue: ENUM_ARTICLE_LANGUE!
     published_at: DateTime
     slug: String
@@ -90,11 +90,6 @@ type ArticleConnection {
     values: [Article]
 }
 
-type ArticleConnectionAuthor {
-    connection: ArticleConnection
-    key: ID
-}
-
 type ArticleConnectionContent {
     connection: ArticleConnection
     key: String
@@ -106,6 +101,11 @@ type ArticleConnectionCreated_at {
 }
 
 type ArticleConnectionId {
+    connection: ArticleConnection
+    key: ID
+}
+
+type ArticleConnectionImage {
     connection: ArticleConnection
     key: ID
 }
@@ -136,10 +136,10 @@ type ArticleConnectionUpdated_at {
 }
 
 type ArticleGroupBy {
-    author: [ArticleConnectionAuthor]
     content: [ArticleConnectionContent]
     created_at: [ArticleConnectionCreated_at]
     id: [ArticleConnectionId]
+    image: [ArticleConnectionImage]
     langue: [ArticleConnectionLangue]
     published_at: [ArticleConnectionPublished_at]
     slug: [ArticleConnectionSlug]
@@ -154,7 +154,6 @@ type ComponentImageGalleryCaption {
 }
 
 type ComponentImageGalleryImage {
-    caption: ComponentImageGalleryCaption
     id: ID!
     picture: UploadFile
 }
@@ -784,15 +783,15 @@ enum PublicationState {
 input AlbumInput {
     album_title: ComponentLangSimpleTextInput
     created_by: ID
-    images: [ComponentImageGalleryImageInput]
+    images: [ID]
     published_at: DateTime
     updated_by: ID
 }
 
 input ArticleInput {
-    author: ID
     content: String
     created_by: ID
+    image: ID
     langue: ENUM_ARTICLE_LANGUE!
     published_at: DateTime
     slug: String
@@ -806,7 +805,6 @@ input ComponentImageGalleryCaptionInput {
 }
 
 input ComponentImageGalleryImageInput {
-    caption: ComponentImageGalleryCaptionInput
     picture: ID
 }
 
@@ -986,15 +984,15 @@ input deleteUserInput {
 input editAlbumInput {
     album_title: editComponentLangSimpleTextInput
     created_by: ID
-    images: [editComponentImageGalleryImageInput]
+    images: [ID]
     published_at: DateTime
     updated_by: ID
 }
 
 input editArticleInput {
-    author: ID
     content: String
     created_by: ID
+    image: ID
     langue: ENUM_ARTICLE_LANGUE
     published_at: DateTime
     slug: String
@@ -1009,7 +1007,6 @@ input editComponentImageGalleryCaptionInput {
 }
 
 input editComponentImageGalleryImageInput {
-    caption: editComponentImageGalleryCaptionInput
     id: ID
     picture: ID
 }
