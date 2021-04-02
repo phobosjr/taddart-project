@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "03/30/2021 8:53:22 PM"
+    "x-generation-date": "03/31/2021 8:26:50 PM"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -5211,41 +5211,63 @@
               "FR"
             ]
           },
-          "author": {
+          "image": {
             "required": [
               "id",
-              "username",
-              "email"
+              "name",
+              "hash",
+              "mime",
+              "size",
+              "url",
+              "provider"
             ],
             "properties": {
               "id": {
                 "type": "string"
               },
-              "username": {
+              "name": {
                 "type": "string"
               },
-              "email": {
+              "alternativeText": {
+                "type": "string"
+              },
+              "caption": {
+                "type": "string"
+              },
+              "width": {
+                "type": "integer"
+              },
+              "height": {
+                "type": "integer"
+              },
+              "formats": {
+                "type": "object"
+              },
+              "hash": {
+                "type": "string"
+              },
+              "ext": {
+                "type": "string"
+              },
+              "mime": {
+                "type": "string"
+              },
+              "size": {
+                "type": "number"
+              },
+              "url": {
+                "type": "string"
+              },
+              "previewUrl": {
                 "type": "string"
               },
               "provider": {
                 "type": "string"
               },
-              "password": {
-                "type": "string"
+              "provider_metadata": {
+                "type": "object"
               },
-              "resetPasswordToken": {
-                "type": "string"
-              },
-              "confirmationToken": {
-                "type": "string"
-              },
-              "confirmed": {
-                "type": "boolean"
-              },
-              "blocked": {
-                "type": "boolean"
-              },
-              "role": {
+              "related": {
                 "type": "string"
               },
               "created_by": {
@@ -5283,9 +5305,6 @@
               "KB",
               "FR"
             ]
-          },
-          "author": {
-            "type": "string"
           },
           "published_at": {
             "type": "string",

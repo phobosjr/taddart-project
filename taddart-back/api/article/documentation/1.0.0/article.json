@@ -540,41 +540,63 @@
               "FR"
             ]
           },
-          "author": {
+          "image": {
             "required": [
               "id",
-              "username",
-              "email"
+              "name",
+              "hash",
+              "mime",
+              "size",
+              "url",
+              "provider"
             ],
             "properties": {
               "id": {
                 "type": "string"
               },
-              "username": {
+              "name": {
                 "type": "string"
               },
-              "email": {
+              "alternativeText": {
+                "type": "string"
+              },
+              "caption": {
+                "type": "string"
+              },
+              "width": {
+                "type": "integer"
+              },
+              "height": {
+                "type": "integer"
+              },
+              "formats": {
+                "type": "object"
+              },
+              "hash": {
+                "type": "string"
+              },
+              "ext": {
+                "type": "string"
+              },
+              "mime": {
+                "type": "string"
+              },
+              "size": {
+                "type": "number"
+              },
+              "url": {
+                "type": "string"
+              },
+              "previewUrl": {
                 "type": "string"
               },
               "provider": {
                 "type": "string"
               },
-              "password": {
-                "type": "string"
+              "provider_metadata": {
+                "type": "object"
               },
-              "resetPasswordToken": {
-                "type": "string"
-              },
-              "confirmationToken": {
-                "type": "string"
-              },
-              "confirmed": {
-                "type": "boolean"
-              },
-              "blocked": {
-                "type": "boolean"
-              },
-              "role": {
+              "related": {
                 "type": "string"
               },
               "created_by": {
@@ -612,9 +634,6 @@
               "KB",
               "FR"
             ]
-          },
-          "author": {
-            "type": "string"
           },
           "published_at": {
             "type": "string",
