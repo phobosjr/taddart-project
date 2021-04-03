@@ -1,10 +1,10 @@
 query{
   header {
     background_image {
-      url
+      formats
     }
     logo_image {
-      url
+      formats
     }
   }
 }
