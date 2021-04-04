@@ -1,31 +1,7 @@
 query {
   contact{
-    name_label {
-      fr
-      kb
-    }
-    email_label {
-      fr
-      kb
-    }
-    message_label{
-      fr
-      kb
-    }
-    button_label {
-      fr
-      kb
-    }
     background_image {
-      url
-    }
-    title_label {
-      fr
-      kb
-    }
-    alert_success_label {
-      fr
-      kb
+      formats
     }
   }
 }
