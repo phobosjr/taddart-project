@@ -89,10 +89,11 @@ export default {
       display: flex;
 
       img {
-        max-width: 800px;
-        max-height: 600px;
         margin: auto;
       }
+    }
+
+    &__content {
     }
 
     &__profile {
@@ -122,6 +123,4 @@ export default {
     }
   }
 }
-
-
 </style>
