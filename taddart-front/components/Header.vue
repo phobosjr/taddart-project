@@ -1,13 +1,14 @@
 <template>
-  <div :class="['Header', {'scrolled': isScrolled}, 'td-transition', {'Header--small-height': smallHeader}]"
-       :style="{backgroundImage: 'url()'}">
+  <div :class="['Header', {'scrolled': isScrolled}, 'td-transition', {'Header--small-height': smallHeader}]">
     <nav class="Header__navbar navbar navbar-light position-fixed td-transition">
       <nuxt-link class="Header__navbar__logo navbar-brand" to="/">
-        <img :src="'http://localhost:1337'+header.logo_image.url" width="30" height="30"
+        <img :src="header.logo_image.formats | defaultImage" width="30" height="30"
              class="Header__navbar__logo__img d-inline-block align-top td-transition" alt="">
       </nuxt-link>
-      <div class="Header__menu d-flex justify-content-end">
-        <div class="Header__menu__item">
+      <div class="Header__navbar__menu">
+        <div :class="['Header__navbar__menu__item', 'td-transition',
+          {'Header__navbar__menu__item--open': navBarMenuOpened},
+          {'Header__navbar__menu__item--scrolled': isScrolled}]">
           <a :href="localePath('index', $i18n.locale)">
             {{ $t('home_title') }}
           </a>
@@ -23,6 +24,12 @@
             {{ $t('map_title') }}
           </a>
         </div>
+        <div class="Header__navbar__menu__btn">
+          <button type="button" @click="navBarMenuOpened = !navBarMenuOpened">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        </div>
+
         <div class="Header__navbar__lang">
         <span>
           <img :class="['Header__navbar__lang__img', {'Header__navbar__lang__img--current': $i18n.locale === 'kb'}]"
@@ -48,11 +55,14 @@
         <template v-slot:img>
           <img
             class="d-block Header__slider__img"
-            :src="'http://localhost:1337'+image.url"
+            :src="image.formats | defaultImage"
             alt="image slot">
         </template>
       </b-carousel-slide>
     </b-carousel>
+    <div class="Header_title">
+      <span>Taddart-iw</span>
+    </div>
   </div>
 </template>
 <script>
@@ -66,7 +76,8 @@ export default {
 
   data: () => {
     return {
-      isScrolled: false
+      isScrolled: false,
+      navBarMenuOpened: false
     }
   },
   computed: {
@@ -96,7 +107,10 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+@import "assets/css/pallete";
 
+$navbar-height: 120px;
+$navbar-height-small: 60px;
 .Header {
   position: relative;
   height: 37em;
@@ -110,7 +124,7 @@ export default {
   }
 
   &__navbar {
-    height: 120px;
+    height: $navbar-height;
     padding: 0 204px;
     background-color: rgba(96, 168, 239, 0.38) !important;
     width: 100%;
@@ -127,6 +141,56 @@ export default {
       }
     }
 
+    &__menu {
+      display: flex;
+      justify-content: right;
+
+      &__item {
+        margin-right: 10px;
+        text-transform: uppercase;
+        color: $td-blue;
+        overflow: hidden;
+        transition: all .5s ease;
+        @media screen and (max-width: 992px) {
+          visibility: hidden;
+          opacity: 0;
+          position: absolute;
+          display: flex;
+          flex-direction: column;
+          left: 0;
+          top: $navbar-height;
+          background-color: $td-blue;
+          width: 100%;
+          padding: 10px;
+          &--open {
+            visibility: visible;
+            opacity: 1;
+          }
+          &--scrolled {
+            top: $navbar-height-small;
+          }
+        }
+        a {
+          @media screen and (max-width: 992px) {
+            margin: 10px;
+            color: white;
+          }
+          &:hover {
+            color: $td-green;
+            text-decoration: none;
+          }
+        }
+      }
+
+      &__btn {
+        margin-right: 15px;
+
+        @media screen and (min-width: 992px) {
+          display: none;
+        }
+      }
+    }
+
     &__lang {
       &__img {
         width: 20px;
@@ -134,6 +198,7 @@ export default {
         cursor: pointer;
         opacity: .25;
         border-radius: 10px;
+
         &--current {
           opacity: 1 !important;
           cursor: default !important;
@@ -156,11 +221,6 @@ export default {
       z-index: 1;
       object-fit: cover;
     }
-  }
-
-  &__menu__item {
-    margin-right: 10px;
-    text-transform: uppercase;
   }
 
   &.scrolled {

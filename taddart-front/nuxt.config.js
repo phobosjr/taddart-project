@@ -16,10 +16,17 @@ export default {
     ]
   },
 
+  loading: {
+    color: 'blue',
+    height: '5px',
+    continuous: true
+  },
+
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
     '@/assets/css/tooltip.scss',
     '@/assets/css/global.scss',
+    '@/assets/css/pallete.scss',
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
