@@ -21,12 +21,6 @@
 export default {
   name: "index",
   layout: 'layoutWithSmallHeader',
-  apollo: {
-    map: {
-      prefetch: true,
-      query: mapQuery
-    }
-  },
 }
 </script>
 

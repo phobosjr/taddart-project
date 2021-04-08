@@ -89,6 +89,7 @@ export default {
     contact: {
       prefetch: true,
       query: contactQuery,
+      errorPolicy: "ignore"
     }
   },
   methods: {
@@ -105,7 +106,7 @@ export default {
       }).catch(()=> {
         this.alertFailed = true;
       })
-    }
+    },
   }
 }
 </script>

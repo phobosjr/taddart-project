@@ -1,0 +1,44 @@
+{
+  "kind": "collectionType",
+  "collectionName": "content_numerics",
+  "info": {
+    "name": "Content-numeric-files",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "files": {
+      "collection": "file",
+      "via": "related",
+      "allowedTypes": [
+        "files"
+      ],
+      "plugin": "upload",
+      "required": true
+    },
+    "content_numeric_category": {
+      "model": "content-numeric-categories"
+    },
+    "title": {
+      "type": "component",
+      "repeatable": false,
+      "component": "lang.simple-text"
+    },
+    "description": {
+      "type": "text"
+    },
+    "picture": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images"
+      ],
+      "plugin": "upload",
+      "required": false
+    }
+  }
+}

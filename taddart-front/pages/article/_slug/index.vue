@@ -39,7 +39,7 @@ import articleQuery from '@/apollo/queries/article/article.gql'
 import lastArticlesQuery from '@/apollo/queries/article/lastArticles.gql'
 
 export default {
-  name: "article",
+  name: "Article",
   apollo: {
     fetchedArticle: {
       prefetch: true,
