@@ -78,22 +78,14 @@ export default {
   apollo: {
     clientConfigs: {
       default: {
-        httpEndpoint: process.env.BACKEND_URL || 'http://192.168.1.93:1337/graphql'
+        httpEndpoint: 'http://0.0.0.0:1337/graphql'
       }
     }
   },
-
-  strapi: {
-    entities: ['header'],
-    url: process.env.BACKEND_URL || 'http://localhost:1337'
-  },
-
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
     customVariables: ['~/assets/variables.scss'],
-
   },
-
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
 

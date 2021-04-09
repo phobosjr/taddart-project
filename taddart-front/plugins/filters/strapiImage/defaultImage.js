@@ -8,5 +8,5 @@ function getPictureUrl (formats) {
 }
 
 Vue.filter('defaultImage', function (formats) {
-  return 'http://192.168.1.93:1337' + getPictureUrl(formats)
+  return getPictureUrl(formats)
 });
