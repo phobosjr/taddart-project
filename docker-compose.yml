@@ -5,7 +5,7 @@ services:
     container_name: taddart-back-container
     environment:
       - DATABASE_CLIENT=mysql
-      - DATABASE_HOST=0.0.0.0
+      - DATABASE_HOST=db
       - DATABASE_PORT=3306
       - DATABASE_NAME=td-strapi
       - DATABASE_USERNAME=td-strapi
