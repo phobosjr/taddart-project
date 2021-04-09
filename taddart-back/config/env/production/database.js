@@ -5,7 +5,7 @@ module.exports = ({ env }) => ({
       connector: 'bookshelf',
       settings: {
         client: 'mysql',
-        host: env('DATABASE_HOST', 'localhost'),
+        host: env('DATABASE_HOST', '0.0.0.0'),
         port: env.int('DATABASE_PORT', 3306),
         database: env('DATABASE_NAME', 'td-strapi'),
         username: env('DATABASE_USERNAME', 'td-strapi'),
