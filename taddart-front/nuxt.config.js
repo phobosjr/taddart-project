@@ -82,6 +82,12 @@ export default {
       }
     }
   },
+
+  strapi: {
+    entities: ['header'],
+    url: process.env.BACKEND_URL || 'http://localhost:1337'
+  },
+
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
     customVariables: ['~/assets/variables.scss'],

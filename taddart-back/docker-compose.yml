@@ -6,7 +6,7 @@ services:
     environment:
       - DATABASE_CLIENT=mysql
       - DATABASE_HOST=0.0.0.0
-      - DATABASE_PORT=3316
+      - DATABASE_PORT=3306
       - DATABASE_NAME=td-strapi
       - DATABASE_USERNAME=td-strapi
       - DATABASE_PASSWORD=td-strapi
