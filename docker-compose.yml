@@ -17,10 +17,11 @@ services:
       - strapi-app-network
 
   front:
-    build: ./taddart-front
+    build:
+      context: ./taddart-front
+      args:
+        BACKEND_URL: http://10.0.3.24:1337/graphql
     container_name: taddart-front-container
-    environment:
-      - BACKEND_URL=http://10.0.3.24:1337/graphql
     ports:
       - "3000:3000"
     networks:
