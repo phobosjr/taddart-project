@@ -19,10 +19,12 @@ services:
   front:
     build: ./taddart-front
     container_name: taddart-front-container
-    networks:
-      - strapi-app-network
+    environment:
+      - BACKEND_URL=http://10.0.3.24:1337/graphql
     ports:
       - "3000:3000"
+    networks:
+      - strapi-app-network
 
   db:
     container_name: mysql-strapi
