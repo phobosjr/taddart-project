@@ -8,14 +8,14 @@
       <h1 class="Article__main__title font-weight-bolder text-uppercase mb-4">{{ article.title }}</h1>
       <div class="Article__main__content text-justify m-auto" v-html="article.content"></div>
       <div class="Article__main__profile text-right w-100">
-        <span> {{ $t('article_author_label') }}<strong>Evan You</strong></span>
+        <span> {{ $t('article_author_label') }}<strong>{{ $t('admin_label') }}</strong></span>
         <span>{{ article.created_at | formatDate }}</span>
       </div>
     </div>
     <div class="Article__last-posts d-flex flex-column p-3">
 
       <h3>{{ $t('last_article_title') }}</h3>
-      <div v-for="article in lastArticles" :key="article.id" class="p-3">
+      <div v-for="article in filteredLastArticles" :key="article.id" class="p-3">
         <div class="mb-3">
           <img class="w-100" :src="getFormatsFromImage(article.imageUrl) | thumbnailImage" alt="">
         </div>
@@ -59,6 +59,9 @@ export default {
     },
     articleImageUrl() {
       return this.article?.image?.formats
+    },
+    filteredLastArticles () {
+      return this.lastArticles.filter(article => article.slug !== this.$route.params.slug);
     }
   },
   methods: {
