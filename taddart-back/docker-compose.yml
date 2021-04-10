@@ -1,0 +1,15 @@
+version: "3"
+services:
+  web:
+    build: .
+    container_name: taddart-back-container
+    environment:
+      - DATABASE_CLIENT=mysql
+      - DATABASE_HOST=0.0.0.0
+      - DATABASE_PORT=3306
+      - DATABASE_NAME=td-strapi
+      - DATABASE_USERNAME=td-strapi
+      - DATABASE_PASSWORD=td-strapi
+      - DATABASE_SCHEMA=public
+    ports:
+      - "1337:1337"

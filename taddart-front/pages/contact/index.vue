@@ -1,8 +1,8 @@
 <template>
-  <div :class="['Contact', 'position-relative', 'p-5']" :style="{backgroundImage: 'url(http://localhost:1337'+contact.background_image.url+')'}">
+  <div :class="['Contact', 'position-relative', 'p-5']" :style="{backgroundImage: $options.filters.defaultImage(contact.background_image.formats)}">
 
     <div class="Contact__title d-flex justify-content-center">
-      <h1>{{ contact.title_label[$i18n.locale] }}</h1>
+      <h1>{{ $t('contact_title') }}</h1>
     </div>
 
     <v-form class="Contact__form m-auto p-3"
@@ -11,14 +11,14 @@
             lazy-validation>
       <v-text-field
         v-model="name"
-        :label="contact.name_label[$i18n.locale]"
+        :label="$t('contact_form_name')"
         :rules="nameRules"
         required
       ></v-text-field>
 
       <v-text-field
         v-model="email"
-        :label="contact.email_label[$i18n.locale]"
+        :label="$t('contact_form_email')"
         :rules="emailRules"
         required
       ></v-text-field>
@@ -26,7 +26,7 @@
       <v-textarea
         v-model="message"
         :counter="120"
-        :label="contact.message_label[$i18n.locale]"
+        :label="$t('contact_form_message')"
         value=""
       ></v-textarea>
       <div class="Contact__form__btn d-flex justify-content-end">
@@ -36,7 +36,7 @@
           class=""
           @click="submit()"
         >
-          {{contact.button_label[$i18n.locale]}}
+          {{$t('contact_form_submit_btn')}}
         </v-btn>
       </div>
       <div class="Contact__form__alert p-2">
@@ -46,7 +46,7 @@
           type="success"
           dismissible
           v-if="alertSuccess"
-        >{{contact.alert_success_label[$i18n.locale]}}</v-alert>
+        >{{$t('contact_form_alert_success_message')}}</v-alert>
 
         <v-alert
           dense
@@ -54,7 +54,7 @@
           type="success"
           dismissible
           v-if="alertFailed"
-        >{{contact.alert_failed_label[$i18n.locale]}}</v-alert>
+        >{{$t('contact_form_alert_failed_message')}}</v-alert>
       </div>
     </v-form>
 
@@ -64,7 +64,6 @@
 
 <script>
 import contactQuery from '@/apollo/queries/contact/contact.gql'
-import {mapGetters} from "vuex";
 export default {
   name: "contact",
   layout: 'layoutWithSmallHeader',
@@ -90,6 +89,7 @@ export default {
     contact: {
       prefetch: true,
       query: contactQuery,
+      errorPolicy: "ignore"
     }
   },
   methods: {
@@ -106,7 +106,7 @@ export default {
       }).catch(()=> {
         this.alertFailed = true;
       })
-    }
+    },
   }
 }
 </script>

@@ -1,18 +1,19 @@
 {
   "paths": {
-    "/map": {
+    "/content-numeric-categories": {
       "get": {
         "deprecated": false,
-        "description": "Find all the map's records",
+        "description": "Find all the content-numeric-categories's records",
         "responses": {
           "200": {
-            "description": "Retrieve map document(s)",
+            "description": "Retrieve content-numeric-categories document(s)",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Map"
+                  "properties": {
+                    "foo": {
+                      "type": "string"
+                    }
                   }
                 }
               }
@@ -51,7 +52,7 @@
         },
         "summary": "",
         "tags": [
-          "Map"
+          "Content-numeric-categories"
         ],
         "parameters": [
           {
@@ -192,16 +193,20 @@
           }
         ]
       },
-      "put": {
+      "post": {
         "deprecated": false,
-        "description": "Update a single map record",
+        "description": "Create a new content-numeric-categories record",
         "responses": {
           "200": {
-            "description": "Retrieve map document(s)",
+            "description": "Retrieve content-numeric-categories document(s)",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Map"
+                  "properties": {
+                    "foo": {
+                      "type": "string"
+                    }
+                  }
                 }
               }
             }
@@ -239,7 +244,7 @@
         },
         "summary": "",
         "tags": [
-          "Map"
+          "Content-numeric-categories"
         ],
         "requestBody": {
           "description": "",
@@ -247,19 +252,220 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewMap"
+                "$ref": "#/components/schemas/NewContent-numeric-categories"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/content-numeric-categories/count": {
+      "get": {
+        "deprecated": false,
+        "description": "Retrieve the numver of content-numeric-categories documents",
+        "responses": {
+          "200": {
+            "description": "Retrieve content-numeric-categories document(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "foo": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
               }
             }
           }
         },
+        "summary": "",
+        "tags": [
+          "Content-numeric-categories"
+        ],
         "parameters": []
+      }
+    },
+    "/content-numeric-categories/{id}": {
+      "get": {
+        "deprecated": false,
+        "description": "Find one content-numeric-categories record",
+        "responses": {
+          "200": {
+            "description": "Retrieve content-numeric-categories document(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "foo": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Content-numeric-categories"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "deprecated": false,
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      },
+      "put": {
+        "deprecated": false,
+        "description": "Update a single content-numeric-categories record",
+        "responses": {
+          "200": {
+            "description": "Retrieve content-numeric-categories document(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "foo": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Content-numeric-categories"
+        ],
+        "requestBody": {
+          "description": "",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewContent-numeric-categories"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "deprecated": false,
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
       },
       "delete": {
         "deprecated": false,
-        "description": "Delete a single map record",
+        "description": "Delete a single content-numeric-categories record",
         "responses": {
           "200": {
-            "description": "deletes a single map based on the ID supplied",
+            "description": "deletes a single content-numeric-categories based on the ID supplied",
             "content": {
               "application/json": {
                 "schema": {
@@ -302,15 +508,26 @@
         },
         "summary": "",
         "tags": [
-          "Map"
+          "Content-numeric-categories"
         ],
-        "parameters": []
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "deprecated": false,
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
       }
     }
   },
   "components": {
     "schemas": {
-      "Map": {
+      "Content-numeric-categories": {
         "required": [
           "id"
         ],
@@ -318,43 +535,29 @@
           "id": {
             "type": "string"
           },
-          "title": {
-            "type": "object",
-            "required": [
-              "id"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "fr": {
-                "type": "string"
-              },
-              "kb": {
-                "type": "string"
-              }
-            }
+          "name_fr": {
+            "type": "string"
+          },
+          "name_kb": {
+            "type": "string"
+          },
+          "published_at": {
+            "type": "string",
+            "format": "date-time"
           }
         }
       },
-      "NewMap": {
+      "NewContent-numeric-categories": {
         "properties": {
-          "title": {
-            "type": "object",
-            "required": [
-              "id"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "fr": {
-                "type": "string"
-              },
-              "kb": {
-                "type": "string"
-              }
-            }
+          "name_fr": {
+            "type": "string"
+          },
+          "name_kb": {
+            "type": "string"
+          },
+          "published_at": {
+            "type": "string",
+            "format": "date-time"
           },
           "created_by": {
             "type": "string"
@@ -366,9 +569,5 @@
       }
     }
   },
-  "tags": [
-    {
-      "name": "Map"
-    }
-  ]
+  "tags": []
 }

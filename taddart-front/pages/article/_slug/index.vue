@@ -39,7 +39,7 @@ import articleQuery from '@/apollo/queries/article/article.gql'
 import lastArticlesQuery from '@/apollo/queries/article/lastArticles.gql'
 
 export default {
-  name: "article",
+  name: "Article",
   apollo: {
     fetchedArticle: {
       prefetch: true,
@@ -89,10 +89,11 @@ export default {
       display: flex;
 
       img {
-        max-width: 800px;
-        max-height: 600px;
         margin: auto;
       }
+    }
+
+    &__content {
     }
 
     &__profile {
@@ -122,6 +123,4 @@ export default {
     }
   }
 }
-
-
 </style>

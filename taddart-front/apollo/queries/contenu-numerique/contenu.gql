@@ -1,0 +1,7 @@
+query {
+  contentNumerics {
+    files {
+      url
+    }
+  }
+}

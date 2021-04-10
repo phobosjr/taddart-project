@@ -1,6 +1,6 @@
 <template>
   <div class="Map p-5">
-    <h1 class="Map__title">{{ map.title[$i18n.locale] }}</h1>
+    <h1 class="Map__title">{{ $t('map_title') }}</h1>
     <svg class="Map__svg">
       <image xlink:href="~/assets/images/map.svg" class="Map__svg__image"></image>
       <polygon points="732,315,943,351,868,504,725,460,707,408" v-tooltip="'Ait Graich'"
@@ -18,18 +18,9 @@
 </template>
 
 <script>
-import mapQuery from "@/apollo/queries/map/map.gql";
-import {mapGetters} from "vuex";
-
 export default {
   name: "index",
   layout: 'layoutWithSmallHeader',
-  apollo: {
-    map: {
-      prefetch: true,
-      query: mapQuery
-    }
-  },
 }
 </script>
 
