@@ -10,9 +10,7 @@
         </nuxt-link>
       </v-card-actions>
     </v-card>
-
   </div>
-
 </template>
 
 <script>
@@ -24,6 +22,7 @@ export default {
     articles: {
       prefetch: true,
       query: articlesQuery,
+      errorPolicy: "ignore"
     }
   }
 }
