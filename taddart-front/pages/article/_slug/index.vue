@@ -2,20 +2,22 @@
   <div
     :class="['Article', 'p-5', 'd-flex']" v-if="article">
     <div class="Article__main p-0">
-      <div v-if="articleImageUrl" class="Article__main__image mb-4">
-        <img :src="articleImageUrl | defaultImage">
-      </div>
       <h1 class="Article__main__title font-weight-bolder text-uppercase mb-4">{{ article.title }}</h1>
-      <div class="Article__main__content text-justify m-auto" v-html="article.content"></div>
-      <div class="Article__main__profile text-right w-100">
-        <span> {{ $t('article_author_label') }}<strong>Evan You</strong></span>
+      <div class="Article__main__profile text-left w-100">
+        <span> {{ $t('article_author_label') }}<strong>{{ $t('admin_label') }}</strong></span>
         <span>{{ article.created_at | formatDate }}</span>
       </div>
+      <div v-if="articleImageUrl" class="Article__main__image mb-4">
+      <div :style="{backgroundImage: 'url('+$options.filters.defaultImage(articleImageUrl)+')'}">
+
+      </div>
+      </div>
+      <div class="Article__main__content text-justify m-auto" v-html="article.content"></div>
     </div>
     <div class="Article__last-posts d-flex flex-column p-3">
 
-      <h3>{{ $t('last_article_title') }}</h3>
-      <div v-for="article in lastArticles" :key="article.id" class="p-3">
+      <h4>{{ $t('last_article_title') }}</h4>
+      <div v-for="article in filteredLastArticles" :key="article.id" class="p-3">
         <div class="mb-3">
           <img class="w-100" :src="getFormatsFromImage(article.imageUrl) | thumbnailImage" alt="">
         </div>
@@ -59,6 +61,9 @@ export default {
     },
     articleImageUrl() {
       return this.article?.image?.formats
+    },
+    filteredLastArticles () {
+      return this.lastArticles.filter(article => article.slug !== this.$route.params.slug);
     }
   },
   methods: {
@@ -75,7 +80,7 @@ export default {
   position: relative;
 
   &__main {
-    width: 75%;
+    width: 85%;
 
     @media screen and (max-width: 1390px) {
       width: 100%;
@@ -85,27 +90,33 @@ export default {
       text-align: center;
     }
 
-    &__image {
-      display: flex;
-
-      img {
-        margin: auto;
-      }
-    }
-
-    &__content {
-    }
-
     &__profile {
       display: flex;
       flex-direction: column;
       text-align: end;
       padding: 5px;
-      margin-bottom: 15px;
+      max-width: 700px;
+      height: auto;
+      margin: auto;
+    }
+
+    &__image {
+      max-width: 700px;
+      min-height: 400px;
+      margin: auto;
+       div {
+         width: 100%;
+         min-height: 400px;
+         background-size: cover;
+       }
+    }
+
+    &__content {
     }
   }
 
   &__last-posts {
+    width: 15%;
     @media screen and (max-width: 1390px) {
       display: none !important;
     }

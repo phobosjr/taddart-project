@@ -40,6 +40,10 @@
       ],
       "plugin": "upload",
       "required": false
+    },
+    "author": {
+      "plugin": "admin",
+      "model": "user"
     }
   }
 }

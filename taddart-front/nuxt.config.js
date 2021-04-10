@@ -80,7 +80,8 @@ export default {
       default: {
         httpEndpoint: process.env.BACKEND_URL || 'http://localhost:1337/graphql'
       }
-    }
+    },
+    errorHandler: '~/plugins/apollo-error-handler.js'
   },
 
   strapi: {
