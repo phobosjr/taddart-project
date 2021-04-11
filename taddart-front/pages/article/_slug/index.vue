@@ -4,18 +4,15 @@
     <div class="Article__main p-0">
       <h1 class="Article__main__title font-weight-bolder text-uppercase mb-4">{{ article.title }}</h1>
       <div class="Article__main__profile text-left w-100">
-        <span> {{ $t('article_author_label') }}<strong>{{ $t('admin_label') }}</strong></span>
+        <span> {{ $t('article_author_label') }}<strong>{{ article.author }}</strong></span>
         <span>{{ article.created_at | formatDate }}</span>
       </div>
       <div v-if="articleImageUrl" class="Article__main__image mb-4">
-      <div :style="{backgroundImage: 'url('+$options.filters.defaultImage(articleImageUrl)+')'}">
-
-      </div>
+      <div :style="{backgroundImage: 'url('+$options.filters.defaultImage(articleImageUrl)+')'}"></div>
       </div>
       <div class="Article__main__content text-justify m-auto" v-html="article.content"></div>
     </div>
     <div class="Article__last-posts d-flex flex-column p-3">
-
       <h4>{{ $t('last_article_title') }}</h4>
       <div v-for="article in filteredLastArticles" :key="article.id" class="p-3">
         <div class="mb-3">
@@ -28,9 +25,7 @@
             {{ $t('read_article_label') }}
           </a>
         </div>
-
       </div>
-
     </div>
   </div>
   <not-found-error v-else></not-found-error>

@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "04/10/2021 7:03:40 PM"
+    "x-generation-date": "04/11/2021 4:54:57 PM"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -5930,7 +5930,7 @@
         "required": [
           "id",
           "title",
-          "langue"
+          "author"
         ],
         "properties": {
           "id": {
@@ -5944,13 +5944,6 @@
           },
           "content": {
             "type": "string"
-          },
-          "langue": {
-            "type": "string",
-            "enum": [
-              "KB",
-              "FR"
-            ]
           },
           "image": {
             "required": [
@@ -6020,48 +6013,8 @@
             }
           },
           "author": {
-            "required": [
-              "id",
-              "email"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "firstname": {
-                "type": "string"
-              },
-              "lastname": {
-                "type": "string"
-              },
-              "username": {
-                "type": "string"
-              },
-              "email": {
-                "type": "string"
-              },
-              "password": {
-                "type": "string"
-              },
-              "resetPasswordToken": {
-                "type": "string"
-              },
-              "registrationToken": {
-                "type": "string"
-              },
-              "isActive": {
-                "type": "boolean"
-              },
-              "roles": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "blocked": {
-                "type": "boolean"
-              }
-            }
+            "type": "string",
+            "maxLength": 50
           },
           "published_at": {
             "type": "string",
@@ -6072,7 +6025,7 @@
       "NewArticle": {
         "required": [
           "title",
-          "langue"
+          "author"
         ],
         "properties": {
           "title": {
@@ -6084,15 +6037,9 @@
           "content": {
             "type": "string"
           },
-          "langue": {
-            "type": "string",
-            "enum": [
-              "KB",
-              "FR"
-            ]
-          },
           "author": {
-            "type": "string"
+            "type": "string",
+            "maxLength": 50
           },
           "published_at": {
             "type": "string",

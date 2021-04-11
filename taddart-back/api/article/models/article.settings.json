@@ -24,14 +24,6 @@
     "content": {
       "type": "richtext"
     },
-    "langue": {
-      "type": "enumeration",
-      "enum": [
-        "KB",
-        "FR"
-      ],
-      "required": true
-    },
     "image": {
       "model": "file",
       "via": "related",
@@ -42,8 +34,9 @@
       "required": false
     },
     "author": {
-      "plugin": "admin",
-      "model": "user"
+      "type": "string",
+      "required": true,
+      "maxLength": 50
     }
   }
 }

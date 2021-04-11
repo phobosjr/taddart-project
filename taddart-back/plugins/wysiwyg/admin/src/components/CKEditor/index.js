@@ -28,7 +28,6 @@ const configuration = {
       'indent',
       'alignment',
       '|',
-      'imageUpload',
       'blockQuote',
       'insertTable',
       'mediaEmbed',
