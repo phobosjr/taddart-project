@@ -518,7 +518,7 @@
         "required": [
           "id",
           "title",
-          "langue"
+          "author"
         ],
         "properties": {
           "id": {
@@ -532,13 +532,6 @@
           },
           "content": {
             "type": "string"
-          },
-          "langue": {
-            "type": "string",
-            "enum": [
-              "KB",
-              "FR"
-            ]
           },
           "image": {
             "required": [
@@ -608,48 +601,8 @@
             }
           },
           "author": {
-            "required": [
-              "id",
-              "email"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "firstname": {
-                "type": "string"
-              },
-              "lastname": {
-                "type": "string"
-              },
-              "username": {
-                "type": "string"
-              },
-              "email": {
-                "type": "string"
-              },
-              "password": {
-                "type": "string"
-              },
-              "resetPasswordToken": {
-                "type": "string"
-              },
-              "registrationToken": {
-                "type": "string"
-              },
-              "isActive": {
-                "type": "boolean"
-              },
-              "roles": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "blocked": {
-                "type": "boolean"
-              }
-            }
+            "type": "string",
+            "maxLength": 50
           },
           "published_at": {
             "type": "string",
@@ -660,7 +613,7 @@
       "NewArticle": {
         "required": [
           "title",
-          "langue"
+          "author"
         ],
         "properties": {
           "title": {
@@ -672,15 +625,9 @@
           "content": {
             "type": "string"
           },
-          "langue": {
-            "type": "string",
-            "enum": [
-              "KB",
-              "FR"
-            ]
-          },
           "author": {
-            "type": "string"
+            "type": "string",
+            "maxLength": 50
           },
           "published_at": {
             "type": "string",

@@ -4,6 +4,7 @@ query getArticle ($slug: String){
     title
     content
     created_at
+    author
     image {
       formats
     }
