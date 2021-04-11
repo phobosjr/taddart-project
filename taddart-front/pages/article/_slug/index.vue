@@ -1,6 +1,6 @@
 <template>
   <div
-    :class="['Article', 'p-5', 'd-flex']" v-if="article">
+    :class="['Article', 'd-flex']" v-if="article">
     <div class="Article__main p-0">
       <h1 class="Article__main__title font-weight-bolder text-uppercase mb-4">{{ article.title }}</h1>
       <div class="Article__main__profile text-left w-100">
@@ -63,7 +63,7 @@ export default {
       return this.article?.image?.formats
     },
     filteredLastArticles () {
-      return this.lastArticles.filter(article => article.slug !== this.$route.params.slug);
+      return this.lastArticles?.filter(article => article.slug !== this.$route.params.slug);
     }
   },
   methods: {
@@ -74,10 +74,15 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .Article {
   min-height: 100vh;
   position: relative;
+  padding: 3rem;
+
+  @media screen and (max-width: 442px){
+    padding: 30px;
+  }
 
   &__main {
     width: 85%;
@@ -112,6 +117,28 @@ export default {
     }
 
     &__content {
+      figure {
+        text-align: center;
+        &.image {
+          margin: auto;
+          &.image-style-side {
+            float: right;
+            margin-left: 1.5em;
+            max-width: 50%;
+
+            @media screen and (max-width: 992px){
+              width: 70% !important;
+              margin: auto;
+              float: none;
+              display: contents;
+            }
+
+            &.image_resized {
+              max-width: 100%;
+            }
+          }
+        }
+      }
     }
   }
 
