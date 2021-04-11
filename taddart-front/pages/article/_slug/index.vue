@@ -63,7 +63,7 @@ export default {
       return this.article?.image?.formats
     },
     filteredLastArticles () {
-      return this.lastArticles.filter(article => article.slug !== this.$route.params.slug);
+      return this.lastArticles?.filter(article => article.slug !== this.$route.params.slug);
     }
   },
   methods: {
@@ -74,7 +74,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .Article {
   min-height: 100vh;
   position: relative;
@@ -112,6 +112,23 @@ export default {
     }
 
     &__content {
+      figure {
+        text-align: center;
+        &.image.image-style-side {
+          float: right;
+          margin-left: 1.5em;
+          max-width: 50%;
+          img {
+            width: 500px;
+            height: 400px;
+          }
+        }
+
+        img {
+          width: 800px;
+          max-height: 450px;
+        }
+      }
     }
   }
 
