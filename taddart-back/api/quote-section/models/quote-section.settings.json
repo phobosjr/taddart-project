@@ -1,0 +1,46 @@
+{
+  "kind": "singleType",
+  "collectionName": "quote_sections",
+  "info": {
+    "name": "quote-section",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "title": {
+      "type": "component",
+      "repeatable": false,
+      "component": "lang.simple-text"
+    },
+    "enable": {
+      "type": "boolean"
+    },
+    "horizontalImage": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images"
+      ],
+      "plugin": "upload",
+      "required": true
+    },
+    "verticalImage": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images"
+      ],
+      "plugin": "upload",
+      "required": true
+    },
+    "content": {
+      "type": "component",
+      "repeatable": false,
+      "component": "lang.long-text"
+    }
+  }
+}

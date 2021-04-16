@@ -60,9 +60,6 @@
         </template>
       </b-carousel-slide>
     </b-carousel>
-    <div class="Header_title">
-      <span>Taddart-iw</span>
-    </div>
   </div>
 </template>
 <script>
@@ -73,7 +70,6 @@ export default {
   props: {
     smallHeader: {type: Boolean, required: false, default: false}
   },
-
   data: () => {
     return {
       isScrolled: false,

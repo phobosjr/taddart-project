@@ -1,0 +1,19 @@
+query {
+  quoteSection {
+    title {
+      kb
+      fr
+    }
+    content {
+      fr
+      kb
+    }
+    horizontalImage {
+      formats
+    }
+    verticalImage {
+      formats
+    }
+    enable
+  }
+}
