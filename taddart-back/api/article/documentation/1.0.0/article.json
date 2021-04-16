@@ -518,7 +518,8 @@
         "required": [
           "id",
           "title",
-          "author"
+          "author",
+          "summary"
         ],
         "properties": {
           "id": {
@@ -604,6 +605,9 @@
             "type": "string",
             "maxLength": 50
           },
+          "summary": {
+            "type": "string"
+          },
           "published_at": {
             "type": "string",
             "format": "date-time"
@@ -613,7 +617,8 @@
       "NewArticle": {
         "required": [
           "title",
-          "author"
+          "author",
+          "summary"
         ],
         "properties": {
           "title": {
@@ -628,6 +633,9 @@
           "author": {
             "type": "string",
             "maxLength": 50
+          },
+          "summary": {
+            "type": "string"
           },
           "published_at": {
             "type": "string",

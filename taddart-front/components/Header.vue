@@ -1,10 +1,10 @@
 <template>
   <div :class="['Header', {'scrolled': isScrolled}, 'td-transition', {'Header--small-height': smallHeader}]">
     <nav class="Header__navbar navbar navbar-light position-fixed td-transition">
-      <nuxt-link class="Header__navbar__logo navbar-brand" to="/">
+      <a class="Header__navbar__logo navbar-brand" href="/">
         <img :src="header.logo_image.formats | defaultImage" width="30" height="30"
              class="Header__navbar__logo__img d-inline-block align-top td-transition" alt="">
-      </nuxt-link>
+      </a>
       <div class="Header__navbar__menu">
         <div :class="['Header__navbar__menu__item', 'td-transition',
           {'Header__navbar__menu__item--open': navBarMenuOpened},
@@ -12,16 +12,11 @@
           <a :href="localePath('index', $i18n.locale)">
             {{ $t('home_title') }}
           </a>
-
           <a :href="localePath('/gallery', $i18n.locale)">
             {{ $t('gallery_title') }}
           </a>
-
           <a :href="localePath({name: 'contact'})">
             {{ $t('contact_title') }}
-          </a>
-          <a :href="localePath('/map', $i18n.locale)">
-            {{ $t('map_title') }}
           </a>
         </div>
         <div class="Header__navbar__menu__btn">
@@ -166,11 +161,16 @@ $navbar-height-small: 60px;
             top: $navbar-height-small;
           }
         }
+
         a {
+          color: white;
+          margin: 0 4px;
+          font-weight: bold;
           @media screen and (max-width: 992px) {
             margin: 10px;
             color: white;
           }
+
           &:hover {
             color: $td-green;
             text-decoration: none;
@@ -222,7 +222,7 @@ $navbar-height-small: 60px;
   &.scrolled {
     .Header__navbar {
       height: 60px;
-      background-color: rgba(96, 168, 239, 0.85) !important;
+      background-color: $td-blue !important;
 
       .Header__navbar__logo {
         .Header__navbar__logo__img {

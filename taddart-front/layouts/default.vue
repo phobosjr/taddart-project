@@ -13,6 +13,13 @@ import Header from '../components/Header.vue'
 
 export default {
   components: {Header},
+  mounted() {
+    if(process.client) {
+      this.$nextTick(() => {
+        this.$nuxt.$loading.finish()
+      })
+    }
+  }
 }
 </script>
 

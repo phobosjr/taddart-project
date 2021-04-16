@@ -1,37 +1,20 @@
 <template>
   <div class="Gallery container-fluid p-2">
     <div class="Gallery__tags d-flex flex-wrap justify-content-center m-4">
-      <v-btn
-        depressed
-        elevation="2"
-        outlined
-        raised
-        rounded
-        small
-        text
-        :class="{'active-tag': albumId === null}"
-        @click="albumId = null"
-      > {{ $t('all_albums_title') }}
-      </v-btn>
-      <v-btn
+      <button :class="['Gallery__album-btn',{'active-tag': albumId === null}]"
+              @click="albumId = null">
+        {{ $t('all_albums_title') }}
+      </button>
+      <button  :class="['Gallery__album-btn',{'active-tag': albumId === album.id}]"
         v-for="(album, index) in albums"
-        :key="index"
-        depressed
-        elevation="2"
-        outlined
-        raised
-        rounded
-        small
-        text
-        :class="{'active-tag': albumId === album.id}"
-        @click="albumId = album.id"
-      > {{ album.album_title[$i18n.locale] }}
-      </v-btn>
+               :key="index"
+               @click="albumId = album.id"
+      >
+        {{ album.album_title[$i18n.locale] }}
+      </button>
     </div>
 
-
     <transition-group name="fade" mode="out-in" tag="div" class="Gallery__panel p-1 justify-content-center">
-
       <div v-for="(item, index) in pictureThumbnails"
            :key="item"
            :style="{backgroundImage: 'url('+item+')'}"
@@ -80,8 +63,9 @@ export default {
   },
   methods: {
     getAlbumPictures() {
-      return this.albumId ? this.albums[this.albumId - 1].images : this.albums
-        .flatMap(album => album.images)
+      return this.albumId ?
+        this.albums.find(album => album.id === this.albumId).images :
+        this.albums.flatMap(album => album.images)
     }
   }
 }
@@ -97,13 +81,21 @@ export default {
     }
   }
 
+  &__album-btn {
+    padding: 3px 21px;
+    border-radius: 16px;
+    border: 1px solid #0000001f;
+    &:hover {
+      background-color: #0000001f;
+    }
+  }
+
   &__panel {
-    display: grid;
-    grid-template-columns: repeat(3, 210px);
-    grid-column-gap: 46px;
-    grid-row-gap: 4px;
     overflow: hidden;
     position: relative;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
 
     @media screen and (max-width: 669px) {
       grid-template-columns: repeat(2, 210px);
@@ -115,18 +107,15 @@ export default {
 
     &__image {
       cursor: pointer;
-      width: 250px;
+      width: 350px;
       background-color: #a5a4a4;
       background-position: center;
       background-size: cover;
       min-height: 200px;
-
+      margin: 8px;
       &:hover {
-        -ms-transform: scale(1.2);
-        -webkit-transform: scale(1.2);
-        transform: scale(1.2);
-        -webkit-transition: all 0.8s cubic-bezier(.68, -0.55, .27, 1.55);
-        transition: all 0.8s cubic-bezier(.68, -0.55, .27, 1.55);
+        -webkit-box-shadow: 0 0 16px -2px #000000;
+        box-shadow: 0 0 16px -2px #000000;
       }
     }
   }
@@ -139,14 +128,17 @@ export default {
   .fade-enter-active, .fade-leave-active {
     transition: all .5s ease-out;
   }
+
   .fade-enter {
     opacity: 0;
     transform: translateX(120px);
   }
+
   .fade-leave-to {
     opacity: 0;
     transform: translateX(-120px);
   }
+
   .fade-enter-active {
     transition-delay: .5s;
   }

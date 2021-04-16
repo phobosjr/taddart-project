@@ -47,7 +47,10 @@ export default {
     },
     lastArticles: {
       prefetch: true,
-      query: lastArticlesQuery
+      query: lastArticlesQuery,
+      variables () {
+        return {limit: 3}
+      }
     }
   },
   computed: {

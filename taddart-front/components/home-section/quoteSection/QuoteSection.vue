@@ -19,7 +19,7 @@
 
 <script>
 export default {
-  name: "DescriptionSection",
+  name: "QuoteSection",
   props: {
     title: {type: String, required: true},
     content: {type: String, required: true},
@@ -75,6 +75,10 @@ export default {
   &__text {
     width: 50%;
     height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
     @media screen and (max-width: 1480px){
       width: 100%;
     }
@@ -101,7 +105,6 @@ export default {
       font-size: 18px;
       text-align: center;
       line-height: 2em;
-      margin: auto;
     }
   }
 }

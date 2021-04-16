@@ -37,6 +37,10 @@
       "type": "string",
       "required": true,
       "maxLength": 50
+    },
+    "summary": {
+      "type": "text",
+      "required": true
     }
   }
 }
