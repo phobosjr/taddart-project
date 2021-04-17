@@ -32,6 +32,7 @@ export default {
     {src: '~/plugins/filters/strapiImage/thumbnailImage.js'},
     {src: '~/plugins/gallery.js', ssr: true},
     {src: '~/plugins/tooltip.js', ssr: true},
+    {src: '~/plugins/wayPoint.js', mode: 'client'},
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

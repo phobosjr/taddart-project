@@ -7,8 +7,9 @@
                   :vertical-image="quoteSection.verticalImage.formats | defaultImage"
     ></QuoteSection>
     <SeparateLine :text-content="$t('last_article_title')"/>
-    <LastArticlesSection></LastArticlesSection>
-    <div class="Home__gallery-panel">
+    <LastArticlesSection v-waypoint="{ active: true, callback: onWaypoint}"></LastArticlesSection>
+    <div :class="['Home__gallery-panel']"
+         v-waypoint="{ active: true, callback: onWaypoint}">
       <a :href="localePath('/gallery', $i18n.locale)">
         {{ $t('gallery_title') }}
       </a>
@@ -27,6 +28,10 @@ export default {
     QuoteSection,
     LastArticlesSection
   },
+  data() {
+    return {
+    }
+  },
   apollo: {
     articles: {
       prefetch: true,
@@ -38,27 +43,42 @@ export default {
       query: quoteQuery,
       errorPolicy: "ignore"
     }
+  },
+  methods: {
+    onWaypoint({el, going}) {
+      if (going === this.$waypointMap.GOING_IN) {
+        el.classList.add('visible')
+      }
+    }
   }
 }
 </script>
 <style lang="scss" scoped>
 @import "assets/css/pallete";
+
 .Home {
   padding-top: 70px;
 
   &__gallery-panel {
     width: 100%;
-    height: 150px;
+    height: 320px;
     font-size: 35px;
     background-color: $td-yellow;
     text-align: center;
-    padding: 50px 0;
+    padding: 140px 0;
     margin: 40px 0;
+    transition: all .5s ease;
+    transform: translateX(-100%);
+
+    &.visible {
+      transform: translateX(0);
+    }
 
     a {
       color: white !important;
       text-transform: uppercase;
       font-weight: bolder;
+      text-decoration: none;
     }
   }
 }

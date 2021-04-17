@@ -47,6 +47,11 @@ export default {
   flex-wrap: wrap;
   justify-content: center;
   min-height: 555px;
+  transition: all .5s ease;
+  transform: translateX(100%);
+  &.visible {
+    transform: translateX(0);
+  }
 
   &__article {
     margin: 10px;
