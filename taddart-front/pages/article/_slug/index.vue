@@ -1,29 +1,31 @@
 <template>
   <div
-    :class="['Article', 'd-flex']" v-if="article">
-    <div class="Article__main p-0">
-      <h1 class="Article__main__title font-weight-bolder text-uppercase mb-4">{{ article.title }}</h1>
-      <div class="Article__main__profile text-left w-100">
+    :class="['Article']" v-if="article">
+    <div class="Article__header" :style="{backgroundImage: 'url('+$options.filters.defaultImage(articleImageUrl)+')'}">
+      <div class="td-overlay"></div>
+      <div class="Article__header__title">
+        <h1 class=" font-weight-bolder text-uppercase mb-4">{{ article.title }}</h1>
+      </div>
+      <div class="Article__header__profile text-left w-100">
         <span> {{ $t('article_author_label') }}<strong>{{ article.author }}</strong></span>
         <span>{{ article.created_at | formatDate }}</span>
       </div>
-      <div v-if="articleImageUrl" class="Article__main__image mb-4">
-      <div :style="{backgroundImage: 'url('+$options.filters.defaultImage(articleImageUrl)+')'}"></div>
-      </div>
-      <div class="Article__main__content text-justify m-auto" v-html="article.content"></div>
     </div>
-    <div class="Article__last-posts d-flex flex-column p-3">
-      <h4>{{ $t('last_article_title') }}</h4>
-      <div v-for="article in filteredLastArticles" :key="article.id" class="p-3">
-        <div class="mb-3">
-          <img class="w-100" :src="getFormatsFromImage(article.imageUrl) | thumbnailImage" alt="">
-        </div>
-        <div class="d-flex flex-column">
-          <div class="Article__last-posts__date">{{ article.created_at | formatDate }}</div>
-          <div class="Article__last-posts__title">{{ article.title }}</div>
-          <a :href="article.slug" class="Article__last-posts__link mt-3">
-            {{ $t('read_article_label') }}
-          </a>
+    <div class="Article__main">
+      <div class="Article__main__content" v-html="article.content"></div>
+      <div class="Article__main__last-posts d-flex flex-column p-3">
+        <h4>{{ $t('last_article_title') }}</h4>
+        <div v-for="article in filteredLastArticles" :key="article.id" class="p-3">
+          <div class="mb-3">
+            <img class="w-100" :src="getFormatsFromImage(article.imageUrl) | thumbnailImage" alt="">
+          </div>
+          <div class="d-flex flex-column">
+            <div class="Article__last-posts__date">{{ article.created_at | formatDate }}</div>
+            <div class="Article__last-posts__title">{{ article.title }}</div>
+            <a :href="article.slug" class="Article__last-posts__link mt-3">
+              {{ $t('read_article_label') }}
+            </a>
+          </div>
         </div>
       </div>
     </div>
@@ -37,6 +39,7 @@ import lastArticlesQuery from '@/apollo/queries/article/lastArticles.gql'
 
 export default {
   name: "Article",
+  layout: 'layoutWithSmallHeader',
   apollo: {
     fetchedArticle: {
       prefetch: true,
@@ -48,7 +51,7 @@ export default {
     lastArticles: {
       prefetch: true,
       query: lastArticlesQuery,
-      variables () {
+      variables() {
         return {limit: 3}
       }
     }
@@ -60,7 +63,7 @@ export default {
     articleImageUrl() {
       return this.article?.image?.formats
     },
-    filteredLastArticles () {
+    filteredLastArticles() {
       return this.lastArticles?.filter(article => article.slug !== this.$route.params.slug);
     }
   },
@@ -76,55 +79,76 @@ export default {
 .Article {
   min-height: 100vh;
   position: relative;
-  padding: 3rem;
 
-  @media screen and (max-width: 442px){
+  @media screen and (max-width: 442px) {
     padding: 30px;
   }
 
-  &__main {
-    width: 85%;
+  &__header {
+    display: block;
+    width: 100%;
+    height: 500px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    vertical-align: center;
 
+    &__title {
+      color: white;
+      position: absolute;
+      margin: auto;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      width: fit-content;
+      height: fit-content;
+    }
+
+    &__profile {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      display: flex;
+      flex-direction: row;
+      padding: 12px;
+      max-width: fit-content;
+      color: white;
+
+      > * {
+        margin: 0 10px;
+        font-weight: bold;
+      }
+    }
+  }
+
+  &__main {
+    width: 100%;
+    padding: 25px 0 0 0;
+    margin-bottom: 25px;
+    display: flex;
+    justify-content: space-evenly;
     @media screen and (max-width: 1390px) {
       width: 100%;
     }
 
-    &__title {
-      text-align: center;
-    }
-
-    &__profile {
-      display: flex;
-      flex-direction: column;
-      text-align: end;
-      padding: 5px;
-      max-width: 700px;
-      height: auto;
-      margin: auto;
-    }
-
-    &__image {
-      max-width: 700px;
-      min-height: 400px;
-      margin: auto;
-       div {
-         width: 100%;
-         min-height: 400px;
-         background-size: cover;
-       }
-    }
-
     &__content {
+      text-align: justify;
+      padding: 0 25px;
+      max-width: 867px;
+
       figure {
         text-align: center;
+
         &.image {
           margin: auto;
+
           &.image-style-side {
             float: right;
             margin-left: 1.5em;
             max-width: 50%;
 
-            @media screen and (max-width: 992px){
+            @media screen and (max-width: 992px) {
               width: 70% !important;
               margin: auto;
               float: none;
@@ -138,24 +162,25 @@ export default {
         }
       }
     }
-  }
 
-  &__last-posts {
-    width: 15%;
-    @media screen and (max-width: 1390px) {
-      display: none !important;
-    }
+    &__last-posts {
+      @media screen and (max-width: 1390px) {
+        display: none !important;
+      }
 
-    &__date {
-      font-size: 13px;
-      color: gray;
-      margin-bottom: 4px;
-    }
-    &__title {
-      font-weight: bold;
-    }
-    &__link {
-      text-align: right;
+      &__date {
+        font-size: 13px;
+        color: gray;
+        margin-bottom: 4px;
+      }
+
+      &__title {
+        font-weight: bold;
+      }
+
+      &__link {
+        text-align: right;
+      }
     }
   }
 }
