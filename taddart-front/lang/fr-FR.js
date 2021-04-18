@@ -15,4 +15,5 @@ export default {
   contact_form_submit_btn: 'Envoyer',
   contact_form_alert_success_message: 'Votre message à bien été envoyé',
   contact_form_alert_failed_message: 'Envoi a echoué',
+  loading_label: 'Chargement ...'
 }

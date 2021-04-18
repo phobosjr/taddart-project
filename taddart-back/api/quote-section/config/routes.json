@@ -1,0 +1,28 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/quote-section",
+      "handler": "quote-section.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/quote-section",
+      "handler": "quote-section.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/quote-section",
+      "handler": "quote-section.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

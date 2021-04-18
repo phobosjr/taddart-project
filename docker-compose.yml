@@ -23,7 +23,7 @@ services:
         BACKEND_URL: http://10.0.3.24:1337/graphql
     container_name: taddart-front-container
     ports:
-      - "3000:3000"
+      - "3001:3000"
     networks:
       - strapi-app-network
 

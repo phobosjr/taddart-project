@@ -1,5 +1,5 @@
-query {
-  lastArticles: articles(limit: 3, sort: "created_at:desc") {
+query ($limit: Int) {
+  lastArticles: articles(limit: $limit, sort: "created_at:desc") {
     id
     title
     slug
@@ -7,5 +7,7 @@ query {
       formats
     }
     created_at
+    author
+    summary
   }
 }

@@ -1,5 +1,5 @@
 export default {
-  home_title: 'Agejdan',
+  home_title: 'Accueil',
   gallery_title: 'Tagalrit',
   map_title: 'Tkarḍa n taddart',
   all_albums_title: 'Akk',
@@ -15,4 +15,5 @@ export default {
   contact_form_submit_btn: 'Azen',
   contact_form_alert_success_message: '',
   contact_form_alert_failed_message: '',
+  loading_label: 'Asali ...'
 }
