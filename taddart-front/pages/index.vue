@@ -54,7 +54,6 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-@import "assets/css/pallete";
 
 .Home {
   padding-top: 70px;
