@@ -80,10 +80,6 @@ export default {
   min-height: 100vh;
   position: relative;
 
-  @media screen and (max-width: 442px) {
-    padding: 30px;
-  }
-
   &__header {
     display: block;
     width: 100%;

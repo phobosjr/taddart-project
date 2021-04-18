@@ -1,7 +1,6 @@
 <template>
   <section class="LastArticles">
-    <div v-for="article in lastArticles">
-      <div class="LastArticles__article">
+      <div v-for="article in lastArticles" class="LastArticles__article">
         <div class="LastArticles__article__image"
              :style="{backgroundImage: 'url('+$options.filters.defaultImage(article.imageUrl.formats)+')'}"></div>
         <div class="LastArticles__article__article-info">
@@ -14,12 +13,11 @@
         <div class="LastArticles__article__short-content" v-html="article.summary">
         </div>
         <div class="LastArticles__article__btn">
-          <a :href="'/article/'+article.slug">
+          <a :href="localePath('/article/'+article.slug, $i18n.locale)">
             {{ $t('read_article_label') }}
           </a>
         </div>
       </div>
-    </div>
   </section>
 </template>
 
@@ -47,6 +45,7 @@ export default {
   flex-wrap: wrap;
   justify-content: center;
   min-height: 555px;
+  padding: 10px;
   transition: all .5s ease;
   transform: translateX(100%);
   &.visible {
@@ -55,10 +54,10 @@ export default {
 
   &__article {
     margin: 10px;
-    width: 400px;
+    max-width: 400px;
 
     &__image {
-      width: 400px;
+      max-width: 400px;
       height: 252px;
       background-size: cover;
 
