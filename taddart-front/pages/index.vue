@@ -60,13 +60,13 @@ export default {
 
   &__gallery-panel {
     width: 100%;
-    height: 320px;
+    height: 110px;
     font-size: 35px;
-    background-color: $td-yellow;
+    background-color: #e9bd15;
     text-align: center;
-    padding: 140px 0;
+    padding: 30px 0;
     margin: 40px 0;
-    transition: all .5s ease;
+    transition: all 0.5s ease;
     transform: translateX(-100%);
 
     &.visible {

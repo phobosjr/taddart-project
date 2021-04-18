@@ -5,8 +5,10 @@ query {
       fr
       kb
     }
-    images {
+    medias:images {
       formats
+      url
+      mime
     }
   }
 }

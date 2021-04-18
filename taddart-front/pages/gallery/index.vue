@@ -1,34 +1,29 @@
 <template>
   <div class="Gallery container-fluid p-2">
-    <div class="Gallery__tags d-flex flex-wrap justify-content-center m-4">
-      <button :class="['Gallery__album-btn',{'active-tag': albumId === null}]"
-              @click="albumId = null">
-        {{ $t('all_albums_title') }}
-      </button>
-      <button  :class="['Gallery__album-btn',{'active-tag': albumId === album.id}]"
-        v-for="(album, index) in albums"
-               :key="index"
-               @click="albumId = album.id"
-      >
-        {{ album.album_title[$i18n.locale] }}
-      </button>
+    <separate-line :text-content="$t('gallery_title')"></separate-line>
+    <div class="Gallery__panel">
+      <div class="Gallery__panel__album" v-for="(album, index) in albums" :key="index">
+        <div v-for="(image, index) in album.medias.slice(0,3)"
+             :key="index"
+             :style="{backgroundImage:buildThumbnailImage(image.formats, image.mime)}"
+             class="Gallery__panel__album__image"
+             @click="showMediaAlbum(album.id)"
+        ></div>
+        <div class="Gallery__panel__album__infos">
+          <span>{{ album.album_title[$i18n.locale] }}</span>
+          <div>
+            <img src="~/assets/images/card-image.svg">
+            <span>{{ album.medias.length }}</span>
+          </div>
+        </div>
+      </div>
     </div>
-
-    <transition-group name="fade" mode="out-in" tag="div" class="Gallery__panel p-1 justify-content-center">
-      <div v-for="(item, index) in pictureThumbnails"
-           :key="item"
-           :style="{backgroundImage: 'url('+item+')'}"
-           class="Gallery__panel__image"
-           @click="pictureIndex = index"
-      ></div>
-    </transition-group>
-
     <CoolLightBox
-      :items="pictureItems"
-      :index="pictureIndex"
+      :items="mediaItems"
+      :index="mediaIndex"
       :useZoomBar=true
       effect="swipe"
-      @close="pictureIndex = null">
+      @close="mediaIndex = null">
     </CoolLightBox>
   </div>
 </template>
@@ -41,18 +36,14 @@ export default {
   layout: 'layoutWithSmallHeader',
   data: () => {
     return {
-      pictureIndex: null,
+      mediaIndex: null,
       albumId: null
     }
   },
   computed: {
-    pictureItems() {
-      return this.getAlbumPictures()
-        .map(item => this.$options.filters.defaultImage(item.formats))
-    },
-    pictureThumbnails() {
-      return this.getAlbumPictures()
-        .map(item => this.$options.filters.thumbnailImage(item.formats))
+    mediaItems() {
+      return this.getAlbumMedias()
+        .map(item => this.buildMediaObject(item))
     }
   },
   apollo: {
@@ -62,10 +53,23 @@ export default {
     }
   },
   methods: {
-    getAlbumPictures() {
+    getAlbumMedias() {
       return this.albumId ?
-        this.albums.find(album => album.id === this.albumId).images :
-        this.albums.flatMap(album => album.images)
+        this.albums.find(album => album.id === this.albumId).medias :
+        this.albums.flatMap(album => album.medias)
+    },
+    showMediaAlbum(albumId) {
+      this.albumId = albumId;
+      this.mediaIndex = 0;
+    },
+    buildMediaObject(mediaObject) {
+      return {
+        src: mediaObject.url,
+        thumb: this.$options.filters.thumbnailImage(mediaObject.formats)
+      };
+    },
+    buildThumbnailImage(formats, type) {
+      return type.includes('video') ? 'url(' + require('~/assets/images/video-thumbnail.png') + ')' : 'url(' + this.$options.filters.thumbnailImage(formats) + ')';
     }
   }
 }
@@ -75,47 +79,75 @@ export default {
 .Gallery {
   min-height: 100vh;
 
-  &__tags {
-    button {
-      margin: 2px;
-    }
-  }
-
-  &__album-btn {
-    padding: 3px 21px;
-    border-radius: 16px;
-    border: 1px solid #0000001f;
-    &:hover {
-      background-color: #0000001f;
-    }
-  }
-
   &__panel {
     overflow: hidden;
     position: relative;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    justify-content: space-evenly;
 
-    @media screen and (max-width: 669px) {
-      grid-template-columns: repeat(2, 210px);
-    }
-
-    @media screen and (max-width: 472px) {
-      grid-template-columns: 210px;
-    }
-
-    &__image {
-      cursor: pointer;
+    &__album {
+      margin: 40px 20px 20px 20px;
       width: 350px;
-      background-color: #a5a4a4;
-      background-position: center;
-      background-size: cover;
-      min-height: 200px;
-      margin: 8px;
+      height: 220px;
+      position: relative;
+
       &:hover {
-        -webkit-box-shadow: 0 0 16px -2px #000000;
-        box-shadow: 0 0 16px -2px #000000;
+        > * {
+          &:first-child {
+            margin-top: 0px;
+          }
+
+          &:nth-child(2) {
+            margin-top: -10px;
+            margin-left: 10px;
+          }
+
+          &:nth-child(3) {
+            margin-top: -20px;
+            margin-left: 20px;
+          }
+        }
+      }
+
+      &__image {
+        position: absolute;
+        cursor: pointer;
+        width: 100%;
+        min-height: 190px;
+        background-position: center;
+        background-size: cover;
+        -webkit-box-shadow: 4px -1px 12px 0px rgba(0, 0, 0, 0.49);
+        box-shadow: 4px -1px 12px 0px rgba(0, 0, 0, 0.49);
+        transition: all .5s ease;
+
+        &:first-child {
+          z-index: 99;
+        }
+
+        &:nth-child(2) {
+          z-index: 98;
+        }
+
+        &:nth-child(3) {
+          z-index: 97;
+        }
+      }
+
+      &__infos {
+        position: absolute;
+        bottom: 0;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        width: 100%;
+        padding: 0 25px;
+        font-size: 14px;
+
+        img {
+          width: 19px;
+        }
       }
     }
   }
