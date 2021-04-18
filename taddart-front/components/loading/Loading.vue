@@ -22,7 +22,6 @@ export default {
 }
 </script>
 <style  lang="scss" scoped>
-@import "assets/css/pallete";
 .loading-page {
   position: fixed;
   top: 0;
