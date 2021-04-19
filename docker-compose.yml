@@ -11,6 +11,8 @@ services:
       - DATABASE_USERNAME=td-strapi
       - DATABASE_PASSWORD=td-strapi
       - DATABASE_SCHEMA=public
+    volumes:
+      - ./public:/app/public
     ports:
       - "1337:1337"
     networks:
@@ -20,7 +22,8 @@ services:
     build:
       context: ./taddart-front
       args:
-        BACKEND_URL: http://10.0.3.24:1337/graphql
+        GRAPHQL_HOST_URL: http://10.0.3.24:1337/graphql
+        BACKEND_URL: https://anebdal.tuddar-nat-abdelmumen.net
     container_name: taddart-front-container
     ports:
       - "3001:3000"

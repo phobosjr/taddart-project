@@ -75,7 +75,7 @@ export default {
   apollo: {
     clientConfigs: {
       default: {
-        httpEndpoint: process.env.BACKEND_URL || 'http://localhost:1337/graphql'
+        httpEndpoint: process.env.GRAPHQL_HOST_URL || 'http://localhost:1337/graphql'
       }
     },
     errorHandler: '~/plugins/apollo-error-handler.js'
