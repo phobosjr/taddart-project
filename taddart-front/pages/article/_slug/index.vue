@@ -12,7 +12,14 @@
       </div>
     </div>
     <div class="Article__main">
-      <div class="Article__main__content" v-html="article.content"></div>
+      <div class="Article__main__content">
+        <div class="Article__main__content__breadcrumb">
+          <a href="/">{{$t('home_title')}}</a>
+          /
+          <span>{{article.title}}</span>
+        </div>
+        <div class="Article__main__content__text" v-html="article.content"></div>
+      </div>
       <div class="Article__main__last-posts d-flex flex-column p-3">
         <h4>{{ $t('last_article_title') }}</h4>
         <div v-for="article in filteredLastArticles" :key="article.id" class="p-3">
@@ -98,7 +105,7 @@ export default {
       left: 0;
       right: 0;
       width: fit-content;
-      height: fit-content;
+      height: 50px;
     }
 
     &__profile {
@@ -129,30 +136,39 @@ export default {
     }
 
     &__content {
-      text-align: justify;
-      padding: 0 25px;
-      max-width: 867px;
+      display: flex;
+      flex-direction: column;
+      &__breadcrumb {
+        padding: 0 25px;
+        margin-bottom: 25px;
+      }
+      &__text {
+        text-align: justify;
+        padding: 0 25px;
+        max-width: 867px;
+        margin: 25px 0;
 
-      figure {
-        text-align: center;
+        figure {
+          text-align: center;
 
-        &.image {
-          margin: auto;
+          &.image {
+            margin: auto;
 
-          &.image-style-side {
-            float: right;
-            margin-left: 1.5em;
-            max-width: 50%;
+            &.image-style-side {
+              float: right;
+              margin-left: 1.5em;
+              max-width: 50%;
 
-            @media screen and (max-width: 992px) {
-              width: 70% !important;
-              margin: auto;
-              float: none;
-              display: contents;
-            }
+              @media screen and (max-width: 992px) {
+                width: 70% !important;
+                margin: auto;
+                float: none;
+                display: contents;
+              }
 
-            &.image_resized {
-              max-width: 100%;
+              &.image_resized {
+                max-width: 100%;
+              }
             }
           }
         }
