@@ -49,7 +49,7 @@
           <v-alert
             dense
             outlined
-            type="success"
+            type="warning"
             dismissible
             v-if="alertFailed"
           >{{$t('contact_form_alert_failed_message')}}</v-alert>
@@ -91,7 +91,7 @@ export default {
     emailRules() {
       return [
         v => !!v || this.$t('contact_form_email_required'),
-        v => /.+@.+/.test(v) || 'E-mail must be valid',
+        v => /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(v) || 'E-mail must be valid',
       ]
     }
   },

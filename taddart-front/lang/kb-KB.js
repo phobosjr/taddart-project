@@ -13,7 +13,7 @@ export default {
   contact_form_email_required: 'Lmay ilaq ad yili',
   contact_form_message: 'Izen',
   contact_form_submit_btn: 'Azen',
-  contact_form_alert_success_message: '',
-  contact_form_alert_failed_message: '',
+  contact_form_alert_success_message: 'Votre message à bien été envoyé',
+  contact_form_alert_failed_message: 'Envoi a echoué',
   loading_label: 'Asali ...'
 }
