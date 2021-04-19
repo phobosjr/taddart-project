@@ -75,7 +75,7 @@ export default {
   apollo: {
     clientConfigs: {
       default: {
-        httpEndpoint: process.env.GRAPHQL_HOST_URL || 'http://localhost:1337/graphql'
+        httpEndpoint: process.env.ENV === 'production' ? 'http://10.0.3.24:1337/graphql' : 'http://localhost:1337/graphql'
       }
     },
     errorHandler: '~/plugins/apollo-error-handler.js'
@@ -85,7 +85,7 @@ export default {
   },
   strapi: {
     entities: ['header'],
-    url: process.env.BACKEND_URL || 'http://localhost:1337'
+    url: process.env.ENV === 'production' ? 'https://anebdal.tuddar-nat-abdelmumen.net' : 'http://localhost:1337'
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build

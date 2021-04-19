@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "nuxt",
-    "build": "nuxt build",
-    "start": "nuxt start",
+    "build": "ENV=production nuxt build",
+    "start": "ENV=production nuxt start",
     "generate": "nuxt generate",
     "test": "jest"
   },
