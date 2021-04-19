@@ -12,7 +12,7 @@ services:
       - DATABASE_PASSWORD=td-strapi
       - DATABASE_SCHEMA=public
     volumes:
-      - ./public:/app/public
+      - ./public/uploads:/app/public/uploads
     ports:
       - "1337:1337"
     networks:
