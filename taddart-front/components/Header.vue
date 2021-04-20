@@ -1,6 +1,6 @@
 <template>
-  <div :class="['Header', {'scrolled': isScrolled}, 'td-transition', {'Header--small-height': smallHeader}]">
-    <nav class="Header__navbar navbar navbar-light position-fixed td-transition">
+  <div :class="['Header', {'scrolled': isScrolled}, {'Header--small-height': smallHeader}]">
+    <nav class="Header__navbar navbar navbar-light position-fixed" :style="{ 'height': `${navHeight}px`}">
       <a class="Header__navbar__logo navbar-brand" href="/">
         <img :src="header.logo_image.formats | defaultImage" width="30" height="30"
              class="Header__navbar__logo__img d-inline-block align-top td-transition" alt="">
@@ -68,7 +68,8 @@ export default {
   data: () => {
     return {
       isScrolled: false,
-      navBarMenuOpened: false
+      navBarMenuOpened: false,
+      navHeight: 120
     }
   },
   computed: {
@@ -84,6 +85,9 @@ export default {
   },
   methods: {
     handleScroll() {
+      if (window.scrollY < 64) {
+        this.navHeight = (120 -window.scrollY);
+      }
       window.scrollY === 0
         ? (this.isScrolled = false)
         : (this.isScrolled = true);
@@ -111,14 +115,15 @@ $navbar-height-small: 60px;
 
   &--small-height {
     height: 120px;
+    background-color: rgba(96, 168, 239, 0.38) !important;
   }
 
   &__navbar {
     height: $navbar-height;
     padding: 0 204px;
-    background-color: rgba(96, 168, 239, 0.38) !important;
     width: 100%;
     z-index: 999;
+    background-color: rgba(96, 168, 239, 0.38) !important;
 
     @media screen and (max-width: 992px) {
       padding: 0 53px;
@@ -220,9 +225,7 @@ $navbar-height-small: 60px;
 
   &.scrolled {
     .Header__navbar {
-      height: 60px;
       background-color: $td-blue !important;
-
       .Header__navbar__logo {
         .Header__navbar__logo__img {
           width: 50px;
@@ -234,6 +237,6 @@ $navbar-height-small: 60px;
 }
 
 .td-transition {
-  transition: all 0.25s cubic-bezier(.6, .04, .98, .34);
+  transition: all 0.25s ease;
 }
 </style>

@@ -16,9 +16,6 @@ export default {
     notFoundPage: {
       prefetch: true,
       query: notFoundErrorQuery,
-      result (result) {
-        console.log(result);
-      }
     }
   },
 }

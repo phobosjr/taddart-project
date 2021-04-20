@@ -6,7 +6,7 @@ export default {
   last_article_title: 'Les derniers articles',
   read_article_label: 'Lire l\'article',
   article_author_label: 'Par: ',
-  contact_title: 'Contact',
+  contact_title: 'Nous contacter',
   contact_form_name: 'Name',
   contact_form_name_required: 'Nom obligatoire',
   contact_form_email: 'Email',

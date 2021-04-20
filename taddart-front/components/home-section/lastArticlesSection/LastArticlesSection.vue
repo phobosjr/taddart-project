@@ -1,6 +1,8 @@
 <template>
   <section class="LastArticles">
-      <div v-for="article in lastArticles" class="LastArticles__article">
+      <div v-for="article in lastArticles" class="LastArticles__article"
+      @click="redirectToArticle(article.slug)"
+      >
         <div class="LastArticles__article__image"
              :style="{backgroundImage: 'url('+$options.filters.defaultImage(article.imageUrl.formats)+')'}"></div>
         <div class="LastArticles__article__article-info">
@@ -11,11 +13,6 @@
           {{ article.title }}
         </div>
         <div class="LastArticles__article__short-content" v-html="article.summary">
-        </div>
-        <div class="LastArticles__article__btn">
-          <a :href="localePath('/article/'+article.slug, $i18n.locale)">
-            {{ $t('read_article_label') }}
-          </a>
         </div>
       </div>
   </section>
@@ -33,6 +30,11 @@ export default {
       variables() {
         return {limit: 6}
       }
+    }
+  },
+  methods: {
+    redirectToArticle (slug) {
+      this.$router.push(this.localePath('/article/'+slug, this.$i18n.locale))
     }
   }
 }
@@ -54,7 +56,8 @@ export default {
 
   &__article {
     margin: 10px;
-    max-width: 400px;
+    width: 400px;
+    cursor: pointer;
 
     &__image {
       max-width: 400px;

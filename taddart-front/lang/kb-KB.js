@@ -6,7 +6,7 @@ export default {
   last_article_title: 'Imagraden ineggura',
   read_article_label: 'Ɣeṛ amagrad-a',
   article_author_label: 'Sγur: ',
-  contact_title: 'Anermis',
+  contact_title: 'Nermes-aɣ-d',
   contact_form_name: 'Isem',
   contact_form_name_required: 'Isem ilaq ad yili',
   contact_form_email: 'Lmay',
