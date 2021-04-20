@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_youtube_url_youtube_urls",
+  "info": {
+    "name": "youtube-url",
+    "icon": "chart-line"
+  },
+  "options": {},
+  "attributes": {
+    "oembed": {
+      "type": "oembed",
+      "columnType": "longtext",
+      "required": true
+    }
+  }
+}

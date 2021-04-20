@@ -26,6 +26,15 @@
       ],
       "plugin": "upload",
       "required": false
+    },
+    "youtubeUrls": {
+      "type": "component",
+      "repeatable": true,
+      "component": "youtube-url.youtube-url"
+    },
+    "nbView": {
+      "type": "integer",
+      "default": 0
     }
   }
 }
