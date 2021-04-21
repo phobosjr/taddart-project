@@ -10,5 +10,9 @@ query {
       url
       mime
     }
+    youtubeUrls {
+      oembed
+    }
+    nbView
   }
 }

@@ -609,6 +609,28 @@
               }
             }
           },
+          "youtubeUrls": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "id",
+                "oembed"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "oembed": {
+                  "type": "oembed"
+                }
+              }
+            }
+          },
+          "nbView": {
+            "type": "integer",
+            "default": 0
+          },
           "published_at": {
             "type": "string",
             "format": "date-time"
@@ -633,6 +655,28 @@
                 "type": "string"
               }
             }
+          },
+          "youtubeUrls": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "id",
+                "oembed"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "oembed": {
+                  "type": "oembed"
+                }
+              }
+            }
+          },
+          "nbView": {
+            "type": "integer",
+            "default": 0
           },
           "published_at": {
             "type": "string",

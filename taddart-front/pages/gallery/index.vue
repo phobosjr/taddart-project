@@ -3,17 +3,21 @@
     <separate-line :text-content="$t('gallery_title')"></separate-line>
     <div class="Gallery__panel">
       <div class="Gallery__panel__album" v-for="(album, index) in albums" :key="index">
-        <div v-for="(image, index) in album.medias.slice(0,3)"
+        <div v-for="(thumbnailImage, index) in getThumbnailImages(album)"
              :key="index"
-             :style="{backgroundImage:buildThumbnailImage(image.formats, image.mime)}"
+             :style="{backgroundImage:thumbnailImage}"
              class="Gallery__panel__album__image"
-             @click="showMediaAlbum(album.id)"
+             @click="showMediaAlbum(album.id, album.nbView)"
         ></div>
         <div class="Gallery__panel__album__infos">
           <span>{{ album.album_title[$i18n.locale] }}</span>
           <div>
             <img src="~/assets/images/card-image.svg">
-            <span>{{ album.medias.length }}</span>
+            <span>{{ computeNumberOfItemMedia(album) }}</span>
+          </div>
+          <div>
+            <img src="~/assets/images/eye-image.svg">
+            <span>{{ album.nbView }}</span>
           </div>
         </div>
       </div>
@@ -42,8 +46,12 @@ export default {
   },
   computed: {
     mediaItems() {
-      return this.getAlbumMedias()
-        .map(item => this.buildMediaObject(item))
+      const embedMedia = this.getEmbedMedias()
+      .map(item => this.buildEmbedMediaObject(item));
+
+      const albumMedia = this.getAlbumMedias()
+        .map(item => this.buildMediaObject(item));
+      return [...albumMedia, ...embedMedia]
     }
   },
   apollo: {
@@ -55,12 +63,30 @@ export default {
   methods: {
     getAlbumMedias() {
       return this.albumId ?
-        this.albums.find(album => album.id === this.albumId).medias :
-        this.albums.flatMap(album => album.medias)
+        this.albums.find(album => album.id === this.albumId).medias:
+        []
     },
-    showMediaAlbum(albumId) {
+    getEmbedMedias() {
+      return this.albumId ?
+        this.albums.find(album => album.id === this.albumId).youtubeUrls :
+        []
+    },
+    showMediaAlbum(albumId, nbView) {
       this.albumId = albumId;
       this.mediaIndex = 0;
+      const viewedAlbums = this.$cookies.get('viewedAlbums');
+      if(!viewedAlbums || !viewedAlbums.includes(albumId)) {
+        this.$strapi.update('albums',albumId,{
+          nbView: nbView + 1
+        }).then((result)=> {
+          this.albums.find(album => album.id === albumId ).nbView = result.nbView;
+          let newViewedAlbums = [];
+          newViewedAlbums.push(albumId);
+          newViewedAlbums.push(viewedAlbums);
+          console.log(newViewedAlbums);
+          this.$cookies.set('viewedAlbums', newViewedAlbums);
+        })
+      }
     },
     buildMediaObject(mediaObject) {
       return {
@@ -69,7 +95,32 @@ export default {
       };
     },
     buildThumbnailImage(formats, type) {
-      return type.includes('video') ? 'url(' + require('~/assets/images/video-thumbnail.png') + ')' : 'url(' + this.$options.filters.thumbnailImage(formats) + ')';
+      return type.includes('video') ?
+        'url(' + require('~/assets/images/video-thumbnail.png') + ')' :
+        'url(' + this.$options.filters.thumbnailImage(formats) + ')';
+    },
+    buildEmbedMediaObject(mediaObject) {
+      const parsedMediaObject = JSON.parse(mediaObject.oembed);
+      return {
+        title:parsedMediaObject.title,
+        src: parsedMediaObject.url,
+        thumb: parsedMediaObject.thumbnail
+      };
+    },
+    getThumbnailImages (album) {
+      if (album?.medias && album?.medias.length > 0) {
+        return album.medias.slice(0,3)
+        .map(image => this.buildThumbnailImage(image.formats, image.mime))
+      } else {
+        return  album.youtubeUrls.slice(0,3)
+          .map(embedObject => {
+            const parsed = JSON.parse(embedObject.oembed);
+            return 'url(' + parsed.thumbnail + ')';
+          })
+      }
+    },
+    computeNumberOfItemMedia (album) {
+      return album?.medias.length + album?.youtubeUrls.length
     }
   }
 }
@@ -85,28 +136,28 @@ export default {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-evenly;
+    justify-content: flex-start;
 
     &__album {
       margin: 40px 20px 20px 20px;
       width: 350px;
-      height: 220px;
+      height: 190px;
       position: relative;
 
-      &:hover {
-        > * {
-          &:first-child {
-            margin-top: 0px;
-          }
-
+      &:hover & {
+        &__image {
           &:nth-child(2) {
             margin-top: -10px;
             margin-left: 10px;
+            -webkit-box-shadow: 4px -1px 12px 0px rgba(0, 0, 0, 0.49);
+            box-shadow: 4px -1px 12px 0px rgba(0, 0, 0, 0.49);
           }
 
           &:nth-child(3) {
             margin-top: -20px;
             margin-left: 20px;
+            -webkit-box-shadow: 4px -1px 12px 0px rgba(0, 0, 0, 0.49);
+            box-shadow: 4px -1px 12px 0px rgba(0, 0, 0, 0.49);
           }
         }
       }
@@ -115,11 +166,9 @@ export default {
         position: absolute;
         cursor: pointer;
         width: 100%;
-        min-height: 190px;
+        min-height: 100%;
         background-position: center;
         background-size: cover;
-        -webkit-box-shadow: 4px -1px 12px 0px rgba(0, 0, 0, 0.49);
-        box-shadow: 4px -1px 12px 0px rgba(0, 0, 0, 0.49);
         transition: all .5s ease;
 
         &:first-child {
@@ -141,9 +190,16 @@ export default {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
+        align-items: center;
         width: 100%;
         padding: 0 25px;
         font-size: 14px;
+        color: white;
+        z-index: 999;
+        font-weight: 600;
+        background: rgb(0,0,0);
+        background: linear-gradient(0deg, rgb(0 0 0 / 28%) 44%, rgb(0 0 0 / 28%) 66%, rgb(0 0 0 / 18%) 81%, #00000000 100%);
+        height: 25px;
 
         img {
           width: 19px;

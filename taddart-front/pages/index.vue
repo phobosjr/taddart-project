@@ -14,6 +14,9 @@
         {{ $t('gallery_title') }}
       </a>
     </div>
+    <SeparateLine :text-content="$t('contact_title')"/>
+
+    <contact-form></contact-form>
   </div>
 </template>
 <script>
