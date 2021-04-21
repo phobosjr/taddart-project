@@ -15,9 +15,6 @@
           <a :href="localePath('/gallery', $i18n.locale)">
             {{ $t('gallery_title') }}
           </a>
-          <a :href="localePath({name: 'contact'})">
-            {{ $t('contact_title') }}
-          </a>
         </div>
         <div class="Header__navbar__menu__btn">
           <button type="button" @click="navBarMenuOpened = !navBarMenuOpened">
