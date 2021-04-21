@@ -32,6 +32,7 @@ export default {
     {src: '~/plugins/gallery.js', ssr: true},
     {src: '~/plugins/tooltip.js', ssr: true},
     {src: '~/plugins/wayPoint.js', mode: 'client'},
+    {src: '~/plugins/cookies.js', mode: 'client'},
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
