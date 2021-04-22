@@ -1,0 +1,25 @@
+{
+  "kind": "collectionType",
+  "collectionName": "file_content_categories",
+  "info": {
+    "name": "FileContentCategory",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "file_contents": {
+      "via": "file_content_category",
+      "collection": "file-content"
+    },
+    "title_fr": {
+      "type": "string"
+    },
+    "title_kb": {
+      "type": "string"
+    }
+  }
+}

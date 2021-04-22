@@ -1,8 +1,8 @@
 {
   "kind": "collectionType",
-  "collectionName": "content_numerics",
+  "collectionName": "file_contents",
   "info": {
-    "name": "Content-numeric-files",
+    "name": "fileContent",
     "description": ""
   },
   "options": {
@@ -11,27 +11,12 @@
     "draftAndPublish": true
   },
   "attributes": {
-    "files": {
-      "collection": "file",
-      "via": "related",
-      "allowedTypes": [
-        "files"
-      ],
-      "plugin": "upload",
-      "required": true
-    },
-    "content_numeric_category": {
-      "model": "content-numeric-categories"
-    },
     "title": {
       "type": "component",
       "repeatable": false,
       "component": "lang.simple-text"
     },
-    "description": {
-      "type": "text"
-    },
-    "picture": {
+    "thumbnail": {
       "model": "file",
       "via": "related",
       "allowedTypes": [
@@ -39,6 +24,24 @@
       ],
       "plugin": "upload",
       "required": false
+    },
+    "file": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "files",
+        "images",
+        "videos"
+      ],
+      "plugin": "upload",
+      "required": false
+    },
+    "file_content_category": {
+      "model": "file-content-category",
+      "via": "file_contents"
+    },
+    "author": {
+      "type": "string"
     }
   }
 }

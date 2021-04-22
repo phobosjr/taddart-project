@@ -1,12 +1,12 @@
 {
   "paths": {
-    "/content-numeric-categories": {
+    "/file-contents": {
       "get": {
         "deprecated": false,
-        "description": "Find all the content-numeric-categories's records",
+        "description": "",
         "responses": {
           "200": {
-            "description": "Retrieve content-numeric-categories document(s)",
+            "description": "response",
             "content": {
               "application/json": {
                 "schema": {
@@ -52,7 +52,7 @@
         },
         "summary": "",
         "tags": [
-          "Content-numeric-categories"
+          "File-content"
         ],
         "parameters": [
           {
@@ -195,10 +195,10 @@
       },
       "post": {
         "deprecated": false,
-        "description": "Create a new content-numeric-categories record",
+        "description": "Create a new record",
         "responses": {
           "200": {
-            "description": "Retrieve content-numeric-categories document(s)",
+            "description": "response",
             "content": {
               "application/json": {
                 "schema": {
@@ -244,7 +244,7 @@
         },
         "summary": "",
         "tags": [
-          "Content-numeric-categories"
+          "File-content"
         ],
         "requestBody": {
           "description": "",
@@ -252,20 +252,20 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewContent-numeric-categories"
+                "$ref": "#/components/schemas/NewFile-content"
               }
             }
           }
         }
       }
     },
-    "/content-numeric-categories/count": {
+    "/file-contents/count": {
       "get": {
         "deprecated": false,
-        "description": "Retrieve the numver of content-numeric-categories documents",
+        "description": "",
         "responses": {
           "200": {
-            "description": "Retrieve content-numeric-categories document(s)",
+            "description": "response",
             "content": {
               "application/json": {
                 "schema": {
@@ -311,18 +311,18 @@
         },
         "summary": "",
         "tags": [
-          "Content-numeric-categories"
+          "File-content"
         ],
         "parameters": []
       }
     },
-    "/content-numeric-categories/{id}": {
+    "/file-contents/{id}": {
       "get": {
         "deprecated": false,
-        "description": "Find one content-numeric-categories record",
+        "description": "",
         "responses": {
           "200": {
-            "description": "Retrieve content-numeric-categories document(s)",
+            "description": "response",
             "content": {
               "application/json": {
                 "schema": {
@@ -368,7 +368,7 @@
         },
         "summary": "",
         "tags": [
-          "Content-numeric-categories"
+          "File-content"
         ],
         "parameters": [
           {
@@ -385,10 +385,10 @@
       },
       "put": {
         "deprecated": false,
-        "description": "Update a single content-numeric-categories record",
+        "description": "Update a record",
         "responses": {
           "200": {
-            "description": "Retrieve content-numeric-categories document(s)",
+            "description": "response",
             "content": {
               "application/json": {
                 "schema": {
@@ -434,7 +434,7 @@
         },
         "summary": "",
         "tags": [
-          "Content-numeric-categories"
+          "File-content"
         ],
         "requestBody": {
           "description": "",
@@ -442,7 +442,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewContent-numeric-categories"
+                "$ref": "#/components/schemas/NewFile-content"
               }
             }
           }
@@ -462,10 +462,10 @@
       },
       "delete": {
         "deprecated": false,
-        "description": "Delete a single content-numeric-categories record",
+        "description": "Delete a record",
         "responses": {
           "200": {
-            "description": "deletes a single content-numeric-categories based on the ID supplied",
+            "description": "deletes a single record based on the ID supplied",
             "content": {
               "application/json": {
                 "schema": {
@@ -508,7 +508,7 @@
         },
         "summary": "",
         "tags": [
-          "Content-numeric-categories"
+          "File-content"
         ],
         "parameters": [
           {
@@ -527,7 +527,7 @@
   },
   "components": {
     "schemas": {
-      "Content-numeric-categories": {
+      "File-content": {
         "required": [
           "id"
         ],
@@ -535,10 +535,186 @@
           "id": {
             "type": "string"
           },
-          "name_fr": {
-            "type": "string"
+          "title": {
+            "type": "object",
+            "required": [
+              "id"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "fr": {
+                "type": "string"
+              },
+              "kb": {
+                "type": "string"
+              }
+            }
           },
-          "name_kb": {
+          "thumbnail": {
+            "required": [
+              "id",
+              "name",
+              "hash",
+              "mime",
+              "size",
+              "url",
+              "provider"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "alternativeText": {
+                "type": "string"
+              },
+              "caption": {
+                "type": "string"
+              },
+              "width": {
+                "type": "integer"
+              },
+              "height": {
+                "type": "integer"
+              },
+              "formats": {
+                "type": "object"
+              },
+              "hash": {
+                "type": "string"
+              },
+              "ext": {
+                "type": "string"
+              },
+              "mime": {
+                "type": "string"
+              },
+              "size": {
+                "type": "number"
+              },
+              "url": {
+                "type": "string"
+              },
+              "previewUrl": {
+                "type": "string"
+              },
+              "provider": {
+                "type": "string"
+              },
+              "provider_metadata": {
+                "type": "object"
+              },
+              "related": {
+                "type": "string"
+              },
+              "created_by": {
+                "type": "string"
+              },
+              "updated_by": {
+                "type": "string"
+              }
+            }
+          },
+          "file": {
+            "required": [
+              "id",
+              "name",
+              "hash",
+              "mime",
+              "size",
+              "url",
+              "provider"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "alternativeText": {
+                "type": "string"
+              },
+              "caption": {
+                "type": "string"
+              },
+              "width": {
+                "type": "integer"
+              },
+              "height": {
+                "type": "integer"
+              },
+              "formats": {
+                "type": "object"
+              },
+              "hash": {
+                "type": "string"
+              },
+              "ext": {
+                "type": "string"
+              },
+              "mime": {
+                "type": "string"
+              },
+              "size": {
+                "type": "number"
+              },
+              "url": {
+                "type": "string"
+              },
+              "previewUrl": {
+                "type": "string"
+              },
+              "provider": {
+                "type": "string"
+              },
+              "provider_metadata": {
+                "type": "object"
+              },
+              "related": {
+                "type": "string"
+              },
+              "created_by": {
+                "type": "string"
+              },
+              "updated_by": {
+                "type": "string"
+              }
+            }
+          },
+          "file_content_category": {
+            "required": [
+              "id"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "file_contents": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "title_fr": {
+                "type": "string"
+              },
+              "title_kb": {
+                "type": "string"
+              },
+              "created_by": {
+                "type": "string"
+              },
+              "updated_by": {
+                "type": "string"
+              }
+            }
+          },
+          "author": {
             "type": "string"
           },
           "published_at": {
@@ -547,12 +723,29 @@
           }
         }
       },
-      "NewContent-numeric-categories": {
+      "NewFile-content": {
         "properties": {
-          "name_fr": {
+          "title": {
+            "type": "object",
+            "required": [
+              "id"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "fr": {
+                "type": "string"
+              },
+              "kb": {
+                "type": "string"
+              }
+            }
+          },
+          "file_content_category": {
             "type": "string"
           },
-          "name_kb": {
+          "author": {
             "type": "string"
           },
           "published_at": {
