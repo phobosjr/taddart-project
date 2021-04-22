@@ -1,7 +1,18 @@
 query {
-  contentNumerics {
-    files {
+  fileContents {
+    title {
+      fr
+      kb
+    }
+    author
+    thumbnail {
+      formats
+    }
+    fileUrl:file {
       url
+    }
+    file_content_category {
+      id
     }
   }
 }

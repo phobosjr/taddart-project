@@ -15,5 +15,9 @@ export default {
   contact_form_submit_btn: 'Azen',
   contact_form_alert_success_message: 'Votre message à bien été envoyé',
   contact_form_alert_failed_message: 'Envoi a echoué',
-  loading_label: 'Asali ...'
+  loading_label: 'Asali ...',
+  numeric_content_author_label: 'Sγur: ',
+  numeric_content_title_label: 'Titre: ',
+  numeric_content_btn_label: 'Sader',
+  numeric_content_title: 'Contenu numérique',
 }

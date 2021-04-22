@@ -1,0 +1,7 @@
+query {
+  fileContentCategories {
+    id
+    title_fr
+    title_kb
+  }
+}
