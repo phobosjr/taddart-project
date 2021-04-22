@@ -18,5 +18,7 @@ export default {
   loading_label: 'Chargement ...',
   numeric_content_author_label: 'Par: ',
   numeric_content_title_label: 'Titre: ',
-  numeric_content_btn_label: 'Télécharger'
+  numeric_content_btn_label: 'Télécharger',
+  numeric_content_title: 'Contenu numérique',
+
 }

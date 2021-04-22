@@ -18,5 +18,6 @@ export default {
   loading_label: 'Asali ...',
   numeric_content_author_label: 'Sγur: ',
   numeric_content_title_label: 'Titre: ',
-  numeric_content_btn_label: 'Sader'
+  numeric_content_btn_label: 'Sader',
+  numeric_content_title: 'Contenu numérique',
 }

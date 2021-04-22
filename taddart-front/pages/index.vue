@@ -14,9 +14,13 @@
         {{ $t('gallery_title') }}
       </a>
     </div>
-    <SeparateLine :text-content="$t('contact_title')"/>
-
     <contact-form></contact-form>
+    <div :class="['Home__numeric_content-panel']"
+         v-waypoint="{ active: true, callback: onWaypoint}">
+      <a :href="localePath('/contenu-numerique', $i18n.locale)">
+        {{ $t('numeric_content_title') }}
+      </a>
+    </div>
   </div>
 </template>
 <script>
@@ -65,12 +69,35 @@ export default {
     width: 100%;
     height: 110px;
     font-size: 35px;
-    background-color: #e9bd15;
+    background-color: $td-yellow;
     text-align: center;
     padding: 30px 0;
     margin: 40px 0;
     transition: all 0.5s ease;
     transform: translateX(-100%);
+
+    &.visible {
+      transform: translateX(0);
+    }
+
+    a {
+      color: white !important;
+      text-transform: uppercase;
+      font-weight: bolder;
+      text-decoration: none;
+    }
+  }
+
+  &__numeric_content-panel {
+    width: 100%;
+    height: 110px;
+    font-size: 35px;
+    background-color: $td-blue;
+    text-align: center;
+    padding: 30px 0;
+    margin: 40px 0;
+    transition: all 0.5s ease;
+    transform: translateX(100%);
 
     &.visible {
       transform: translateX(0);

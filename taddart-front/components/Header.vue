@@ -1,6 +1,6 @@
 <template>
   <div :class="['Header', {'scrolled': isScrolled}, {'Header--small-height': smallHeader}]">
-    <nav class="Header__navbar navbar navbar-light position-fixed" :style="{ 'height': `${navHeight}px`}">
+    <nav class="Header__navbar" :style="{ 'height': `${navHeight}px`}">
       <a class="Header__navbar__logo navbar-brand" href="/">
         <img :src="header.logo_image.formats | defaultImage" width="30" height="30"
              class="Header__navbar__logo__img d-inline-block align-top td-transition" alt="">
@@ -18,7 +18,7 @@
         </div>
         <div class="Header__navbar__menu__btn">
           <button type="button" @click="navBarMenuOpened = !navBarMenuOpened">
-            <span class="navbar-toggler-icon"></span>
+            <img src="~/assets/images/nav-menu-image.svg">
           </button>
         </div>
 
@@ -116,7 +116,9 @@ $navbar-height-small: 60px;
   }
 
   &__navbar {
-    height: $navbar-height;
+    position: fixed;
+    display: flex;
+    justify-content: space-between;
     padding: 0 204px;
     width: 100%;
     z-index: 999;
@@ -136,6 +138,7 @@ $navbar-height-small: 60px;
     &__menu {
       display: flex;
       justify-content: right;
+      align-items: center;
 
       &__item {
         margin-right: 10px;
