@@ -1,10 +1,7 @@
-query {
-  albums {
+query ($locale: String){
+  albums (locale: $locale){
     id
-    album_title {
-      fr
-      kb
-    }
+    title
     medias:images {
       formats
       url

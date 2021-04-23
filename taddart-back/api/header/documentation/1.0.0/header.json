@@ -318,32 +318,6 @@
           "id": {
             "type": "string"
           },
-          "logo_title": {
-            "type": "string"
-          },
-          "menu": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "required": [
-                "id"
-              ],
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "url": {
-                  "type": "string"
-                },
-                "label_kb": {
-                  "type": "string"
-                },
-                "label_fr": {
-                  "type": "string"
-                }
-              }
-            }
-          },
           "background_image": {
             "type": "array",
             "items": {
@@ -414,40 +388,6 @@
               }
             }
           },
-          "big_title": {
-            "type": "object",
-            "required": [
-              "id"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "fr": {
-                "type": "string"
-              },
-              "kb": {
-                "type": "string"
-              }
-            }
-          },
-          "sub_title": {
-            "type": "object",
-            "required": [
-              "id"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "fr": {
-                "type": "string"
-              },
-              "kb": {
-                "type": "string"
-              }
-            }
-          },
           "logo_image": {
             "required": [
               "id",
@@ -515,6 +455,49 @@
               }
             }
           },
+          "localizations": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "background_image": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "logo_image": {
+                  "type": "string"
+                },
+                "localizations": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "locale": {
+                  "type": "string"
+                },
+                "published_at": {
+                  "type": "string"
+                },
+                "created_by": {
+                  "type": "string"
+                },
+                "updated_by": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "locale": {
+            "type": "string"
+          },
           "published_at": {
             "type": "string",
             "format": "date-time"
@@ -523,65 +506,14 @@
       },
       "NewHeader": {
         "properties": {
-          "logo_title": {
-            "type": "string"
-          },
-          "menu": {
+          "localizations": {
             "type": "array",
             "items": {
-              "type": "object",
-              "required": [
-                "id"
-              ],
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "url": {
-                  "type": "string"
-                },
-                "label_kb": {
-                  "type": "string"
-                },
-                "label_fr": {
-                  "type": "string"
-                }
-              }
+              "type": "string"
             }
           },
-          "big_title": {
-            "type": "object",
-            "required": [
-              "id"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "fr": {
-                "type": "string"
-              },
-              "kb": {
-                "type": "string"
-              }
-            }
-          },
-          "sub_title": {
-            "type": "object",
-            "required": [
-              "id"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "fr": {
-                "type": "string"
-              },
-              "kb": {
-                "type": "string"
-              }
-            }
+          "locale": {
+            "type": "string"
           },
           "published_at": {
             "type": "string",

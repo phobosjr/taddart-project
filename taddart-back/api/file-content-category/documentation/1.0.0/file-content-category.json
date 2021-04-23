@@ -545,9 +545,6 @@
                 "id": {
                   "type": "string"
                 },
-                "title": {
-                  "type": "component"
-                },
                 "thumbnail": {
                   "type": "string"
                 },
@@ -558,6 +555,18 @@
                   "type": "string"
                 },
                 "author": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "localizations": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "locale": {
                   "type": "string"
                 },
                 "published_at": {
@@ -572,10 +581,47 @@
               }
             }
           },
-          "title_fr": {
+          "title": {
             "type": "string"
           },
-          "title_kb": {
+          "localizations": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "file_contents": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "title": {
+                  "type": "string"
+                },
+                "localizations": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "locale": {
+                  "type": "string"
+                },
+                "created_by": {
+                  "type": "string"
+                },
+                "updated_by": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "locale": {
             "type": "string"
           }
         }
@@ -588,10 +634,16 @@
               "type": "string"
             }
           },
-          "title_fr": {
+          "title": {
             "type": "string"
           },
-          "title_kb": {
+          "localizations": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "locale": {
             "type": "string"
           },
           "created_by": {

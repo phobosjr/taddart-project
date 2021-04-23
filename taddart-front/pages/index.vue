@@ -1,8 +1,8 @@
 <template>
   <div class="Home">
     <QuoteSection v-if="quoteSection.enable"
-                  :content="quoteSection.content[$i18n.locale]"
-                  :title="quoteSection.title[$i18n.locale]"
+                  :content="quoteSection.content"
+                  :title="quoteSection.title"
                   :horizontal-image="quoteSection.horizontalImage.formats | defaultImage"
                   :vertical-image="quoteSection.verticalImage.formats | defaultImage"
     ></QuoteSection>
@@ -48,6 +48,9 @@ export default {
     quoteSection: {
       prefetch: true,
       query: quoteQuery,
+      variables () {
+        return {locale: this.$i18n.locale}
+      },
       errorPolicy: "ignore"
     }
   },

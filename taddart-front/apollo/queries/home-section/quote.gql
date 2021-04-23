@@ -1,13 +1,7 @@
-query {
-  quoteSection {
-    title {
-      kb
-      fr
-    }
-    content {
-      fr
-      kb
-    }
+query ($locale: String){
+  quoteSection (locale: $locale) {
+    title
+    content
     horizontalImage {
       formats
     }

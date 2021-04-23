@@ -10,31 +10,54 @@
     "timestamps": true,
     "draftAndPublish": true
   },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
   "attributes": {
-    "album_title": {
-      "type": "component",
-      "repeatable": false,
-      "component": "lang.simple-text"
-    },
     "images": {
       "collection": "file",
       "via": "related",
       "allowedTypes": [
-        "images",
         "files",
+        "images",
         "videos"
       ],
       "plugin": "upload",
-      "required": false
+      "required": false,
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
     },
     "youtubeUrls": {
       "type": "component",
       "repeatable": true,
-      "component": "youtube-url.youtube-url"
+      "component": "youtube-url.youtube-url",
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
     },
     "nbView": {
       "type": "integer",
-      "default": 0
+      "default": 0,
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
+    },
+    "title": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     }
   }
 }

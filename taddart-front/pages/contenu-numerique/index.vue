@@ -1,7 +1,7 @@
 <template>
   <div class="Contentu-numerique">
     <div v-for="fileCategory in fileContentCategories" class="Contentu-numerique__file-categories">
-      <h3 class="Contentu-numerique__file-categories__title">{{ fileCategory[`title_${$i18n.locale}`] }}</h3>
+      <h3 class="Contentu-numerique__file-categories__title">{{ fileCategory.title}}</h3>
       <div class="Contentu-numerique__file-categories__files">
         <div class="Contentu-numerique__file-categories__files__file" v-for="file in getFilesByCategory(fileCategory.id)">
           <div :style="{backgroundImage: 'url('+ $options.filters.thumbnailImage(file.thumbnail.formats)+')'}"

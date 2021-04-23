@@ -1,9 +1,6 @@
-query {
-  fileContents {
-    title {
-      fr
-      kb
-    }
+query ($locale: String){
+  fileContents (locale: $locale){
+    title
     author
     thumbnail {
       formats
