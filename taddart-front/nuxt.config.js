@@ -52,14 +52,14 @@ export default {
     '@nuxtjs/style-resources',
     ['nuxt-i18n', {
       strategy: 'prefix_except_default',
-      defaultLocale: 'kb',
+      defaultLocale: 'kab',
     }]
   ],
   i18n: {
     locales: [
       {
-        code: 'kb',
-        file: 'kb-KB.js'
+        code: 'kab',
+        file: 'kab-KAB.js'
       },
       {
         code: 'fr',
@@ -68,9 +68,9 @@ export default {
     ],
     lazy: true,
     langDir: 'lang/',
-    defaultLocale: 'kb',
+    defaultLocale: 'kab',
     vueI18n: {
-      fallbackLocale: 'kb',
+      fallbackLocale: 'kab',
     }
   },
   apollo: {

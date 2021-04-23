@@ -317,28 +317,53 @@
     "schemas": {
       "Not-found-page": {
         "required": [
-          "id"
+          "id",
+          "subTitle"
         ],
         "properties": {
           "id": {
             "type": "string"
           },
           "subTitle": {
-            "type": "object",
-            "required": [
-              "id"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "fr": {
-                "type": "string"
-              },
-              "kb": {
-                "type": "string"
+            "type": "string"
+          },
+          "localizations": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id",
+                "subTitle"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "subTitle": {
+                  "type": "string"
+                },
+                "localizations": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "locale": {
+                  "type": "string"
+                },
+                "published_at": {
+                  "type": "string"
+                },
+                "created_by": {
+                  "type": "string"
+                },
+                "updated_by": {
+                  "type": "string"
+                }
               }
             }
+          },
+          "locale": {
+            "type": "string"
           },
           "published_at": {
             "type": "string",
@@ -347,23 +372,21 @@
         }
       },
       "NewNot-found-page": {
+        "required": [
+          "subTitle"
+        ],
         "properties": {
           "subTitle": {
-            "type": "object",
-            "required": [
-              "id"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "fr": {
-                "type": "string"
-              },
-              "kb": {
-                "type": "string"
-              }
+            "type": "string"
+          },
+          "localizations": {
+            "type": "array",
+            "items": {
+              "type": "string"
             }
+          },
+          "locale": {
+            "type": "string"
           },
           "published_at": {
             "type": "string",

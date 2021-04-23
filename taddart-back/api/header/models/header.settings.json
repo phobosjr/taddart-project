@@ -10,15 +10,12 @@
     "timestamps": true,
     "draftAndPublish": true
   },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
   "attributes": {
-    "logo_title": {
-      "type": "string"
-    },
-    "menu": {
-      "type": "component",
-      "repeatable": true,
-      "component": "menu.menu-item"
-    },
     "background_image": {
       "collection": "file",
       "via": "related",
@@ -28,17 +25,12 @@
         "videos"
       ],
       "plugin": "upload",
-      "required": false
-    },
-    "big_title": {
-      "type": "component",
-      "repeatable": false,
-      "component": "lang.simple-text"
-    },
-    "sub_title": {
-      "type": "component",
-      "repeatable": false,
-      "component": "lang.structurecd-text"
+      "required": false,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     },
     "logo_image": {
       "model": "file",
@@ -49,7 +41,12 @@
         "videos"
       ],
       "plugin": "upload",
-      "required": false
+      "required": false,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     }
   }
 }

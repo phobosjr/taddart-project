@@ -10,11 +10,20 @@
     "timestamps": true,
     "draftAndPublish": true
   },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
   "attributes": {
     "subTitle": {
-      "type": "component",
-      "repeatable": false,
-      "component": "lang.simple-text"
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "required": true
     }
   }
 }

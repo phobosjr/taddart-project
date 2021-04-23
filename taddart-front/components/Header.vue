@@ -23,16 +23,14 @@
         </div>
 
         <div class="Header__navbar__lang">
-        <span>
-          <img :class="['Header__navbar__lang__img', {'Header__navbar__lang__img--current': $i18n.locale === 'kb'}]"
-               src="~/assets/images/header/kb-lang-32-32.png" alt="KB"
-               @click="$i18n.setLocale('kb')">
-        </span>
-          <span>
+        <a :href="switchLocalePath('kab')">
+          <img :class="['Header__navbar__lang__img', {'Header__navbar__lang__img--current': $i18n.locale === 'kab'}]"
+               src="~/assets/images/header/kb-lang-32-32.png" alt="KAB">
+        </a>
+          <a :href="switchLocalePath('fr')">
           <img :class="['Header__navbar__lang__img', {'Header__navbar__lang__img--current': $i18n.locale === 'fr'}]"
-               src="~/assets/images/header/fr-lang.svg" alt="FR"
-               @click="$i18n.setLocale('fr')">
-        </span>
+               src="~/assets/images/header/fr-lang.svg" alt="FR">
+        </a>
         </div>
       </div>
     </nav>

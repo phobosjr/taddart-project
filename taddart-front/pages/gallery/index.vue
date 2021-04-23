@@ -10,7 +10,7 @@
              @click="showMediaAlbum(album.id, album.nbView)"
         ></div>
         <div class="Gallery__panel__album__infos">
-          <span>{{ album.album_title[$i18n.locale] }}</span>
+          <span>{{ album.title }}</span>
           <div>
             <img src="~/assets/images/card-image.svg">
             <span>{{ computeNumberOfItemMedia(album) }}</span>
@@ -47,7 +47,7 @@ export default {
   computed: {
     mediaItems() {
       const embedMedia = this.getEmbedMedias()
-      .map(item => this.buildEmbedMediaObject(item));
+        .map(item => this.buildEmbedMediaObject(item));
 
       const albumMedia = this.getAlbumMedias()
         .map(item => this.buildMediaObject(item));
@@ -58,12 +58,15 @@ export default {
     albums: {
       prefetch: true,
       query: albumsQuery,
+      variables() {
+        return {locale: this.$i18n.locale}
+      }
     }
   },
   methods: {
     getAlbumMedias() {
       return this.albumId ?
-        this.albums.find(album => album.id === this.albumId).medias:
+        this.albums.find(album => album.id === this.albumId).medias :
         []
     },
     getEmbedMedias() {
@@ -75,11 +78,11 @@ export default {
       this.albumId = albumId;
       this.mediaIndex = 0;
       const viewedAlbums = this.$cookies.get('viewedAlbums');
-      if(!viewedAlbums || !viewedAlbums.includes(albumId)) {
-        this.$strapi.update('albums',albumId,{
+      if (!viewedAlbums || !viewedAlbums.includes(albumId)) {
+        this.$strapi.update('albums', albumId, {
           nbView: nbView + 1
-        }).then((result)=> {
-          this.albums.find(album => album.id === albumId ).nbView = result.nbView;
+        }).then((result) => {
+          this.albums.find(album => album.id === albumId).nbView = result.nbView;
           let newViewedAlbums = [];
           newViewedAlbums.push(albumId);
           newViewedAlbums.push(viewedAlbums);
@@ -102,24 +105,24 @@ export default {
     buildEmbedMediaObject(mediaObject) {
       const parsedMediaObject = JSON.parse(mediaObject.oembed);
       return {
-        title:parsedMediaObject.title,
+        title: parsedMediaObject.title,
         src: parsedMediaObject.url,
         thumb: parsedMediaObject.thumbnail
       };
     },
-    getThumbnailImages (album) {
+    getThumbnailImages(album) {
       if (album?.medias && album?.medias.length > 0) {
-        return album.medias.slice(0,3)
-        .map(image => this.buildThumbnailImage(image.formats, image.mime))
+        return album.medias.slice(0, 3)
+          .map(image => this.buildThumbnailImage(image.formats, image.mime))
       } else {
-        return  album.youtubeUrls.slice(0,3)
+        return album.youtubeUrls.slice(0, 3)
           .map(embedObject => {
             const parsed = JSON.parse(embedObject.oembed);
             return 'url(' + parsed.thumbnail + ')';
           })
       }
     },
-    computeNumberOfItemMedia (album) {
+    computeNumberOfItemMedia(album) {
       return album?.medias.length + album?.youtubeUrls.length
     }
   }
@@ -197,7 +200,7 @@ export default {
         color: white;
         z-index: 999;
         font-weight: 600;
-        background: rgb(0,0,0);
+        background: rgb(0, 0, 0);
         background: linear-gradient(0deg, rgb(0 0 0 / 28%) 44%, rgb(0 0 0 / 28%) 66%, rgb(0 0 0 / 18%) 81%, #00000000 100%);
         height: 25px;
 

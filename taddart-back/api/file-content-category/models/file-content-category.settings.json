@@ -10,16 +10,23 @@
     "timestamps": true,
     "draftAndPublish": false
   },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
   "attributes": {
     "file_contents": {
-      "via": "file_content_category",
-      "collection": "file-content"
+      "collection": "file-content",
+      "via": "file_content_category"
     },
-    "title_fr": {
-      "type": "string"
-    },
-    "title_kb": {
-      "type": "string"
+    "title": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     }
   }
 }

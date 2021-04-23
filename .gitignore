@@ -70,7 +70,7 @@ $RECYCLE.BIN/
 *.sql
 *.sqlite
 *.sqlite3
-docker/db
+local-docker-db/db
 
 
 ############################
@@ -114,10 +114,12 @@ exports
 build
 .strapi-updater.json
 uploads
-local-docker-db/db
 
-# Created by .ignore support plugin (hsz.mobi)
-### Node template
+
+############################
+# Node template
+############################
+###
 # Logs
 /logs
 npm-debug.log*
@@ -143,7 +145,6 @@ bower_components
 build/Release
 
 # Dependency directories
-node_modules/
 jspm_packages/
 
 # TypeScript v1 declaration files
@@ -167,21 +168,20 @@ typings/
 # parcel-bundler cache (https://parceljs.org/)
 .cache
 
-# next.js build output
+############################
+# Nuxt
+############################
 .next
-
-# nuxt.js build output
 .nuxt
-
-# Nuxt generate
 dist
-
-# vuepress build output
 .vuepress/dist
-
-# Serverless directories
 .serverless
-
-# Service worker
 sw.*
+
+############################
+# grapql Config
+############################
+/.graphqlconfig
+schema.graphql
+
 
