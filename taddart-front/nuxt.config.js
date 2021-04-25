@@ -18,6 +18,10 @@ export default {
 
   loading: '~/components/loading/Loading',
 
+  publicRuntimeConfig: {
+    strapiBackendUrl: process.env.ENV === 'production' ? 'https://anebdal.tuddar-nat-abdelmumen.net' : 'http://localhost:1337'
+  },
+
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
     '@/assets/style/scss/tooltip.scss',
@@ -50,6 +54,7 @@ export default {
     '@nuxtjs/strapi',
     '@nuxtjs/apollo',
     '@nuxtjs/style-resources',
+    '@nuxtjs/axios',
     ['nuxt-i18n', {
       strategy: 'prefix_except_default',
       defaultLocale: 'kab',
@@ -86,7 +91,14 @@ export default {
   },
   strapi: {
     entities: ['header'],
-    url: process.env.ENV === 'production' ? 'https://anebdal.tuddar-nat-abdelmumen.net' : 'http://localhost:1337'
+    url: process.env.ENV === 'production' ? 'https://anebdal.tuddar-nat-abdelmumen.net' : 'http://localhost:1337',
+    cookie: {
+      path: '/',
+    }
+  },
+
+  axios: {
+    baseURL: process.env.ENV === 'production' ? 'https://anebdal.tuddar-nat-abdelmumen.net' : 'http://localhost:1337'
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build

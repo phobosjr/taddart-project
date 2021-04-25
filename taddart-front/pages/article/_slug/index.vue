@@ -19,6 +19,8 @@
           <span>{{article.title}}</span>
         </div>
         <div class="Article__main__content__text" v-html="article.content"></div>
+        <article-comment v-if="article.enableComments" :article-id="article.id"></article-comment>
+        <article-comments v-if="article.enableComments" :article-id="article.id"></article-comments>
       </div>
       <div class="Article__main__last-posts d-flex flex-column p-3">
         <h4>{{ $t('last_article_title') }}</h4>
@@ -43,9 +45,11 @@
 <script>
 import articleQuery from '@/apollo/queries/article/article.gql'
 import lastArticlesQuery from '@/apollo/queries/article/lastArticles.gql'
+import ArticleComments from "@/components/article-comments/article-comments";
 
 export default {
   name: "Article",
+  components: {ArticleComments},
   layout: 'layoutWithSmallHeader',
   apollo: {
     fetchedArticle: {
