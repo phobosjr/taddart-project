@@ -23,14 +23,17 @@
         </div>
 
         <div class="Header__navbar__lang">
-        <a :href="switchLocalePath('kab')">
-          <img :class="['Header__navbar__lang__img', {'Header__navbar__lang__img--current': $i18n.locale === 'kab'}]"
-               src="~/assets/images/header/kb-lang-32-32.png" alt="KAB">
-        </a>
+          <a :href="switchLocalePath('kab')">
+            <img :class="['Header__navbar__lang__img', {'Header__navbar__lang__img--current': $i18n.locale === 'kab'}]"
+                 src="~/assets/images/header/kb-lang-32-32.png" alt="KAB">
+          </a>
           <a :href="switchLocalePath('fr')">
-          <img :class="['Header__navbar__lang__img', {'Header__navbar__lang__img--current': $i18n.locale === 'fr'}]"
-               src="~/assets/images/header/fr-lang.svg" alt="FR">
-        </a>
+            <img :class="['Header__navbar__lang__img', {'Header__navbar__lang__img--current': $i18n.locale === 'fr'}]"
+                 src="~/assets/images/header/fr-lang.svg" alt="FR">
+          </a>
+        </div>
+        <div v-if="username" class="Header__navbar__user">
+          <div class="Header__navbar__user__logout-btn" @click="logout()"></div>
         </div>
       </div>
     </nav>
@@ -70,7 +73,10 @@ export default {
   computed: {
     ...mapGetters({
       locale: 'locale'
-    })
+    }),
+    username() {
+      return this.$strapi?.user?.username;
+    }
   },
   apollo: {
     header: {
@@ -81,11 +87,21 @@ export default {
   methods: {
     handleScroll() {
       if (window.scrollY < 64) {
-        this.navHeight = (120 -window.scrollY);
+        this.navHeight = (120 - window.scrollY);
       }
       window.scrollY === 0
         ? (this.isScrolled = false)
         : (this.isScrolled = true);
+    },
+    logout() {
+      const userAccessToken = this.$cookies.get('user_access_token');
+      console.log(userAccessToken);
+      this.$axios.post(`https://oauth2.googleapis.com/revoke?token=${userAccessToken}`)
+        .finally(() => {
+          this.$cookies.remove('user_access_token');
+          this.$strapi.clearToken();
+          this.$router.go(0);
+        })
     }
   },
   beforeMount() {
@@ -203,6 +219,22 @@ $navbar-height-small: 60px;
         }
       }
     }
+
+    &__user {
+
+      display: flex;
+      flex-direction: row;
+      margin-left: 10px;
+
+      &__logout-btn {
+        background-image: url("assets/images/logout-image.svg");
+        width: 25px;
+        height: 25px;
+        margin: 0 4px;
+        background-size: contain;
+        cursor: pointer;
+      }
+    }
   }
 
   &__slider {
@@ -224,6 +256,7 @@ $navbar-height-small: 60px;
   &.scrolled {
     .Header__navbar {
       background-color: $td-blue !important;
+
       .Header__navbar__logo {
         .Header__navbar__logo__img {
           width: 50px;

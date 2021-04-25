@@ -20,4 +20,10 @@ export default {
   numeric_content_title_label: 'Titre: ',
   numeric_content_btn_label: 'Sader',
   numeric_content_title: 'Contenu numérique',
+  article_comment_btn_send_label: 'Azen',
+  article_comment_btn_login_label: 'Qqen',
+  article_comment_text_login_label: 'Veuillez vous identifier pour ajouter un commentaire',
+  article_comment_placeholder: 'Aru awennit...',
+  provides_list_title_label: 'Tuqqna'
+
 }

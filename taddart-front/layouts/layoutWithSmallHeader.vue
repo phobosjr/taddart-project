@@ -2,9 +2,10 @@
   <div class="Default-layout">
     <Header class="Default-layout__header" :small-header="true"></Header>
     <div class="Default-layout__main">
-        <nuxt/>
+      <nuxt/>
     </div>
     <Footer class="Default-layout__footer"></Footer>
+    <provider-connect-list></provider-connect-list>
   </div>
 </template>
 
@@ -14,7 +15,7 @@ import Header from '../components/Header.vue'
 export default {
   components: {Header},
   mounted() {
-    if(process.client) {
+    if (process.client) {
       this.$nextTick(() => {
         this.$nuxt.$loading.finish()
       })

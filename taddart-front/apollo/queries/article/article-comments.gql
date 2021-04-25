@@ -1,0 +1,9 @@
+query ($articleId: String){
+  articleComments (where: {article: $articleId}, sort: "created_at:desc"){
+    comment
+    created_at
+    user: users_permissions_user {
+      username
+    }
+  }
+}

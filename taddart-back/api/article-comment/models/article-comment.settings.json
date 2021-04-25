@@ -1,0 +1,25 @@
+{
+  "kind": "collectionType",
+  "collectionName": "article_comments",
+  "info": {
+    "name": "article-comment"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "comment": {
+      "type": "text"
+    },
+    "article": {
+      "model": "article"
+    },
+    "users_permissions_user": {
+      "plugin": "users-permissions",
+      "model": "user"
+    }
+  }
+}

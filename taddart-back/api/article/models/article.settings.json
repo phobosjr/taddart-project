@@ -31,7 +31,8 @@
         "images"
       ],
       "plugin": "upload",
-      "required": false
+      "required": false,
+      "pluginOptions": {}
     },
     "author": {
       "type": "string",
@@ -41,6 +42,11 @@
     "summary": {
       "type": "text",
       "required": true
+    },
+    "enableComments": {
+      "type": "boolean",
+      "required": true,
+      "default": true
     }
   }
 }

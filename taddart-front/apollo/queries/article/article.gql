@@ -5,6 +5,7 @@ query getArticle ($slug: String){
     content
     created_at
     author
+    enableComments
     image {
       formats
     }
