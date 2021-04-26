@@ -24,6 +24,8 @@ export default {
   article_comment_btn_login_label: 'Se connecter',
   article_comment_text_login_label: 'Veuillez vous identifier pour ajouter un commentaire',
   article_comment_placeholder: 'Écris un commentaire...',
-  provides_list_title_label: 'Connexion'
+  provides_list_title_label: 'Connexion',
+  lang_fr_label: 'Français',
+  lang_kab_label: 'Kabyle'
 
 }

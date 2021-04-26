@@ -1,10 +1,6 @@
 <template>
   <div :class="['Header', {'scrolled': isScrolled}, {'Header--small-height': smallHeader}]">
     <nav class="Header__navbar" :style="{ 'height': `${navHeight}px`}">
-      <a class="Header__navbar__logo navbar-brand" href="/">
-        <img :src="header.logo_image.formats | defaultImage" width="30" height="30"
-             class="Header__navbar__logo__img d-inline-block align-top td-transition" alt="">
-      </a>
       <div class="Header__navbar__menu">
         <div :class="['Header__navbar__menu__item', 'td-transition',
           {'Header__navbar__menu__item--open': navBarMenuOpened},
@@ -16,24 +12,47 @@
             {{ $t('gallery_title') }}
           </a>
         </div>
-        <div class="Header__navbar__menu__btn">
-          <button type="button" @click="navBarMenuOpened = !navBarMenuOpened">
-            <img src="~/assets/images/nav-menu-image.svg">
-          </button>
-        </div>
-
-        <div class="Header__navbar__lang">
-          <a :href="switchLocalePath('kab')">
-            <img :class="['Header__navbar__lang__img', {'Header__navbar__lang__img--current': $i18n.locale === 'kab'}]"
-                 src="~/assets/images/header/kb-lang-32-32.png" alt="KAB">
-          </a>
-          <a :href="switchLocalePath('fr')">
-            <img :class="['Header__navbar__lang__img', {'Header__navbar__lang__img--current': $i18n.locale === 'fr'}]"
-                 src="~/assets/images/header/fr-lang.svg" alt="FR">
-          </a>
-        </div>
+        <button :class="['Header__navbar__menu__btn',{'Header__navbar__menu__btn--opened': navBarMenuOpened }]"
+                aria-expanded="true" aria-label="Main Menu" @click="navBarMenuOpened = !navBarMenuOpened">
+          <svg width="100" height="100" viewBox="0 0 100 100">
+            <path class="line line1"
+                  d="M 20,29.000046 H 80.000231 C 80.000231,29.000046 94.498839,28.817352 94.532987,66.711331 94.543142,77.980673 90.966081,81.670246 85.259173,81.668997 79.552261,81.667751 75.000211,74.999942 75.000211,74.999942 L 25.000021,25.000058"/>
+            <path class="line line2" d="M 20,50 H 80"/>
+            <path class="line line3"
+                  d="M 20,70.999954 H 80.000231 C 80.000231,70.999954 94.498839,71.182648 94.532987,33.288669 94.543142,22.019327 90.966081,18.329754 85.259173,18.331003 79.552261,18.332249 75.000211,25.000058 75.000211,25.000058 L 25.000021,74.999942"/>
+          </svg>
+        </button>
         <div v-if="username" class="Header__navbar__user">
           <div class="Header__navbar__user__logout-btn" @click="logout()"></div>
+        </div>
+      </div>
+      <a class="Header__navbar__logo navbar-brand" href="/">
+        <img :src="header.logo_image.formats | defaultImage" width="30" height="30"
+             class="Header__navbar__logo__img d-inline-block align-top td-transition" alt="">
+      </a>
+      <div class="Header__navbar__lang">
+        <div class="Header__navbar__lang__selected" v-if="$i18n.locale === 'kab'" @click="openSelectLang($event)">
+          {{ $t('lang_kab_label') }}
+          <img :class="['Header__navbar__lang__img']"
+               src="~/assets/images/header/kb-lang-32-32.png" alt="KAB">
+        </div>
+        <div class="Header__navbar__lang__selected" v-if=" $i18n.locale === 'fr'" @click="openSelectLang($event)">
+          {{ $t('lang_fr_label') }}
+          <img :class="['Header__navbar__lang__img']"
+               src="~/assets/images/header/fr-lang.svg" alt="FR">
+        </div>
+
+        <div :class="['Header__navbar__lang__list', 'td-transition', {'Header__navbar__lang__list--opened': langListOpened}]">
+          <a :href="switchLocalePath('kab')" :disabled="$i18n.locale === 'kab'">
+            {{ $t('lang_kab_label') }}
+            <img :class="['Header__navbar__lang__img']"
+                 src="~/assets/images/header/kb-lang-32-32.png" alt="KAB">
+          </a>
+          <a :href="switchLocalePath('fr')" :disabled="$i18n.locale === 'fr'">
+            {{ $t('lang_fr_label') }}
+            <img :class="['Header__navbar__lang__img']"
+                 src="~/assets/images/header/fr-lang.svg" alt="FR">
+          </a>
         </div>
       </div>
     </nav>
@@ -67,7 +86,8 @@ export default {
     return {
       isScrolled: false,
       navBarMenuOpened: false,
-      navHeight: 120
+      navHeight: 120,
+      langListOpened: false
     }
   },
   computed: {
@@ -102,6 +122,15 @@ export default {
           this.$strapi.clearToken();
           this.$router.go(0);
         })
+    },
+    openSelectLang($event) {
+      $event.stopPropagation();
+      this.langListOpened = !this.langListOpened;
+      window.addEventListener('click', () => {
+        this.langListOpened = false;
+      }, {
+        once: true
+      })
     }
   },
   beforeMount() {
@@ -133,13 +162,13 @@ $navbar-height-small: 60px;
     position: fixed;
     display: flex;
     justify-content: space-between;
+    align-items: center;
     padding: 0 204px;
     width: 100%;
     z-index: 999;
-    background-color: rgba(96, 168, 239, 0.38) !important;
 
     @media screen and (max-width: 992px) {
-      padding: 0 53px;
+      padding: 0 25px;
     }
 
     &__logo {
@@ -153,6 +182,7 @@ $navbar-height-small: 60px;
       display: flex;
       justify-content: right;
       align-items: center;
+      width: calc(50% - 50px);
 
       &__item {
         margin-right: 10px;
@@ -160,62 +190,139 @@ $navbar-height-small: 60px;
         color: $td-blue;
         overflow: hidden;
         transition: all .5s ease;
-        @media screen and (max-width: 992px) {
-          visibility: hidden;
-          opacity: 0;
-          position: absolute;
-          display: flex;
-          flex-direction: column;
-          left: 0;
-          top: $navbar-height;
-          background-color: $td-blue;
-          width: 100%;
-          padding: 10px;
-          &--open {
-            visibility: visible;
-            opacity: 1;
-          }
-          &--scrolled {
-            top: $navbar-height-small;
-          }
+        visibility: hidden;
+        opacity: 0;
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        left: 0;
+        top: 0;
+        background-color: rgb(96 168 239 / 83%);
+        padding-top: $navbar-height;
+        width: 300px;
+        height: 100vh;
+        text-align: center;
+        transform: translateX(-100%);
+
+        &--open {
+          visibility: visible;
+          opacity: 1;
+          transform: translateX(0%);
         }
 
         a {
           color: white;
-          margin: 0 4px;
+          padding: 13px 0;
           font-weight: bold;
-          @media screen and (max-width: 992px) {
-            margin: 10px;
-            color: white;
-          }
+
 
           &:hover {
-            color: $td-green;
+            background-color: $td-yellow;
             text-decoration: none;
           }
         }
       }
 
       &__btn {
-        margin-right: 15px;
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        display: flex;
+        padding: 0;
+        width: 50px;
+        z-index: 9;
 
-        @media screen and (min-width: 992px) {
-          display: none;
+        .line {
+          fill: none;
+          stroke: black;
+          stroke-width: 6;
+          transition: stroke-dasharray 600ms cubic-bezier(0.4, 0, 0.2, 1),
+          stroke-dashoffset 600ms cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .line1 {
+          stroke-dasharray: 60 207;
+          stroke-width: 6;
+        }
+
+        .line2 {
+          stroke-dasharray: 60 60;
+          stroke-width: 6;
+        }
+
+        .line3 {
+          stroke-dasharray: 60 207;
+          stroke-width: 6;
+        }
+
+        &--opened {
+          .line1 {
+            stroke-dasharray: 90 207;
+            stroke-dashoffset: -134;
+            stroke-width: 6;
+          }
+
+          .line2 {
+            stroke-dasharray: 1 60;
+            stroke-dashoffset: -30;
+            stroke-width: 6;
+          }
+
+          .line3 {
+            stroke-dasharray: 90 207;
+            stroke-dashoffset: -134;
+            stroke-width: 6;
+          }
         }
       }
     }
 
     &__lang {
+      width: calc(50% - 50px);
+      text-align: right;
+      position: relative;
+
+      &__selected {
+        cursor: pointer;
+      }
+
       &__img {
         width: 20px;
         height: 20px;
         cursor: pointer;
-        opacity: .25;
-        border-radius: 10px;
+        border-radius: 5px;
+      }
 
-        &--current {
-          opacity: 1 !important;
-          cursor: default !important;
+      &__list {
+        position: absolute;
+        opacity: 0;
+        visibility: hidden;
+        width: 152px;
+        height: 132px;
+        padding: 25px;
+        background-color: rgb(0 0 0 / 20%);
+        right: 0;
+        top: 30px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-content: space-between;
+        align-items: center;
+        border-radius: 7px;
+
+        &--opened {
+          opacity: 1;
+          visibility: visible;
+        }
+
+        a {
+          color: white;
+          font-weight: bold;
+
+          &[disabled] {
+            pointer-events: none;
+            cursor: default;
+          }
         }
       }
     }
