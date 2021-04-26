@@ -100,7 +100,7 @@ export default {
     padding: 30px 0;
     margin: 40px 0;
     transition: all 0.5s ease;
-    transform: translateX(100%);
+    transform: translateX(-100%);
 
     &.visible {
       transform: translateX(0);

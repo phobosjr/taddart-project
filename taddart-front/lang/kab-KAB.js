@@ -24,6 +24,8 @@ export default {
   article_comment_btn_login_label: 'Qqen',
   article_comment_text_login_label: 'Veuillez vous identifier pour ajouter un commentaire',
   article_comment_placeholder: 'Aru awennit...',
-  provides_list_title_label: 'Tuqqna'
+  provides_list_title_label: 'Tuqqna',
+  lang_fr_label: 'Tafṛansist',
+  lang_kab_label: 'Taqbaylit'
 
 }
