@@ -19,13 +19,15 @@ export default {
   numeric_content_author_label: 'Sγur: ',
   numeric_content_title_label: 'Titre: ',
   numeric_content_btn_label: 'Sader',
-  numeric_content_title: 'Contenu numérique',
+  numeric_content_title: 'Temkerḍit',
   article_comment_btn_send_label: 'Azen',
   article_comment_btn_login_label: 'Qqen',
   article_comment_text_login_label: 'Veuillez vous identifier pour ajouter un commentaire',
   article_comment_placeholder: 'Aru awennit...',
   provides_list_title_label: 'Tuqqna',
   lang_fr_label: 'Tafṛansist',
-  lang_kab_label: 'Taqbaylit'
+  lang_kab_label: 'Taqbaylit',
+  maps_section_title_label: 'Tkarḍa taddart',
+  follow_us_title_label: 'Ḍfeṛ-aɣ!'
 
 }

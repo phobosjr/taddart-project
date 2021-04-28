@@ -1,5 +1,5 @@
 <template>
-  <section class="LastArticles">
+  <section class="LastArticles" v-waypoint="{ active: true, callback: onWaypoint}">
       <div v-for="article in lastArticles" class="LastArticles__article"
       @click="redirectToArticle(article.slug)"
       >
@@ -34,7 +34,12 @@ export default {
   },
   methods: {
     redirectToArticle (slug) {
-      this.$router.push(this.localePath('/article/'+slug, this.$i18n.locale))
+      window.location = this.localePath('/article/'+slug, this.$i18n.locale);
+    },
+    onWaypoint({el, going}) {
+      if (going === this.$waypointMap.GOING_IN) {
+        el.classList.add('visible')
+      }
     }
   }
 }
@@ -48,6 +53,13 @@ export default {
   justify-content: center;
   min-height: 555px;
   padding: 10px;
+  transition: all 1s ease-in;
+  transform: translateX(100%);
+  opacity: 0;
+  &.visible {
+    transform: translateX(0);
+    opacity: 1;
+  }
 
   &__article {
     margin: 10px;

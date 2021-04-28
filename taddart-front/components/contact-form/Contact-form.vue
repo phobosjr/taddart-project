@@ -1,5 +1,5 @@
 <template>
-  <div class="Contact-form">
+  <div id="Contact-form" class="Contact-form" v-waypoint="{ active: true, callback: onWaypoint}">
     <div class="Contact-form__label">
       <h3>{{ $t('contact_title') }}</h3>
     </div>
@@ -109,6 +109,11 @@ export default {
         }, 5000)
       })
     },
+    onWaypoint({el, going}) {
+      if (going === this.$waypointMap.GOING_IN) {
+        el.classList.add('Contact-form--visible')
+      }
+    }
   }
 }
 </script>
@@ -121,14 +126,24 @@ export default {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
+  background-color: #77b5fe1f;
   padding: 0 25px;
 
   @media (max-width: 992px) {
     flex-direction: column;
   }
 
+  &--visible {
+    div {
+      transform: translate(0);
+    }
+  }
+
   &__label {
     margin: auto 0;
+    transform: translateY(400%);
+    transition: all 1s ease-in;
+
     @media (max-width: 992px) {
       text-align: center;
     }
@@ -142,6 +157,9 @@ export default {
     max-width: 500px;
     width: 100%;
     margin: auto 0;
+    transform: translatex(100%);
+    transition: all 1s ease-in;
+
     @media (max-width: 992px) {
       max-width: 100%;
     }

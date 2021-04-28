@@ -7,37 +7,34 @@
                   :vertical-image="quoteSection.verticalImage.formats | defaultImage"
     ></QuoteSection>
     <SeparateLine :text-content="$t('last_article_title')"/>
-    <LastArticlesSection v-waypoint="{ active: true, callback: onWaypoint}"></LastArticlesSection>
-    <div :class="['Home__gallery-panel']"
-         v-waypoint="{ active: true, callback: onWaypoint}">
-      <a :href="localePath('/gallery', $i18n.locale)">
-        {{ $t('gallery_title') }}
-      </a>
+    <LastArticlesSection></LastArticlesSection>
+    <div class="Home__gallery-panel">
+      <div class="Home__gallery-panel__link">
+        <a :href="localePath('/gallery', $i18n.locale)">
+          {{ $t('gallery_title') }}
+        </a>
+      </div>
     </div>
     <contact-form></contact-form>
-    <div :class="['Home__numeric_content-panel']"
-         v-waypoint="{ active: true, callback: onWaypoint}">
-      <a :href="localePath('/contenu-numerique', $i18n.locale)">
-        {{ $t('numeric_content_title') }}
-      </a>
-    </div>
+    <google-maps></google-maps>
   </div>
 </template>
 <script>
 import articlesQuery from '@/apollo/queries/articles/articles.gql'
 import QuoteSection from "@/components/home-section/quoteSection/QuoteSection";
 import LastArticlesSection from "@/components/home-section/lastArticlesSection/LastArticlesSection";
+import googleMaps from "@/components/home-section/maps/googleMaps";
 import quoteQuery from "@/apollo/queries/home-section/quote.gql";
 
 export default {
   name: "index",
   components: {
     QuoteSection,
-    LastArticlesSection
+    LastArticlesSection,
+    googleMaps
   },
   data() {
-    return {
-    }
+    return {}
   },
   apollo: {
     articles: {
@@ -48,17 +45,10 @@ export default {
     quoteSection: {
       prefetch: true,
       query: quoteQuery,
-      variables () {
+      variables() {
         return {locale: this.$i18n.locale}
       },
       errorPolicy: "ignore"
-    }
-  },
-  methods: {
-    onWaypoint({el, going}) {
-      if (going === this.$waypointMap.GOING_IN) {
-        el.classList.add('visible')
-      }
     }
   }
 }
@@ -67,27 +57,31 @@ export default {
 
 .Home {
   padding-top: 70px;
+  overflow-x: hidden;
 
   &__gallery-panel {
     width: 100%;
     height: 110px;
-    font-size: 35px;
-    background-color: $td-yellow;
+    font-size: 25px;
+    background-color: $td-blue;
     text-align: center;
     padding: 30px 0;
-    margin: 40px 0;
-    transition: all 0.5s ease;
-    transform: translateX(-100%);
+    background-image: url("assets/images/gallery-backgroung-image.jpg");
+    background-position: top;
+    background-attachment: fixed;
 
-    &.visible {
-      transform: translateX(0);
-    }
+    &__link {
+      transition: all 0.5s ease;
+      &:hover {
+        transform: translateX(25px);
+      }
 
-    a {
-      color: white !important;
-      text-transform: uppercase;
-      font-weight: bolder;
-      text-decoration: none;
+      a {
+        color: black;
+        text-transform: uppercase;
+        font-weight: bolder;
+        text-decoration: none;
+      }
     }
   }
 

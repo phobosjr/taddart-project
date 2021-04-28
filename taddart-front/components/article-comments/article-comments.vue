@@ -38,11 +38,12 @@ export default {
     articleComments: {
       prefetch: true,
       query: articleCommentsQuery,
+      errorPolicy: "ignore",
       variables() {
         return {articleId: this.articleId}
       },
       result(result) {
-        this.$store.dispatch('articleComments/init', result.data.articleComments);
+        this.$store.dispatch('articleComments/init', result?.data?.articleComments);
       }
     }
   },
