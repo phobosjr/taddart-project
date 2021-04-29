@@ -1,5 +1,5 @@
 <template>
-  <div id="Contact-form" class="Contact-form" v-waypoint="{ active: true, callback: onWaypoint}">
+  <div id="Contact-form" class="Contact-form" v-intersection="'Contact-form--visible'">
     <div class="Contact-form__label">
       <h3>{{ $t('contact_title') }}</h3>
     </div>
@@ -108,11 +108,6 @@ export default {
           this.alertFailed = false
         }, 5000)
       })
-    },
-    onWaypoint({el, going}) {
-      if (going === this.$waypointMap.GOING_IN) {
-        el.classList.add('Contact-form--visible')
-      }
     }
   }
 }

@@ -37,6 +37,7 @@ export default {
     {src: '~/plugins/tooltip.js', ssr: true},
     {src: '~/plugins/wayPoint.js', mode: 'client'},
     {src: '~/plugins/cookies.js', mode: 'client'},
+    {src: '~/plugins/directives/v-intersection.js', mode: 'client'},
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

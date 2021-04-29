@@ -4,7 +4,7 @@
       <div class="Description__picture__vertical" :style="{backgroundImage: 'url('+ verticalImage+')'}"></div>
       <div class="Description__picture__horizontal" :style="{backgroundImage: 'url('+ horizontalImage+')'}"></div>
     </div>
-    <div class="Description__text">
+    <div class="Description__text" v-intersection>
       <div class="Description__text__title">
         <h2>{{ title }}</h2>
       </div>
@@ -78,6 +78,10 @@ export default {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    transition: all 1s ease-in;
+    transform: translateY(100px);
+    opacity: 0;
+
 
     @media screen and (max-width: 1480px){
       width: 100%;

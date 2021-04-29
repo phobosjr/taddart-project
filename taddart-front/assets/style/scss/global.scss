@@ -21,3 +21,9 @@ html, body {
   background-color: #00000042;
 }
 
+.visible {
+  opacity: 1 !important;
+  transform: translate(0) !important;
+  visibility: visible !important;
+}
+

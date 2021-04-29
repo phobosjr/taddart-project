@@ -14,24 +14,27 @@
     <div class="Article__main">
       <div class="Article__main__content">
         <div class="Article__main__content__breadcrumb">
-          <a href="/">{{$t('home_title')}}</a>
+          <a href="/">{{ $t('home_title') }}</a>
           /
-          <span>{{article.title}}</span>
+          <span>{{ article.title }}</span>
         </div>
         <div class="Article__main__content__text" v-html="article.content"></div>
         <article-comment v-if="article.enableComments" :article-id="article.id"></article-comment>
         <article-comments v-if="article.enableComments" :article-id="article.id"></article-comments>
       </div>
-      <div class="Article__main__last-posts d-flex flex-column p-3">
+      <div class="Article__main__last-posts">
         <h4>{{ $t('last_article_title') }}</h4>
-        <div v-for="article in filteredLastArticles" :key="article.id" class="p-3">
-          <div class="mb-3">
-            <img class="w-100" :src="getFormatsFromImage(article.imageUrl) | thumbnailImage" alt="">
+        <div v-for="article in filteredLastArticles" :key="article.id" class="Article__main__last-posts__article">
+          <div class="Article__main__last-posts__article__img"
+               :style="{backgroundImage: 'url('+$options.filters.thumbnailImage(article.imageUrl.formats)+')'}">
           </div>
-          <div class="d-flex flex-column">
-            <div class="Article__last-posts__date">{{ article.created_at | formatDate }}</div>
-            <div class="Article__last-posts__title">{{ article.title }}</div>
-            <a :href="article.slug" class="Article__last-posts__link mt-3">
+          <div class="Article__main__last-posts__article__infos">
+            <h4 class="Article__main__last-posts__article__infos__title">{{ article.title }}</h4>
+            <div class="Article__main__last-posts__article__infos__author">
+              {{article.author}}
+            </div>
+            <div class="Article__main__last-posts__article__infos__date">{{ article.created_at | formatDate }}</div>
+            <a :href="article.slug" class="Article__main__last-posts__article__infos__link">
               {{ $t('read_article_label') }}
             </a>
           </div>
@@ -142,10 +145,12 @@ export default {
     &__content {
       display: flex;
       flex-direction: column;
+
       &__breadcrumb {
         padding: 0 25px;
         margin-bottom: 25px;
       }
+
       &__text {
         text-align: justify;
         padding: 0 25px;
@@ -180,22 +185,46 @@ export default {
     }
 
     &__last-posts {
+      width: 500px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
       @media screen and (max-width: 1390px) {
         display: none !important;
       }
 
-      &__date {
-        font-size: 13px;
-        color: gray;
-        margin-bottom: 4px;
-      }
+      &__article {
+        display: flex;
+        flex-direction: row;
 
-      &__title {
-        font-weight: bold;
-      }
+        &__img {
+          width: 171px;
+          height: 125px;
+          margin: 2px 5px 2px 0px ;
+        }
 
-      &__link {
-        text-align: right;
+        &__infos {
+
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+
+
+          &__date {
+            font-size: 13px;
+            color: gray;
+            margin-bottom: 4px;
+          }
+
+          &__title {
+            font-weight: bold;
+            color: #680606;
+          }
+
+          &__link {
+
+          }
+        }
       }
     }
   }
