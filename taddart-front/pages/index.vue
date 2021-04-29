@@ -37,11 +37,6 @@ export default {
     return {}
   },
   apollo: {
-    articles: {
-      prefetch: true,
-      query: articlesQuery,
-      errorPolicy: "ignore"
-    },
     quoteSection: {
       prefetch: true,
       query: quoteQuery,
