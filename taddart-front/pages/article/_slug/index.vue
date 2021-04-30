@@ -9,6 +9,8 @@
       <div class="Article__header__profile text-left w-100">
         <span> {{ $t('article_author_label') }}<strong>{{ article.author }}</strong></span>
         <span>{{ article.created_at | formatDate }}</span>
+        <div class="Article__header__profile__category":style="{backgroundColor: getArticleCategoryColor(article)}">
+          {{ getArticleCategory(article)}}</div>
       </div>
     </div>
     <div class="Article__main">
@@ -84,6 +86,12 @@ export default {
   methods: {
     getFormatsFromImage(image) {
       return image?.formats;
+    },
+    getArticleCategory (article) {
+      return article?.article_categorie?.category
+    },
+    getArticleCategoryColor (article) {
+      return article?.article_categorie?.backgroundColor
     }
   }
 }
@@ -124,10 +132,19 @@ export default {
       padding: 12px;
       max-width: fit-content;
       color: white;
+      align-items: center;
 
       > * {
         margin: 0 10px;
         font-weight: bold;
+      }
+
+      &__category {
+        color: white;
+        padding: 10px;
+        margin: 10px;
+        border-radius: 15px;
+        font-weight: 600;
       }
     }
   }

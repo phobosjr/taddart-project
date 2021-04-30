@@ -4,6 +4,9 @@
       <div v-for="article in lastArticles" class="LastArticles__article"
            @click="redirectToArticle(article.slug)"
       >
+        <div class="LastArticles__article__category" :style="{backgroundColor: getArticleCategoryColor(article)}">
+          {{ getArticleCategory(article)}}
+        </div>
         <div class="LastArticles__article__image"
              :style="{backgroundImage: 'url('+$options.filters.defaultImage(article.imageUrl.formats)+')'}"></div>
         <div class="LastArticles__article__article-info">
@@ -37,6 +40,12 @@ export default {
   methods: {
     redirectToArticle (slug) {
       window.location = this.localePath('/article/'+slug, this.$i18n.locale);
+    },
+    getArticleCategory (article) {
+      return article?.article_categorie?.category
+    },
+    getArticleCategoryColor (article) {
+      return article?.article_categorie?.backgroundColor
     }
   }
 }
@@ -69,6 +78,17 @@ export default {
     margin: 10px;
     width: 400px;
     cursor: pointer;
+
+    &__category {
+      color: white;
+      position: absolute;
+      top: 10px;
+      padding: 10px;
+      margin: 10px;
+      border-radius: 15px;
+      font-weight: 600;
+
+    }
 
     &__image {
       max-width: 400px;

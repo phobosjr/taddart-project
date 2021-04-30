@@ -613,6 +613,41 @@
             "type": "boolean",
             "default": true
           },
+          "article_categorie": {
+            "required": [
+              "id",
+              "category"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "category": {
+                "type": "string"
+              },
+              "backgroundColor": {
+                "type": "string"
+              },
+              "localizations": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "locale": {
+                "type": "string"
+              },
+              "published_at": {
+                "type": "string"
+              },
+              "created_by": {
+                "type": "string"
+              },
+              "updated_by": {
+                "type": "string"
+              }
+            }
+          },
           "published_at": {
             "type": "string",
             "format": "date-time"
@@ -646,6 +681,9 @@
           "enableComments": {
             "type": "boolean",
             "default": true
+          },
+          "article_categorie": {
+            "type": "string"
           },
           "published_at": {
             "type": "string",

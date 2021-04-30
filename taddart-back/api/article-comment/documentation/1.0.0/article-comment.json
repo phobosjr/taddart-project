@@ -571,6 +571,9 @@
               "enableComments": {
                 "type": "boolean"
               },
+              "article_categorie": {
+                "type": "string"
+              },
               "published_at": {
                 "type": "string"
               },

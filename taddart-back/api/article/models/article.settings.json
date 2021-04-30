@@ -47,6 +47,9 @@
       "type": "boolean",
       "required": true,
       "default": true
+    },
+    "article_categorie": {
+      "model": "article-categorie"
     }
   }
 }
