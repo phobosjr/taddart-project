@@ -1,5 +1,6 @@
 <template>
   <div class="article-comments">
+    <div class="article-comments__count"> {{$t('comments_count_title_label')}} {{comments.length}}</div>
     <div v-for="comment in comments" class="article-comments__row">
       <div class="article-comments__row__left">
         <img class="article-comments__row__left__img" src="~/assets/images/image_face_comment.jpg">
@@ -52,10 +53,14 @@ export default {
 
 <style lang="scss" scoped>
 .article-comments {
+  &__count {
+    font-weight: bolder;
+    margin: 10px 0;
+  }
   &__row {
     display: flex;
     flex-direction: row;
-    border: 1.5px solid rgb(240 240 241 / 61%);
+    border-top: 1.5px solid rgb(240 240 241 / 61%);
     border-radius: 5px;
     padding: 25px;
     max-width: 867px;
