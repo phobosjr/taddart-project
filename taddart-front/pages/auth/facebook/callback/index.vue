@@ -9,9 +9,12 @@ export default {
   async middleware({redirect, $cookies, $axios, route}) {
     const lastPath = $cookies.get('last_path');
     $cookies.remove('last_path');
-    const idToken = route.fullPath.split('?id_token=')[1];
-    const response = await $axios.$get(`/auth/google/callback/?id_token=${idToken}`);
-    $cookies.set('strapi_jwt', response.jwt)
+    const acces_token_regex = new RegExp('(?<=access_token=).*?(?=&)');
+    const [access_token] = acces_token_regex.exec(route.fullPath);
+    console.log(access_token);
+    const response = await $axios.$get(`/auth/google/callback?access_token=${access_token}`);
+    $cookies.set('strapi_jwt', response.jwt);
+    $cookies.set('user_access_token', access_token);
     return redirect(lastPath || '/');
   }
 }

@@ -26,6 +26,7 @@ export default {
   article_comment_placeholder: 'Aru awennit...',
   comments_count_title_label: 'Iwenniten',
   provides_list_title_label: 'Tuqqna',
+  providers_or_label: 'Neɣ',
   lang_fr_label: 'Tafṛansist',
   lang_kab_label: 'Taqbaylit',
   maps_section_title_label: 'Tkarḍa taddart',

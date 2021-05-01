@@ -60,7 +60,7 @@ export default {
   &__row {
     display: flex;
     flex-direction: row;
-    border-top: 1.5px solid rgb(240 240 241 / 61%);
+    border-top: 1.5px solid $td-gray-61;
     border-radius: 5px;
     padding: 25px;
     max-width: 867px;
@@ -75,10 +75,11 @@ export default {
       display: flex;
       flex-direction: column;
       align-items: center;
+      justify-content: center;
       margin-right: 5px;
 
       &__img {
-        max-width: 100px;
+        max-width: 67px;
         margin-bottom: 10px;
       }
 
@@ -104,7 +105,6 @@ export default {
 
       &__comment {
         color: black;
-        background-color: rgb(240 240 241 / 61%);
         padding: 25px;
         border-radius: 5px;
       }

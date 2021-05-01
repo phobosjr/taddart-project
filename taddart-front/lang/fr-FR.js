@@ -26,6 +26,7 @@ export default {
   article_comment_placeholder: 'Écris un commentaire...',
   comments_count_title_label: 'Commentaires',
   provides_list_title_label: 'Connexion',
+  providers_or_label: 'Ou',
   lang_fr_label: 'Français',
   lang_kab_label: 'Kabyle',
   maps_section_title_label: 'Carte du village',
