@@ -37,6 +37,7 @@ export default {
     {src: '~/plugins/tooltip.js', ssr: true},
     {src: '~/plugins/wayPoint.js', mode: 'client'},
     {src: '~/plugins/cookies.js', mode: 'client'},
+    {src: '~/plugins/directives/v-intersection.js', mode: 'client'},
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -54,11 +55,11 @@ export default {
     '@nuxtjs/strapi',
     '@nuxtjs/apollo',
     '@nuxtjs/style-resources',
-    '@nuxtjs/axios',
     ['nuxt-i18n', {
       strategy: 'prefix_except_default',
       defaultLocale: 'kab',
-    }]
+    }],
+    '@nuxtjs/axios',
   ],
   i18n: {
     locales: [
@@ -105,6 +106,6 @@ export default {
   build: {},
 
   server: {
-    host: '0.0.0.0',
+    host: process.env.ENV === 'production' ? '0.0.0.0' : 'localhost',
   }
 }

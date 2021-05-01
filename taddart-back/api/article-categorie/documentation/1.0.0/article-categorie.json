@@ -1,6 +1,6 @@
 {
   "paths": {
-    "/article-comments": {
+    "/article-categories": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -52,7 +52,7 @@
         },
         "summary": "",
         "tags": [
-          "Article-comment"
+          "Article-categorie"
         ],
         "parameters": [
           {
@@ -244,7 +244,7 @@
         },
         "summary": "",
         "tags": [
-          "Article-comment"
+          "Article-categorie"
         ],
         "requestBody": {
           "description": "",
@@ -252,14 +252,14 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewArticle-comment"
+                "$ref": "#/components/schemas/NewArticle-categorie"
               }
             }
           }
         }
       }
     },
-    "/article-comments/count": {
+    "/article-categories/count": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -311,12 +311,12 @@
         },
         "summary": "",
         "tags": [
-          "Article-comment"
+          "Article-categorie"
         ],
         "parameters": []
       }
     },
-    "/article-comments/{id}": {
+    "/article-categories/{id}": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -368,7 +368,7 @@
         },
         "summary": "",
         "tags": [
-          "Article-comment"
+          "Article-categorie"
         ],
         "parameters": [
           {
@@ -434,7 +434,7 @@
         },
         "summary": "",
         "tags": [
-          "Article-comment"
+          "Article-categorie"
         ],
         "requestBody": {
           "description": "",
@@ -442,7 +442,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewArticle-comment"
+                "$ref": "#/components/schemas/NewArticle-categorie"
               }
             }
           }
@@ -508,7 +508,7 @@
         },
         "summary": "",
         "tags": [
-          "Article-comment"
+          "Article-categorie"
         ],
         "parameters": [
           {
@@ -527,108 +527,62 @@
   },
   "components": {
     "schemas": {
-      "Article-comment": {
+      "Article-categorie": {
         "required": [
-          "id"
+          "id",
+          "category"
         ],
         "properties": {
           "id": {
             "type": "string"
           },
-          "comment": {
+          "category": {
             "type": "string"
           },
-          "article": {
-            "required": [
-              "id",
-              "title",
-              "author",
-              "summary",
-              "enableComments"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "title": {
-                "type": "string"
-              },
-              "slug": {
-                "type": "uid"
-              },
-              "content": {
-                "type": "string"
-              },
-              "image": {
-                "type": "string"
-              },
-              "author": {
-                "type": "string"
-              },
-              "summary": {
-                "type": "string"
-              },
-              "enableComments": {
-                "type": "boolean"
-              },
-              "article_categorie": {
-                "type": "string"
-              },
-              "published_at": {
-                "type": "string"
-              },
-              "created_by": {
-                "type": "string"
-              },
-              "updated_by": {
-                "type": "string"
+          "backgroundColor": {
+            "type": "string",
+            "default": "#e9bd15"
+          },
+          "localizations": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id",
+                "category"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "category": {
+                  "type": "string"
+                },
+                "backgroundColor": {
+                  "type": "string"
+                },
+                "localizations": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "locale": {
+                  "type": "string"
+                },
+                "published_at": {
+                  "type": "string"
+                },
+                "created_by": {
+                  "type": "string"
+                },
+                "updated_by": {
+                  "type": "string"
+                }
               }
             }
           },
-          "users_permissions_user": {
-            "required": [
-              "id",
-              "username",
-              "email"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "username": {
-                "type": "string"
-              },
-              "email": {
-                "type": "string"
-              },
-              "provider": {
-                "type": "string"
-              },
-              "password": {
-                "type": "string"
-              },
-              "resetPasswordToken": {
-                "type": "string"
-              },
-              "confirmationToken": {
-                "type": "string"
-              },
-              "confirmed": {
-                "type": "boolean"
-              },
-              "blocked": {
-                "type": "boolean"
-              },
-              "role": {
-                "type": "string"
-              },
-              "created_by": {
-                "type": "string"
-              },
-              "updated_by": {
-                "type": "string"
-              }
-            }
+          "locale": {
+            "type": "string"
           },
           "published_at": {
             "type": "string",
@@ -636,15 +590,25 @@
           }
         }
       },
-      "NewArticle-comment": {
+      "NewArticle-categorie": {
+        "required": [
+          "category"
+        ],
         "properties": {
-          "comment": {
+          "category": {
             "type": "string"
           },
-          "article": {
-            "type": "string"
+          "backgroundColor": {
+            "type": "string",
+            "default": "#e9bd15"
           },
-          "users_permissions_user": {
+          "localizations": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "locale": {
             "type": "string"
           },
           "published_at": {

@@ -59,8 +59,8 @@ export default {
 .article-comment {
   display: flex;
   flex-direction: column;
-  border: 1.5px solid rgb(240 240 241 / 61%);
-  background-color: rgb(240 240 241 / 61%);
+  border: 1.5px solid $td-gray-61;
+  background-color: $td-gray-61;
   border-radius: 5px;
   padding: 25px;
   max-width: 867px;
@@ -94,8 +94,7 @@ export default {
   height: 150px;
   display: flex;
   flex-direction: column;
-  border: 1.5px solid rgb(240 240 241 / 61%);
-  background-color: rgb(240 240 241 / 61%);
+  border: 1.5px solid $td-gray-61;
   border-radius: 5px;
   padding: 25px;
   max-width: 867px;
@@ -105,9 +104,16 @@ export default {
     width: 150px;
     height: 50px;
     padding: 10px;
-    background-color: $td-blue;
+    background-color: $td-yellow;
+    border: 1px solid $td-yellow;
     color: white;
+    font-weight: bold;
     border-radius: 10px;
+
+    &:hover {
+      background-color: transparent;
+      color: black;
+    }
   }
 }
 

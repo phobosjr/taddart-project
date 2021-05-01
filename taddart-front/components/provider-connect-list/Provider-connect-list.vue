@@ -8,6 +8,7 @@
         <h3>{{ $t('provides_list_title_label') }}</h3>
       </div>
       <button class="providers__main__btn--google" @click="connect('google')">Google</button>
+      <span>{{ $t('providers_or_label') }}</span>
       <button class="providers__main__btn--facebook" @click="connect('facebook')">Facebook</button>
     </div>
     <div class="td-overlay" @click="hide()"></div>
@@ -52,8 +53,8 @@ export default {
 
   &__main {
     background-color: white;
-    height: 400px;
-    width: 350px;
+    height: 550px;
+    width: 600px;
     position: fixed;
     left: 0;
     right: 0;
@@ -61,7 +62,7 @@ export default {
     margin: auto;
     top: 0;
     bottom: 0;
-    border-radius: 5px;
+    border-radius: 10px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -72,6 +73,7 @@ export default {
       position: absolute;
       top: 10px;
       right: 25px;
+      cursor: pointer;
 
       img {
         width: 25px;

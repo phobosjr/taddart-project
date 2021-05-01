@@ -1,31 +1,6 @@
-export default {
-  home_title: 'Accueil',
-  gallery_title: 'Galerie',
-  map_title: 'Carte',
-  all_albums_title: 'Tous',
-  last_article_title: 'Les derniers articles',
-  read_article_label: 'Lire l\'article',
-  article_author_label: 'Par: ',
-  contact_title: 'Nous contacter',
-  contact_form_name: 'Name',
-  contact_form_name_required: 'Nom obligatoire',
-  contact_form_email: 'Email',
-  contact_form_email_required: 'Email obligatoire',
-  contact_form_message: 'Message',
-  contact_form_submit_btn: 'Envoyer',
-  contact_form_alert_success_message: 'Votre message à bien été envoyé',
-  contact_form_alert_failed_message: 'Envoi a echoué',
-  loading_label: 'Chargement ...',
-  numeric_content_author_label: 'Par: ',
-  numeric_content_title_label: 'Titre: ',
-  numeric_content_btn_label: 'Télécharger',
-  numeric_content_title: 'Contenu numérique',
-  article_comment_btn_send_label: 'Envoyer',
-  article_comment_btn_login_label: 'Se connecter',
-  article_comment_text_login_label: 'Veuillez vous identifier pour ajouter un commentaire',
-  article_comment_placeholder: 'Écris un commentaire...',
-  provides_list_title_label: 'Connexion',
-  lang_fr_label: 'Français',
-  lang_kab_label: 'Kabyle'
+import langFetch from "@/lang/langFetch";
 
+export default ({store})=>  {
+  return langFetch(store.$axios, 'fr');
 }
+

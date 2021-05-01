@@ -1,8 +1,12 @@
 <template>
-  <section class="LastArticles">
+  <section class="LastArticles" v-intersection>
+    <div class="LastArticles__container">
       <div v-for="article in lastArticles" class="LastArticles__article"
-      @click="redirectToArticle(article.slug)"
+           @click="redirectToArticle(article.slug)"
       >
+        <div class="LastArticles__article__category" :style="{backgroundColor: getArticleCategoryColor(article)}">
+          {{ getArticleCategory(article)}}
+        </div>
         <div class="LastArticles__article__image"
              :style="{backgroundImage: 'url('+$options.filters.defaultImage(article.imageUrl.formats)+')'}"></div>
         <div class="LastArticles__article__article-info">
@@ -15,6 +19,7 @@
         <div class="LastArticles__article__short-content" v-html="article.summary">
         </div>
       </div>
+    </div>
   </section>
 </template>
 
@@ -34,7 +39,13 @@ export default {
   },
   methods: {
     redirectToArticle (slug) {
-      this.$router.push(this.localePath('/article/'+slug, this.$i18n.locale))
+      window.location = this.localePath('/article/'+slug, this.$i18n.locale);
+    },
+    getArticleCategory (article) {
+      return article?.article_categorie?.category
+    },
+    getArticleCategoryColor (article) {
+      return article?.article_categorie?.backgroundColor
     }
   }
 }
@@ -42,17 +53,42 @@ export default {
 
 <style lang="scss" scoped>
 .LastArticles {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
+
   min-height: 555px;
   padding: 10px;
+
+  &__container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    transition: all 1s ease-in;
+    transform: translateX(100%);
+    opacity: 0;
+  }
+
+  &.visible {
+    > * {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
 
   &__article {
     margin: 10px;
     width: 400px;
     cursor: pointer;
+
+    &__category {
+      color: white;
+      position: absolute;
+      top: 10px;
+      padding: 10px;
+      margin: 10px;
+      border-radius: 15px;
+      font-weight: 600;
+
+    }
 
     &__image {
       max-width: 400px;
@@ -84,6 +120,10 @@ export default {
       color: #7b7e85;
       text-align: left;
       margin-bottom: 10px;
+      max-height: 145px;
+      text-overflow: ellipsis;
+      white-space: normal;
+      overflow: hidden;
     }
   }
 }

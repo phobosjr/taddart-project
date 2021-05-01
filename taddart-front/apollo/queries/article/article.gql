@@ -9,5 +9,9 @@ query getArticle ($slug: String){
     image {
       formats
     }
+    article_categorie {
+      backgroundColor
+      category
+    }
   }
 }

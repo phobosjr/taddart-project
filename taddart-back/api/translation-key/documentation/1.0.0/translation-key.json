@@ -1,6 +1,6 @@
 {
   "paths": {
-    "/article-comments": {
+    "/translation-keys": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -52,7 +52,7 @@
         },
         "summary": "",
         "tags": [
-          "Article-comment"
+          "Translation-key"
         ],
         "parameters": [
           {
@@ -244,7 +244,7 @@
         },
         "summary": "",
         "tags": [
-          "Article-comment"
+          "Translation-key"
         ],
         "requestBody": {
           "description": "",
@@ -252,14 +252,14 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewArticle-comment"
+                "$ref": "#/components/schemas/NewTranslation-key"
               }
             }
           }
         }
       }
     },
-    "/article-comments/count": {
+    "/translation-keys/count": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -311,12 +311,12 @@
         },
         "summary": "",
         "tags": [
-          "Article-comment"
+          "Translation-key"
         ],
         "parameters": []
       }
     },
-    "/article-comments/{id}": {
+    "/translation-keys/{id}": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -368,7 +368,7 @@
         },
         "summary": "",
         "tags": [
-          "Article-comment"
+          "Translation-key"
         ],
         "parameters": [
           {
@@ -434,7 +434,7 @@
         },
         "summary": "",
         "tags": [
-          "Article-comment"
+          "Translation-key"
         ],
         "requestBody": {
           "description": "",
@@ -442,7 +442,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewArticle-comment"
+                "$ref": "#/components/schemas/NewTranslation-key"
               }
             }
           }
@@ -508,7 +508,7 @@
         },
         "summary": "",
         "tags": [
-          "Article-comment"
+          "Translation-key"
         ],
         "parameters": [
           {
@@ -527,129 +527,80 @@
   },
   "components": {
     "schemas": {
-      "Article-comment": {
+      "Translation-key": {
         "required": [
-          "id"
+          "id",
+          "keyName"
         ],
         "properties": {
           "id": {
             "type": "string"
           },
-          "comment": {
+          "keyName": {
             "type": "string"
           },
-          "article": {
-            "required": [
-              "id",
-              "title",
-              "author",
-              "summary",
-              "enableComments"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "title": {
-                "type": "string"
-              },
-              "slug": {
-                "type": "uid"
-              },
-              "content": {
-                "type": "string"
-              },
-              "image": {
-                "type": "string"
-              },
-              "author": {
-                "type": "string"
-              },
-              "summary": {
-                "type": "string"
-              },
-              "enableComments": {
-                "type": "boolean"
-              },
-              "article_categorie": {
-                "type": "string"
-              },
-              "published_at": {
-                "type": "string"
-              },
-              "created_by": {
-                "type": "string"
-              },
-              "updated_by": {
-                "type": "string"
+          "value": {
+            "type": "string"
+          },
+          "localizations": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id",
+                "keyName"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "keyName": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                },
+                "localizations": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "locale": {
+                  "type": "string"
+                },
+                "created_by": {
+                  "type": "string"
+                },
+                "updated_by": {
+                  "type": "string"
+                }
               }
             }
           },
-          "users_permissions_user": {
-            "required": [
-              "id",
-              "username",
-              "email"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "username": {
-                "type": "string"
-              },
-              "email": {
-                "type": "string"
-              },
-              "provider": {
-                "type": "string"
-              },
-              "password": {
-                "type": "string"
-              },
-              "resetPasswordToken": {
-                "type": "string"
-              },
-              "confirmationToken": {
-                "type": "string"
-              },
-              "confirmed": {
-                "type": "boolean"
-              },
-              "blocked": {
-                "type": "boolean"
-              },
-              "role": {
-                "type": "string"
-              },
-              "created_by": {
-                "type": "string"
-              },
-              "updated_by": {
-                "type": "string"
-              }
-            }
-          },
-          "published_at": {
-            "type": "string",
-            "format": "date-time"
+          "locale": {
+            "type": "string"
           }
         }
       },
-      "NewArticle-comment": {
+      "NewTranslation-key": {
+        "required": [
+          "keyName"
+        ],
         "properties": {
-          "comment": {
+          "keyName": {
             "type": "string"
           },
-          "article": {
+          "value": {
             "type": "string"
           },
-          "users_permissions_user": {
-            "type": "string"
+          "localizations": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           },
-          "published_at": {
-            "type": "string",
-            "format": "date-time"
+          "locale": {
+            "type": "string"
           },
           "created_by": {
             "type": "string"
