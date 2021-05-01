@@ -317,26 +317,18 @@
     "schemas": {
       "Translation-key": {
         "required": [
-          "id",
-          "keyName"
+          "id"
         ],
         "properties": {
           "id": {
             "type": "string"
           },
-          "keyName": {
-            "type": "string"
-          },
-          "value": {
-            "type": "string",
-            "default": "  "
-          },
-          "localizations": {
+          "translation": {
             "type": "array",
             "items": {
+              "type": "object",
               "required": [
-                "id",
-                "keyName"
+                "id"
               ],
               "properties": {
                 "id": {
@@ -347,6 +339,22 @@
                 },
                 "value": {
                   "type": "string"
+                }
+              }
+            }
+          },
+          "localizations": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "translation": {
+                  "type": "component"
                 },
                 "localizations": {
                   "type": "array",
@@ -372,16 +380,26 @@
         }
       },
       "NewTranslation-key": {
-        "required": [
-          "keyName"
-        ],
         "properties": {
-          "keyName": {
-            "type": "string"
-          },
-          "value": {
-            "type": "string",
-            "default": "  "
+          "translation": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "keyName": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                }
+              }
+            }
           },
           "localizations": {
             "type": "array",

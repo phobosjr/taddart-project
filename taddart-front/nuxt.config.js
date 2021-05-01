@@ -55,11 +55,11 @@ export default {
     '@nuxtjs/strapi',
     '@nuxtjs/apollo',
     '@nuxtjs/style-resources',
-    '@nuxtjs/axios',
     ['nuxt-i18n', {
       strategy: 'prefix_except_default',
       defaultLocale: 'kab',
-    }]
+    }],
+    '@nuxtjs/axios',
   ],
   i18n: {
     locales: [
@@ -106,6 +106,6 @@ export default {
   build: {},
 
   server: {
-    host: '0.0.0.0',
+    host: process.env.ENV === 'production' ? '0.0.0.0' : 'localhost',
   }
 }

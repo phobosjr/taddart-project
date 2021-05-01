@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "05/01/2021 10:13:32 AM"
+    "x-generation-date": "05/01/2021 11:05:40 AM"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -8755,26 +8755,18 @@
       },
       "Translation-key": {
         "required": [
-          "id",
-          "keyName"
+          "id"
         ],
         "properties": {
           "id": {
             "type": "string"
           },
-          "keyName": {
-            "type": "string"
-          },
-          "value": {
-            "type": "string",
-            "default": "  "
-          },
-          "localizations": {
+          "translation": {
             "type": "array",
             "items": {
+              "type": "object",
               "required": [
-                "id",
-                "keyName"
+                "id"
               ],
               "properties": {
                 "id": {
@@ -8785,6 +8777,22 @@
                 },
                 "value": {
                   "type": "string"
+                }
+              }
+            }
+          },
+          "localizations": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "translation": {
+                  "type": "component"
                 },
                 "localizations": {
                   "type": "array",
@@ -8810,16 +8818,26 @@
         }
       },
       "NewTranslation-key": {
-        "required": [
-          "keyName"
-        ],
         "properties": {
-          "keyName": {
-            "type": "string"
-          },
-          "value": {
-            "type": "string",
-            "default": "  "
+          "translation": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "keyName": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                }
+              }
+            }
           },
           "localizations": {
             "type": "array",
