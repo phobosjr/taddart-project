@@ -1,6 +1,6 @@
 <template>
   <div :class="['Header', {'scrolled': isScrolled}, {'Header--small-height': smallHeader}]">
-    <nav class="Header__navbar" :style="{ 'height': `${navHeight}px`}">
+    <nav class="Header__navbar">
       <div class="Header__navbar__menu">
         <div :class="['Header__navbar__menu__item', 'td-transition',
           {'Header__navbar__menu__item--open': navBarMenuOpened},
@@ -112,16 +112,12 @@ export default {
   },
   methods: {
     handleScroll() {
-      if (window.scrollY < 64) {
-        this.navHeight = (120 - window.scrollY);
-      }
       window.scrollY === 0
         ? (this.isScrolled = false)
         : (this.isScrolled = true);
     },
     logout() {
       const userAccessToken = this.$cookies.get('user_access_token');
-      console.log(userAccessToken);
       this.$axios.post(`https://oauth2.googleapis.com/revoke?token=${userAccessToken}`)
         .finally(() => {
           this.$cookies.remove('user_access_token');
@@ -159,7 +155,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 
-$navbar-height: 120px;
+$navbar-height: 60px;
 $navbar-height-small: 60px;
 .Header {
   position: relative;
@@ -170,7 +166,7 @@ $navbar-height-small: 60px;
   background-size: cover;
 
   &--small-height {
-    height: 120px;
+    height: $navbar-height;
     background-color: rgba(96, 168, 239, 0.38) !important;
   }
 
@@ -181,6 +177,7 @@ $navbar-height-small: 60px;
     align-items: center;
     padding: 0 204px;
     width: 100%;
+    height: 60px;
     z-index: 999;
 
     @media screen and (max-width: 992px) {
@@ -189,8 +186,8 @@ $navbar-height-small: 60px;
 
     &__logo {
       &__img {
-        width: 100px;
-        height: 100px;
+        width: 50px;
+        height: 50px;
       }
     }
 
@@ -380,13 +377,6 @@ $navbar-height-small: 60px;
   &.scrolled {
     .Header__navbar {
       background-color: $td-blue !important;
-
-      .Header__navbar__logo {
-        .Header__navbar__logo__img {
-          width: 50px;
-          height: 50px;
-        }
-      }
     }
   }
 }

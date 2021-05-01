@@ -129,6 +129,9 @@ export default {
       right: 0;
       width: fit-content;
       height: fit-content;
+      background-color: brown;
+      padding: 15px;
+
       a {
         color: white;
         text-shadow: 0 0 0 #680606;
