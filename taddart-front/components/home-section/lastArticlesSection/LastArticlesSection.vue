@@ -83,9 +83,9 @@ export default {
       color: white;
       position: absolute;
       top: 10px;
-      padding: 10px;
+      padding: 10px 24px;
       margin: 10px;
-      border-radius: 15px;
+      border-radius: 4px;
       font-weight: 600;
 
     }

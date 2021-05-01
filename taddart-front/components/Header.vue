@@ -193,7 +193,6 @@ $navbar-height-small: 60px;
 
     &__menu {
       display: flex;
-      justify-content: right;
       align-items: center;
       width: calc(50% - 50px);
 
@@ -292,11 +291,12 @@ $navbar-height-small: 60px;
 
     &__lang {
       width: calc(50% - 50px);
-      text-align: right;
       position: relative;
 
       &__selected {
         cursor: pointer;
+        width: fit-content;
+        float: right;
       }
 
       &__img {
