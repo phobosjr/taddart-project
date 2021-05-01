@@ -8,6 +8,9 @@
           <a :href="localePath('index', $i18n.locale)">
             {{ $t('home_title') }}
           </a>
+          <a :href="localePath('/articles', $i18n.locale)">
+            {{ $t('articles_title') }}
+          </a>
           <a :href="localePath('/gallery', $i18n.locale)">
             {{ $t('gallery_title') }}
           </a>
@@ -229,7 +232,8 @@ $navbar-height-small: 60px;
 
 
           &:hover {
-            background-color: $td-yellow;
+            background-color: $td-black-43;
+            border-right: 5px solid  $td-yellow;
             text-decoration: none;
           }
         }

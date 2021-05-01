@@ -1,8 +1,9 @@
 import Vue from 'vue'
 import moment from 'moment'
 
-Vue.filter('formatDate', function (value) {
+Vue.filter('formatDate', function (value, dayOnly) {
   if (value) {
-    return moment(String(value)).format('DD/MM/YYYY hh:mm')
+
+   return  dayOnly ? moment(String(value)).format('DD/MM/YYYY') : moment(String(value)).format('DD/MM/YYYY hh:mm')
   }
 });

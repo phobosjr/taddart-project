@@ -21,11 +21,8 @@ export default {
 .Separate-line {
   margin: 40px auto;
   width: fit-content;
+
   hr {
-    margin: 13px auto 0;
-    width: 100%;
-    border: 0;
-    height: 1px;
     background-image: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(7, 7, 7, 0.75), rgba(255, 255, 255, 0));
   }
 }

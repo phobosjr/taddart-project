@@ -6,11 +6,12 @@
       <div class="Article__header__title">
         <h1 class=" font-weight-bolder text-uppercase mb-4">{{ article.title }}</h1>
       </div>
-      <div class="Article__header__profile text-left w-100">
+      <div class="Article__header__profile">
         <span> {{ $t('article_author_label') }}<strong>{{ article.author }}</strong></span>
-        <span>{{ article.created_at | formatDate }}</span>
-        <div class="Article__header__profile__category":style="{backgroundColor: getArticleCategoryColor(article)}">
-          {{ getArticleCategory(article)}}</div>
+        <span>{{ article.created_at | formatDate(true) }}</span>
+        <div class="Article__header__profile__category" :style="{backgroundColor: getArticleCategoryColor(article)}">
+          {{ getArticleCategory(article) }}
+        </div>
       </div>
     </div>
     <div class="Article__main">
@@ -18,27 +19,36 @@
         <div class="Article__main__content__breadcrumb">
           <a href="/">{{ $t('home_title') }}</a>
           /
+          <a href="/articles">{{ $t('articles_title') }}</a>
+          /
           <span>{{ article.title }}</span>
         </div>
         <div class="Article__main__content__text" v-html="article.content"></div>
         <article-comment v-if="article.enableComments" :article-id="article.id"></article-comment>
         <article-comments v-if="article.enableComments" :article-id="article.id"></article-comments>
       </div>
-      <div class="Article__main__last-posts">
-        <h4>{{ $t('last_article_title') }}</h4>
-        <div v-for="article in filteredLastArticles" :key="article.id" class="Article__main__last-posts__article">
-          <div class="Article__main__last-posts__article__img"
-               :style="{backgroundImage: 'url('+$options.filters.thumbnailImage(article.imageUrl.formats)+')'}">
-          </div>
-          <div class="Article__main__last-posts__article__infos">
-            <h4 class="Article__main__last-posts__article__infos__title">{{ article.title }}</h4>
-            <div class="Article__main__last-posts__article__infos__author">
-              {{article.author}}
+      <div class="Article__main__left-main">
+        <div ref="last-post"
+             :class="['Article__main__left-main__last-post', {'Article__main__left-main__last-post--fixed': fixedLeftMain}]">
+          <h4>{{ $t('last_article_title') }}</h4>
+          <div v-for="article in filteredLastArticles" :key="article.id"
+               class="Article__main__left-main__last-post__article">
+            <div class="Article__main__left-main__last-post__article__img"
+                 :style="{backgroundImage: 'url('+getArticlePicture(article)+')'}">
             </div>
-            <div class="Article__main__last-posts__article__infos__date">{{ article.created_at | formatDate }}</div>
-            <a :href="article.slug" class="Article__main__last-posts__article__infos__link">
-              {{ $t('read_article_label') }}
-            </a>
+            <div class="Article__main__left-main__last-post__article__infos">
+              <h4 class="Article__main__left-main__last-post__article__infos__title">{{ article.title }}</h4>
+              <div class="Article__main__left-main__last-post__article__infos__author">
+                {{ article.author }}
+              </div>
+              <div class="Article__main__left-main__last-post__article__infos__date">{{
+                  article.created_at | formatDate
+                }}
+              </div>
+              <a :href="article.slug" class="Article__main__left-main__last-post__article__infos__link">
+                {{ $t('read_article_label') }}
+              </a>
+            </div>
           </div>
         </div>
       </div>
@@ -56,6 +66,11 @@ export default {
   name: "Article",
   components: {ArticleComments},
   layout: 'layoutWithSmallHeader',
+  data: () => {
+    return {
+      fixedLeftMain: false
+    }
+  },
   apollo: {
     fetchedArticle: {
       prefetch: true,
@@ -87,12 +102,24 @@ export default {
     getFormatsFromImage(image) {
       return image?.formats;
     },
-    getArticleCategory (article) {
+    getArticlePicture(article) {
+      return this.$options.filters.thumbnailImage(article?.imageUrl?.formats);
+    },
+    getArticleCategory(article) {
       return article?.article_categorie?.category
     },
-    getArticleCategoryColor (article) {
+    getArticleCategoryColor(article) {
       return article?.article_categorie?.backgroundColor
+    },
+    handleScroll() {
+      window.scrollY >= 580 ? this.fixedLeftMain = true : this.fixedLeftMain = false;
     }
+  },
+  beforeMount() {
+    window.addEventListener('scroll', this.handleScroll);
+  },
+  beforeDestroy() {
+    window.removeEventListener('scroll', this.handleScroll);
   }
 }
 </script>
@@ -126,7 +153,7 @@ export default {
     &__profile {
       position: absolute;
       bottom: 0;
-      right: 0;
+      left: 0;
       display: flex;
       flex-direction: row;
       padding: 12px;
@@ -201,45 +228,59 @@ export default {
       }
     }
 
-    &__last-posts {
+    &__left-main {
       width: 500px;
       display: flex;
       flex-direction: column;
+      position: relative;
       gap: 10px;
       @media screen and (max-width: 1390px) {
         display: none !important;
       }
 
-      &__article {
-        display: flex;
-        flex-direction: row;
+      &__last-post {
 
-        &__img {
-          width: 171px;
-          height: 125px;
-          margin: 2px 5px 2px 0px ;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        &--fixed {
+          position: fixed;
+          top: 88px;
         }
 
-        &__infos {
-
+        &__article {
           display: flex;
-          flex-direction: column;
-          justify-content: space-between;
+          flex-direction: row;
 
-
-          &__date {
-            font-size: 13px;
-            color: gray;
-            margin-bottom: 4px;
+          &__img {
+            width: 171px;
+            height: 125px;
+            margin: 2px 5px 2px 0px;
+            background-color: $td-gray-61;
           }
 
-          &__title {
-            font-weight: bold;
-            color: #680606;
-          }
+          &__infos {
 
-          &__link {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
 
+
+            &__date {
+              font-size: 13px;
+              color: gray;
+              margin-bottom: 4px;
+            }
+
+            &__title {
+              font-weight: bold;
+              color: #680606;
+            }
+
+            &__link {
+
+            }
           }
         }
       }

@@ -6,7 +6,6 @@
                   :horizontal-image="quoteSection.horizontalImage.formats | defaultImage"
                   :vertical-image="quoteSection.verticalImage.formats | defaultImage"
     ></QuoteSection>
-    <SeparateLine :text-content="$t('last_article_title')"/>
     <LastArticlesSection></LastArticlesSection>
     <div class="Home__gallery-panel">
       <div class="Home__gallery-panel__link">

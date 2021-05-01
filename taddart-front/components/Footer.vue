@@ -26,7 +26,7 @@
       </div>
     </div>
     <div class="Footer__copyright">
-      <span>Tuddart N'at abdelmumen &copy; {{ new Date().getFullYear() }}</span>
+      <span>{{$t('footer_copyrights_label')}} &copy; {{ new Date().getFullYear() }}</span>
     </div>
   </nav>
 </template>
@@ -43,7 +43,7 @@ export default {
   height: 250px;
   margin-top: 25px;
   padding: 35px 0;
-  background-color: #09052b;
+  background-color: $td-gray-footer;
   position: relative;
 
   &__content {
