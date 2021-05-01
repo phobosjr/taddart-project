@@ -13,8 +13,8 @@
           {{ getArticleCategory(article) }}
         </div>
         <div class="LastArticles__article__article-info">
-          <span>{{ $t('article_author_label') }}<strong>{{ article.author }}</strong></span>
           <span>{{ article.created_at | formatDate(true) }}</span>
+          <span>{{ $t('article_author_label') }}<strong>{{ article.author }}</strong></span>
         </div>
         <div class="LastArticles__article__title">
           {{ article.title }}
