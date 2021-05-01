@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "05/01/2021 11:05:40 AM"
+    "x-generation-date": "05/01/2021 12:46:42 PM"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -4618,13 +4618,13 @@
         "parameters": []
       }
     },
-    "/translation-key": {
+    "/translation-keys": {
       "get": {
         "deprecated": false,
-        "description": "Find all the translation-key's records",
+        "description": "",
         "responses": {
           "200": {
-            "description": "Retrieve translation-key document(s)",
+            "description": "response",
             "content": {
               "application/json": {
                 "schema": {
@@ -4811,12 +4811,202 @@
           }
         ]
       },
-      "put": {
+      "post": {
         "deprecated": false,
-        "description": "Update a single translation-key record",
+        "description": "Create a new record",
         "responses": {
           "200": {
-            "description": "Retrieve translation-key document(s)",
+            "description": "response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "foo": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Translation-key"
+        ],
+        "requestBody": {
+          "description": "",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewTranslation-key"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/translation-keys/count": {
+      "get": {
+        "deprecated": false,
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "foo": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Translation-key"
+        ],
+        "parameters": []
+      }
+    },
+    "/translation-keys/{id}": {
+      "get": {
+        "deprecated": false,
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "foo": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Translation-key"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "deprecated": false,
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      },
+      "put": {
+        "deprecated": false,
+        "description": "Update a record",
+        "responses": {
+          "200": {
+            "description": "response",
             "content": {
               "application/json": {
                 "schema": {
@@ -4875,14 +5065,25 @@
             }
           }
         },
-        "parameters": []
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "deprecated": false,
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
       },
       "delete": {
         "deprecated": false,
-        "description": "Delete a single translation-key record",
+        "description": "Delete a record",
         "responses": {
           "200": {
-            "description": "deletes a single translation-key based on the ID supplied",
+            "description": "deletes a single record based on the ID supplied",
             "content": {
               "application/json": {
                 "schema": {
@@ -4927,7 +5128,18 @@
         "tags": [
           "Translation-key"
         ],
-        "parameters": []
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "deprecated": false,
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
       }
     },
     "/email/": {
@@ -8755,18 +8967,25 @@
       },
       "Translation-key": {
         "required": [
-          "id"
+          "id",
+          "keyName"
         ],
         "properties": {
           "id": {
             "type": "string"
           },
-          "translation": {
+          "keyName": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          },
+          "localizations": {
             "type": "array",
             "items": {
-              "type": "object",
               "required": [
-                "id"
+                "id",
+                "keyName"
               ],
               "properties": {
                 "id": {
@@ -8777,22 +8996,6 @@
                 },
                 "value": {
                   "type": "string"
-                }
-              }
-            }
-          },
-          "localizations": {
-            "type": "array",
-            "items": {
-              "required": [
-                "id"
-              ],
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "translation": {
-                  "type": "component"
                 },
                 "localizations": {
                   "type": "array",
@@ -8818,26 +9021,15 @@
         }
       },
       "NewTranslation-key": {
+        "required": [
+          "keyName"
+        ],
         "properties": {
-          "translation": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "required": [
-                "id"
-              ],
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "keyName": {
-                  "type": "string"
-                },
-                "value": {
-                  "type": "string"
-                }
-              }
-            }
+          "keyName": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
           },
           "localizations": {
             "type": "array",

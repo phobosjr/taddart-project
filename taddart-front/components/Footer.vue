@@ -2,7 +2,7 @@
   <nav class="Footer">
     <div class="Footer__content">
       <div class="Footer__content__col">
-        <h3>Rubriques</h3>
+        <h3>{{ $t('footer_rubric-header_label') }}</h3>
         <ul class="Footer__content__col__list">
           <li><a :href="localePath('/gallery', $i18n.locale)">
             {{ $t('gallery_title') }}
@@ -13,7 +13,7 @@
         </ul>
       </div>
       <div class="Footer__content__col">
-        <h3>A propos</h3>
+        <h3>{{ $t('footer_about-header_label') }}</h3>
         <ul class="Footer__content__col__list">
           <li>
             <a href="#Contact-form">{{ $t('contact_title') }}</a></li>

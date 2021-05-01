@@ -1,5 +1,5 @@
 {
-  "kind": "singleType",
+  "kind": "collectionType",
   "collectionName": "translation_keys",
   "info": {
     "name": "TranslationKey",
@@ -16,15 +16,23 @@
     }
   },
   "attributes": {
-    "translation": {
-      "type": "component",
-      "repeatable": true,
+    "keyName": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "type": "string",
+      "required": true,
+      "unique": false
+    },
+    "value": {
       "pluginOptions": {
         "i18n": {
           "localized": true
         }
       },
-      "component": "translation.translated-key"
+      "type": "string"
     }
   }
 }
