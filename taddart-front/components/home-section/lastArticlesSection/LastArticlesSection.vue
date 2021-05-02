@@ -12,15 +12,15 @@
         <div class="LastArticles__article__category" :style="{backgroundColor: getArticleCategoryColor(article)}">
           {{ getArticleCategory(article) }}
         </div>
-        <div class="LastArticles__article__article-info">
-          <span>{{ article.created_at | formatDate(true) }}</span>
-          <span>{{ $t('article_author_label') }}<strong>{{ article.author }}</strong></span>
-        </div>
-        <div class="LastArticles__article__title">
+        <div class="LastArticles__article__title" :style="{borderColor: getArticleCategoryColor(article)}">
           {{ article.title }}
         </div>
-        <div class="LastArticles__article__short-content" v-html="article.summary">
+        <div class="LastArticles__article__short-content" v-html="article.summary"></div>
+        <div class="LastArticles__article__article-info">
+          <span>{{ $t('article_author_label') }}<strong>{{ article.author }}</strong></span>
+          <span>{{ article.created_at | formatDate(true) }}</span>
         </div>
+
       </div>
     </div>
   </section>
@@ -93,6 +93,7 @@ export default {
     position: relative;
     border-radius: 5px;
     overflow: hidden;
+    box-shadow: 0px 0px 6px 1px #0a0a0a94;
 
     &:hover {
       #{$self}__image {
@@ -138,12 +139,13 @@ export default {
 
     &__title {
       font-size: 25px;
+      width: fit-content;
       color: white;
       font-weight: bolder;
-      margin: 10px 0;
+      margin: 10px 10% 0 0;
       z-index: 1;
       padding: 10px;
-
+      border-bottom: 5px solid;
     }
 
     &__short-content {

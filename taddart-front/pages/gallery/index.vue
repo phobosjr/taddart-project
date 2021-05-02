@@ -9,9 +9,12 @@
              class="Gallery__panel__album__image"
              @click="showMediaAlbum(album.id, album.nbView)"
         ></div>
-        <div class="Gallery__panel__album__infos">
+        <div class="Gallery__panel__album__title"
+             @click="showMediaAlbum(album.id, album.nbView)">
           <span>{{ album.title }}</span>
-          <div>
+        </div>
+        <div class="Gallery__panel__album__infos">
+           <div>
             <img src="~/assets/images/card-image.svg">
             <span>{{ computeNumberOfItemMedia(album) }}</span>
           </div>
@@ -182,6 +185,46 @@ export default {
         }
       }
 
+      &__title {
+        position: absolute;
+        z-index: 99;
+        margin: auto;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        font-size: 25px;
+        text-transform: uppercase;
+        font-weight: bolder;
+        cursor: pointer;
+        color: white;
+
+        > span {
+          height: fit-content;
+          width: fit-content;
+          position: absolute;
+          margin: auto;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          right: 0;
+        }
+
+        &:before {
+          content: ' ';
+          position: absolute;
+          top: 0;
+          margin: auto;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          width: 100%;
+          height: 100%;
+          background-color: $td-black-30;
+        }
+
+      }
+
       &__image {
         position: absolute;
         cursor: pointer;
@@ -209,7 +252,7 @@ export default {
         bottom: 0;
         display: flex;
         flex-direction: row;
-        justify-content: space-between;
+        justify-content: space-evenly;
         align-items: center;
         width: 100%;
         padding: 0 25px;
@@ -217,8 +260,7 @@ export default {
         color: white;
         z-index: 999;
         font-weight: 600;
-        background: rgb(0, 0, 0);
-        background: linear-gradient(0deg, rgb(0 0 0 / 28%) 44%, rgb(0 0 0 / 28%) 66%, rgb(0 0 0 / 18%) 81%, #00000000 100%);
+
         height: 75px;
 
         img {
