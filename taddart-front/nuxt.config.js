@@ -100,7 +100,7 @@ export default {
   },
 
   axios: {
-    baseURL: process.env.ENV === 'production' ? 'https://anebdal.tuddar-nat-abdelmumen.net' : 'http://localhost:1337'
+    baseURL: process.env.ENV === 'production' ? 'http://10.0.3.24:1337' : 'http://localhost:1337'
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
