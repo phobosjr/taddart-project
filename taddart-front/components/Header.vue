@@ -32,9 +32,10 @@
           <div class="Header__navbar__user__logout-btn" @click="logout()"></div>
         </div>
       </div>
-      <a class="Header__navbar__logo navbar-brand" href="/">
-        <img :src="header.logo_image.formats | defaultImage" width="30" height="30"
-             class="Header__navbar__logo__img d-inline-block align-top td-transition" alt="">
+      <a class="Header__navbar__logo" href="/">
+        <img :src="header.logo_image.formats | defaultImage"
+             class="Header__navbar__logo__img"
+             alt="">
       </a>
       <div class="Header__navbar__lang">
         <div class="Header__navbar__lang__selected" v-if="$i18n.locale === 'kab'" @click="openSelectLang($event)">
@@ -103,7 +104,7 @@ export default {
     }
   },
   mounted() {
-    setInterval(()=> {
+    setInterval(() => {
       this.startSlider();
     }, this.sliderTimeoutMs)
   },
@@ -152,7 +153,7 @@ export default {
         this.sliderIndex = 0;
 
       }
-      this.$el.querySelectorAll('.Header__hero-slider__image-item').forEach((entry)=> {
+      this.$el.querySelectorAll('.Header__hero-slider__image-item').forEach((entry) => {
         entry.classList.remove('Header__hero-slider__image-item--active');
       })
       this.$el.querySelector(`.Header__hero-slider__image-item--${this.sliderIndex}`).classList.add('Header__hero-slider__image-item--active');
@@ -184,6 +185,7 @@ $navbar-height-small: 60px;
     height: $navbar-height;
     background-color: rgba(96, 168, 239, 0.38) !important;
     background-image: none;
+
     #{$self}__hero-slider {
       display: none;
     }
@@ -204,6 +206,7 @@ $navbar-height-small: 60px;
       opacity: 0;
       transition: opacity .5s ease-in-out;
       position: absolute;
+
       &--active {
         opacity: 1;
       }
@@ -226,8 +229,8 @@ $navbar-height-small: 60px;
 
     &__logo {
       &__img {
-        width: 50px;
-        height: 50px;
+        width: 70px;
+        height: 70px;
       }
     }
 
