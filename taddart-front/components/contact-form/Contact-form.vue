@@ -29,13 +29,12 @@
           value=""
           class="Contact-form__main__form__textarea"
         ></v-textarea>
-        <div class="Contact-form__main__form__btn">
-          <v-btn
-            @click="submit()"
-          >
-            {{ $t('contact_form_submit_btn') }}
-          </v-btn>
-        </div>
+        <button @click="submit()"
+                class="Contact-form__main__form__btn"
+        :disabled="!valid"
+        >
+          {{ $t('contact_form_submit_btn') }}
+        </button>
         <div class="Contact-form__main__form__alert">
           <v-alert
             dense
@@ -165,6 +164,7 @@ export default {
     &__form {
       &__text {
         color: #680606;
+
         ::v-deep .error--text {
           color: red;
         }
@@ -172,6 +172,22 @@ export default {
 
       &__btn {
         position: relative;
+        background-color: $td-yellow;
+        width: 100px;
+        height: 50px;
+        border: 1px solid $td-yellow;
+        border-radius: 8px;
+        color: white;
+
+        &:hover {
+          background-color: transparent;
+          color: black;
+        }
+
+        &[disabled] {
+          color: $td-black-43;
+          background-color: $td-gray-61;
+        }
       }
 
       &__alert {
@@ -180,6 +196,7 @@ export default {
         .success--text {
           color: $td-green;
         }
+
         .warning--text {
           color: red;
         }
