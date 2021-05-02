@@ -9,15 +9,18 @@
              class="Gallery__panel__album__image"
              @click="showMediaAlbum(album.id, album.nbView)"
         ></div>
-        <div class="Gallery__panel__album__infos">
+        <div class="Gallery__panel__album__title"
+             @click="showMediaAlbum(album.id, album.nbView)">
           <span>{{ album.title }}</span>
-          <div>
+        </div>
+        <div class="Gallery__panel__album__infos">
+           <div>
             <img src="~/assets/images/card-image.svg">
             <span>{{ computeNumberOfItemMedia(album) }}</span>
           </div>
           <div>
             <img src="~/assets/images/eye-image.svg">
-            <span>{{ album.nbView }}</span>
+            <span>{{ album.nbView | numberViewFormat }}</span>
           </div>
         </div>
       </div>
@@ -100,7 +103,7 @@ export default {
     buildThumbnailImage(formats, type) {
       return type.includes('video') ?
         'url(' + require('~/assets/images/video-thumbnail.png') + ')' :
-        'url(' + this.$options.filters.thumbnailImage(formats) + ')';
+        'url(' + this.$options.filters.defaultImage(formats) + ')';
     },
     buildEmbedMediaObject(mediaObject) {
       const parsedMediaObject = JSON.parse(mediaObject.oembed);
@@ -134,19 +137,36 @@ export default {
   min-height: 100vh;
 
   &__panel {
-    overflow: hidden;
     position: relative;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: flex-start;
+    display: grid;
+    width: 75%;
+    margin: auto;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 30px;
+
+    @media screen and (max-width: 992px) {
+      grid-template-columns: 1fr;
+      width: 95%;
+    }
 
     &__album {
-      margin: 40px 20px 20px 20px;
       width: 350px;
-      height: 190px;
+      height: 350px;
       position: relative;
+      width: 100%;
 
+      &:first-child {
+        height: 600px;
+        width: 100%;
+        grid-row: span 2;
+        grid-column: span 2;
+
+        @media screen and (max-width: 992px) {
+          grid-row: span 1;
+          grid-column: span 1;
+          height: 350px;
+        }
+      }
       &:hover & {
         &__image {
           &:nth-child(2) {
@@ -163,6 +183,46 @@ export default {
             box-shadow: 4px -1px 12px 0px rgba(0, 0, 0, 0.49);
           }
         }
+      }
+
+      &__title {
+        position: absolute;
+        z-index: 99;
+        margin: auto;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        font-size: 25px;
+        text-transform: uppercase;
+        font-weight: bolder;
+        cursor: pointer;
+        color: white;
+
+        > span {
+          height: fit-content;
+          width: fit-content;
+          position: absolute;
+          margin: auto;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          right: 0;
+        }
+
+        &:before {
+          content: ' ';
+          position: absolute;
+          top: 0;
+          margin: auto;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          width: 100%;
+          height: 100%;
+          background-color: $td-black-30;
+        }
+
       }
 
       &__image {
@@ -192,17 +252,16 @@ export default {
         bottom: 0;
         display: flex;
         flex-direction: row;
-        justify-content: space-between;
+        justify-content: space-evenly;
         align-items: center;
         width: 100%;
         padding: 0 25px;
-        font-size: 14px;
+        font-size: 20px;
         color: white;
         z-index: 999;
         font-weight: 600;
-        background: rgb(0, 0, 0);
-        background: linear-gradient(0deg, rgb(0 0 0 / 28%) 44%, rgb(0 0 0 / 28%) 66%, rgb(0 0 0 / 18%) 81%, #00000000 100%);
-        height: 25px;
+
+        height: 75px;
 
         img {
           width: 19px;

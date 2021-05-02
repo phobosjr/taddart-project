@@ -1,12 +1,15 @@
 <template>
   <div :class="['Header', {'scrolled': isScrolled}, {'Header--small-height': smallHeader}]">
-    <nav class="Header__navbar" :style="{ 'height': `${navHeight}px`}">
+    <nav class="Header__navbar">
       <div class="Header__navbar__menu">
         <div :class="['Header__navbar__menu__item', 'td-transition',
           {'Header__navbar__menu__item--open': navBarMenuOpened},
           {'Header__navbar__menu__item--scrolled': isScrolled}]">
           <a :href="localePath('index', $i18n.locale)">
             {{ $t('home_title') }}
+          </a>
+          <a :href="localePath('/articles', $i18n.locale)">
+            {{ $t('articles_title') }}
           </a>
           <a :href="localePath('/gallery', $i18n.locale)">
             {{ $t('gallery_title') }}
@@ -45,7 +48,8 @@
                src="~/assets/images/header/fr-lang.svg" alt="FR">
         </div>
 
-        <div :class="['Header__navbar__lang__list', 'td-transition', {'Header__navbar__lang__list--opened': langListOpened}]">
+        <div
+          :class="['Header__navbar__lang__list', 'td-transition', {'Header__navbar__lang__list--opened': langListOpened}]">
           <a :href="switchLocalePath('kab')" :disabled="$i18n.locale === 'kab'">
             {{ $t('lang_kab_label') }}
             <img :class="['Header__navbar__lang__img']"
@@ -59,22 +63,11 @@
         </div>
       </div>
     </nav>
-    <b-carousel
-      :interval="20000"
-      fade
-      indicators
-      style="height: 100%"
-      v-if="!smallHeader"
-    >
-      <b-carousel-slide v-for="(image, index) in header.background_image" :key="index" class="Header__slider">
-        <template v-slot:img>
-          <img
-            class="d-block Header__slider__img"
-            :src="image.formats | defaultImage"
-            alt="image slot">
-        </template>
-      </b-carousel-slide>
-    </b-carousel>
+    <div class="Header__hero-slider">
+      <div v-for="(image, index) in header.background_image" :key="index"
+           :class="['Header__hero-slider__image-item', `Header__hero-slider__image-item--${index}`, {'Header__hero-slider__image-item--active': index === 0} ]"
+           :style="{backgroundImage: 'url('+getPictureUrl(image)+')'}"></div>
+    </div>
   </div>
 </template>
 <script>
@@ -90,7 +83,9 @@ export default {
       isScrolled: false,
       navBarMenuOpened: false,
       navHeight: 120,
-      langListOpened: false
+      langListOpened: false,
+      sliderIndex: 0,
+      sliderTimeoutMs: 30000
     }
   },
   computed: {
@@ -107,18 +102,19 @@ export default {
       query: headerQuery
     }
   },
+  mounted() {
+    setInterval(()=> {
+      this.startSlider();
+    }, this.sliderTimeoutMs)
+  },
   methods: {
     handleScroll() {
-      if (window.scrollY < 64) {
-        this.navHeight = (120 - window.scrollY);
-      }
       window.scrollY === 0
         ? (this.isScrolled = false)
         : (this.isScrolled = true);
     },
     logout() {
       const userAccessToken = this.$cookies.get('user_access_token');
-      console.log(userAccessToken);
       this.$axios.post(`https://oauth2.googleapis.com/revoke?token=${userAccessToken}`)
         .finally(() => {
           this.$cookies.remove('user_access_token');
@@ -144,7 +140,24 @@ export default {
       }, {
         once: true
       })
+    },
+    getPictureUrl(image) {
+      return this.$options.filters.defaultImage(image?.formats);
+    },
+
+    startSlider() {
+      const imageSize = this.$el.querySelectorAll('.Header__hero-slider__image-item').length;
+      this.sliderIndex += 1;
+      if (this.sliderIndex >= imageSize) {
+        this.sliderIndex = 0;
+
+      }
+      this.$el.querySelectorAll('.Header__hero-slider__image-item').forEach((entry)=> {
+        entry.classList.remove('Header__hero-slider__image-item--active');
+      })
+      this.$el.querySelector(`.Header__hero-slider__image-item--${this.sliderIndex}`).classList.add('Header__hero-slider__image-item--active');
     }
+
   },
   beforeMount() {
     window.addEventListener('scroll', this.handleScroll);
@@ -156,19 +169,45 @@ export default {
 </script>
 <style lang="scss" scoped>
 
-$navbar-height: 120px;
+$navbar-height: 60px;
 $navbar-height-small: 60px;
 .Header {
+  $self: &;
   position: relative;
-  height: 37em;
+  height: 600px;
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
 
   &--small-height {
-    height: 120px;
+    height: $navbar-height;
     background-color: rgba(96, 168, 239, 0.38) !important;
+    background-image: none;
+    #{$self}__hero-slider {
+      display: none;
+    }
+  }
+
+  &__hero-slider {
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 100%;
+
+    &__image-item {
+      height: 100%;
+      width: 100%;
+      background-size: cover;
+      background-position: center;
+      flex: 0 0 100%;
+      opacity: 0;
+      transition: opacity .5s ease-in-out;
+      position: absolute;
+      &--active {
+        opacity: 1;
+      }
+    }
   }
 
   &__navbar {
@@ -178,6 +217,7 @@ $navbar-height-small: 60px;
     align-items: center;
     padding: 0 204px;
     width: 100%;
+    height: 60px;
     z-index: 999;
 
     @media screen and (max-width: 992px) {
@@ -186,14 +226,13 @@ $navbar-height-small: 60px;
 
     &__logo {
       &__img {
-        width: 100px;
-        height: 100px;
+        width: 50px;
+        height: 50px;
       }
     }
 
     &__menu {
       display: flex;
-      justify-content: right;
       align-items: center;
       width: calc(50% - 50px);
 
@@ -211,7 +250,7 @@ $navbar-height-small: 60px;
         left: 0;
         top: 0;
         background-color: rgb(96 168 239 / 83%);
-        padding-top: $navbar-height;
+        padding-top: 100px;
         width: 300px;
         height: 100vh;
         text-align: center;
@@ -230,7 +269,8 @@ $navbar-height-small: 60px;
 
 
           &:hover {
-            background-color: $td-yellow;
+            background-color: $td-black-43;
+            border-right: 5px solid $td-yellow;
             text-decoration: none;
           }
         }
@@ -292,11 +332,12 @@ $navbar-height-small: 60px;
 
     &__lang {
       width: calc(50% - 50px);
-      text-align: right;
       position: relative;
 
       &__selected {
         cursor: pointer;
+        width: fit-content;
+        float: right;
       }
 
       &__img {
@@ -376,13 +417,6 @@ $navbar-height-small: 60px;
   &.scrolled {
     .Header__navbar {
       background-color: $td-blue !important;
-
-      .Header__navbar__logo {
-        .Header__navbar__logo__img {
-          width: 50px;
-          height: 50px;
-        }
-      }
     }
   }
 }

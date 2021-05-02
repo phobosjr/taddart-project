@@ -29,13 +29,12 @@
           value=""
           class="Contact-form__main__form__textarea"
         ></v-textarea>
-        <div class="Contact-form__main__form__btn">
-          <v-btn
-            @click="submit()"
-          >
-            {{ $t('contact_form_submit_btn') }}
-          </v-btn>
-        </div>
+        <button @click="submit()"
+                class="Contact-form__main__form__btn"
+        :disabled="!valid"
+        >
+          {{ $t('contact_form_submit_btn') }}
+        </button>
         <div class="Contact-form__main__form__alert">
           <v-alert
             dense
@@ -131,12 +130,14 @@ export default {
   &--visible {
     div {
       transform: translate(0);
+      opacity: 1;
     }
   }
 
   &__label {
     margin: auto 0;
     transform: translateY(400%);
+    opacity: 0;
     transition: all 1s ease-in;
 
     @media (max-width: 992px) {
@@ -153,6 +154,7 @@ export default {
     width: 100%;
     margin: auto 0;
     transform: translatex(100%);
+    opacity: 0;
     transition: all 1s ease-in;
 
     @media (max-width: 992px) {
@@ -160,13 +162,44 @@ export default {
     }
 
     &__form {
+      &__text {
+        color: #680606;
+
+        ::v-deep .error--text {
+          color: red;
+        }
+      }
 
       &__btn {
         position: relative;
+        background-color: $td-yellow;
+        width: 100px;
+        height: 50px;
+        border: 1px solid $td-yellow;
+        border-radius: 8px;
+        color: white;
+
+        &:hover {
+          background-color: transparent;
+          color: black;
+        }
+
+        &[disabled] {
+          color: $td-black-43;
+          background-color: $td-gray-61;
+        }
       }
 
       &__alert {
         margin: 10px 0;
+
+        .success--text {
+          color: $td-green;
+        }
+
+        .warning--text {
+          color: red;
+        }
       }
     }
   }

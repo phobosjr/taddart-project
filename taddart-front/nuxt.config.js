@@ -32,6 +32,7 @@ export default {
   plugins: [
     {src: '~/plugins/filters/dateTimeFilter/DateTimeFilter.js'},
     {src: '~/plugins/filters/strapiImage/defaultImage.js'},
+    {src: '~/plugins/filters/numberView/NumberView.js'},
     {src: '~/plugins/filters/strapiImage/thumbnailImage.js'},
     {src: '~/plugins/gallery.js', ssr: true},
     {src: '~/plugins/tooltip.js', ssr: true},

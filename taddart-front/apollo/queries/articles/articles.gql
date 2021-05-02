@@ -4,6 +4,7 @@ query {
     slug
     summary
     author
+    created_at
     image {
       url
     }
