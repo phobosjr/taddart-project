@@ -83,7 +83,7 @@ export default {
   &__article {
     $self: &;
     margin: 10px;
-    width: 413px;
+    width: 370px;
     height: 410px;
     cursor: pointer;
     display: flex;

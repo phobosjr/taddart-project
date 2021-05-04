@@ -28,6 +28,14 @@
         <article-comments v-if="article.enableComments" :article-id="article.id"></article-comments>
       </div>
       <div class="Article__main__left-main">
+        <div class="Article__main__left-main__infos">
+          <h4>Auteur</h4>
+          <span> {{ $t('article_author_label') }}<strong>{{ article.author }}</strong></span>
+          <span>{{ article.created_at | formatDate(true) }}</span>
+          <div class="Article__main__left-main__infos__category" :style="{backgroundColor: getArticleCategoryColor(article)}">
+            {{ getArticleCategory(article) }}
+          </div>
+        </div>
         <div ref="last-post"
              :class="['Article__main__left-main__last-post', {'Article__main__left-main__last-post--fixed': fixedLeftMain}]">
           <h4>{{ $t('last_article_title') }}</h4>
@@ -236,6 +244,19 @@ export default {
       gap: 10px;
       @media screen and (max-width: 1390px) {
         display: none !important;
+      }
+
+      &__infos {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        &__category {
+          color: white;
+          padding: 10px;
+          margin: 10px;
+          border-radius: 15px;
+          font-weight: 600;
+        }
       }
 
       &__last-post {

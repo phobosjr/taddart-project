@@ -354,7 +354,7 @@ $navbar-height-small: 60px;
         position: absolute;
         opacity: 0;
         visibility: hidden;
-        width: 152px;
+        width: auto;
         height: 132px;
         padding: 25px;
         background-color: rgb(0 0 0 / 20%);

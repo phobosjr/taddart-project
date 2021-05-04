@@ -105,7 +105,6 @@ export default {
       }
       width: auto;
       color: #9c9c9c;
-      font-weight: lighter;
       font-size: 18px;
       text-align: center;
       line-height: 2em;

@@ -8,5 +8,9 @@ query {
     image {
       url
     }
+    article_categorie {
+      backgroundColor
+      category
+    }
   }
 }
