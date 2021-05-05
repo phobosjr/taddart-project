@@ -6,12 +6,14 @@
                   :horizontal-image="quoteSection.horizontalImage.formats | defaultImage"
                   :vertical-image="quoteSection.verticalImage.formats | defaultImage"
     ></QuoteSection>
-    <LastArticlesSection></LastArticlesSection>
+    <LastArticlesSection :background_image="homePage.articlesBackground.url"
+    ></LastArticlesSection>
     <div class="Home__gallery-panel">
       <div class="Home__gallery-panel__link">
         <a :href="localePath('/gallery', $i18n.locale)">
           {{ $t('gallery_title') }}
         </a>
+        <img src="~/assets/images/arrow-right-image.svg">
       </div>
     </div>
     <contact-form></contact-form>
@@ -19,7 +21,7 @@
   </div>
 </template>
 <script>
-import articlesQuery from '@/apollo/queries/articles/articles.gql'
+import homePageQuery from '@/apollo/queries/homePage/homePage.gql'
 import QuoteSection from "@/components/home-section/quoteSection/QuoteSection";
 import LastArticlesSection from "@/components/home-section/lastArticlesSection/LastArticlesSection";
 import googleMaps from "@/components/home-section/maps/googleMaps";
@@ -43,6 +45,11 @@ export default {
         return {locale: this.$i18n.locale}
       },
       errorPolicy: "ignore"
+    },
+    homePage: {
+      prefetch: true,
+      query: homePageQuery,
+      errorPolicy: "ignore"
     }
   }
 }
@@ -50,7 +57,6 @@ export default {
 <style lang="scss" scoped>
 
 .Home {
-  padding-top: 70px;
   overflow-x: hidden;
 
   &__gallery-panel {
@@ -60,14 +66,20 @@ export default {
     background-color: $td-blue;
     text-align: center;
     padding: 30px 0;
-    background-image: url("assets/images/gallery-backgroung-image.jpg");
     background-position: top;
     background-attachment: fixed;
 
     &__link {
-      transition: all 0.5s ease;
+
       &:hover {
-        transform: translateX(25px);
+        img {
+          transform: translateX(10px);
+        }
+      }
+
+      img {
+        transition: all 0.5s ease;
+        width: 25px;
       }
 
       a {

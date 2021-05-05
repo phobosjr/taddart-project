@@ -8,7 +8,7 @@
         <h3>{{ $t('provides_list_title_label') }}</h3>
       </div>
       <button class="providers__main__btn--google" @click="connect('google')">Google</button>
-      <span>{{ $t('providers_or_label') }}</span>
+      <span>{{ $t('or_label') }}</span>
       <button class="providers__main__btn--facebook" @click="connect('facebook')">Facebook</button>
     </div>
     <div class="td-overlay" @click="hide()"></div>

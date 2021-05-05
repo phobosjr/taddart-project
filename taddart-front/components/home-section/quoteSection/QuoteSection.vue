@@ -32,14 +32,15 @@ export default {
 <style lang="scss" scoped>
 .Description {
   width: 100%;
-  height: 500px;
+  height: 600px;
+  padding: 25px 0;
   position: relative;
-  padding: 20px;
   display: flex;
 
   &__picture {
     width: 50%;
     height: 100%;
+    position: relative;
 
     @media screen and (max-width: 1480px){
       display: none;
@@ -53,7 +54,9 @@ export default {
       background-size: cover;
       opacity: 1;
       position: absolute;
-      top: 91px;
+      top: 0;
+      bottom: 0;
+      margin: auto;
       left: 200px;
       overflow: hidden;
     }
@@ -66,8 +69,10 @@ export default {
       background-size: cover;
       opacity: 1;
       position: absolute;
-      top: 0px;
+      top: 0;
+      bottom: 0;
       left: 82px;
+      margin: auto;
       overflow: hidden;
     }
   }
