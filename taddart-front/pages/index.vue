@@ -8,6 +8,7 @@
     ></QuoteSection>
     <LastArticlesSection :background_image="homePage.articlesBackground.url"
     ></LastArticlesSection>
+    <LastAlbumSection></LastAlbumSection>
     <div class="Home__gallery-panel">
       <div class="Home__gallery-panel__link">
         <a :href="localePath('/gallery', $i18n.locale)">
@@ -24,6 +25,7 @@
 import homePageQuery from '@/apollo/queries/homePage/homePage.gql'
 import QuoteSection from "@/components/home-section/quoteSection/QuoteSection";
 import LastArticlesSection from "@/components/home-section/lastArticlesSection/LastArticlesSection";
+import LastAlbumSection from "@/components/home-section/lastAlbumSection/LastAlbumSection";
 import googleMaps from "@/components/home-section/maps/googleMaps";
 import quoteQuery from "@/apollo/queries/home-section/quote.gql";
 
@@ -32,7 +34,8 @@ export default {
   components: {
     QuoteSection,
     LastArticlesSection,
-    googleMaps
+    googleMaps,
+    LastAlbumSection
   },
   data() {
     return {}

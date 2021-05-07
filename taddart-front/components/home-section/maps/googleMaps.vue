@@ -23,6 +23,7 @@ export default {
   height: 650px;
   display: flex;
   flex-direction: row;
+  background-color: #77b5fe1f;
 
   @media screen and (max-width: 992px) {
     flex-direction: column-reverse;

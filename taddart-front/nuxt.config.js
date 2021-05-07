@@ -36,6 +36,7 @@ export default {
     {src: '~/plugins/filters/strapiImage/thumbnailImage.js'},
     {src: '~/plugins/gallery.js', ssr: true},
     {src: '~/plugins/tooltip.js', ssr: true},
+    {src: '~/plugins/v-agile.js', ssr: false},
     {src: '~/plugins/wayPoint.js', mode: 'client'},
     {src: '~/plugins/cookies.js', mode: 'client'},
     {src: '~/plugins/directives/v-intersection.js', mode: 'client'},
