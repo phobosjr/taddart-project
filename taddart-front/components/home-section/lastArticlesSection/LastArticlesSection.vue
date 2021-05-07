@@ -83,6 +83,8 @@ export default {
     transition: all 1s ease-in;
     transform: translateY(100%);
     opacity: 0;
+    max-width: 1300px;
+    margin: auto;
   }
 
   &.visible {

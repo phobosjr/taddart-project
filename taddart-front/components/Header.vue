@@ -64,9 +64,20 @@
         </div>
       </div>
     </nav>
-    <div class="Header__hero-slider">
+    <div class="Header__hero-slider" @click.stop="startSlider()">
       <div class="Header__hero-slider__title">
-        <h1>Tuddar n'at abdelmumen</h1>
+        <h1>{{$t('big_title')}}</h1>
+      </div>
+      <div class="Header__hero-slider__socialMedia">
+        <a :href="header.social_fb_link" >
+          <img class="Header__hero-slider__socialMedia__image" src="~/assets/images/facebook-logo-image.png">
+          {{ header.social_fb_label }}
+        </a>
+
+        <a href="mailTo:contact@tuddar-nat-abdelmumen.net" >
+          <img class="Header__hero-slider__socialMedia__image" src="~/assets/images/envelope-image.svg">
+          contact@tuddar-nat-abdelmumen.net
+        </a>
       </div>
       <div v-for="(image, index) in sliderImages" :key="index"
            :class="['Header__hero-slider__image-item', `Header__hero-slider__image-item--${index}`, {'Header__hero-slider__image-item--active': index === 0} ]"
@@ -224,6 +235,29 @@ $navbar-height-small: 60px;
       color: $td-yellow;
       text-shadow: 0 0 3px $td-blue;
       text-align: center;
+    }
+
+    &__socialMedia {
+      position: absolute;
+      z-index: 1;
+      bottom: 25px;
+      right: 10px;
+      width: fit-content;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+
+      a {
+        color: white;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      &__image {
+        width: 35px;
+        height: 35px;
+      }
     }
 
     &__image-item {

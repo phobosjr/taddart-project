@@ -455,6 +455,12 @@
               }
             }
           },
+          "social_fb_label": {
+            "type": "string"
+          },
+          "social_fb_link": {
+            "type": "string"
+          },
           "localizations": {
             "type": "array",
             "items": {
@@ -472,6 +478,12 @@
                   }
                 },
                 "logo_image": {
+                  "type": "string"
+                },
+                "social_fb_label": {
+                  "type": "string"
+                },
+                "social_fb_link": {
                   "type": "string"
                 },
                 "localizations": {
@@ -506,6 +518,12 @@
       },
       "NewHeader": {
         "properties": {
+          "social_fb_label": {
+            "type": "string"
+          },
+          "social_fb_link": {
+            "type": "string"
+          },
           "localizations": {
             "type": "array",
             "items": {

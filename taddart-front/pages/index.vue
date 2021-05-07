@@ -9,14 +9,6 @@
     <LastArticlesSection :background_image="homePage.articlesBackground.url"
     ></LastArticlesSection>
     <LastAlbumSection></LastAlbumSection>
-    <div class="Home__gallery-panel">
-      <div class="Home__gallery-panel__link">
-        <a :href="localePath('/gallery', $i18n.locale)">
-          {{ $t('gallery_title') }}
-        </a>
-        <img src="~/assets/images/arrow-right-image.svg">
-      </div>
-    </div>
     <contact-form></contact-form>
     <google-maps></google-maps>
   </div>
@@ -61,38 +53,6 @@ export default {
 
 .Home {
   overflow-x: hidden;
-
-  &__gallery-panel {
-    width: 100%;
-    height: 110px;
-    font-size: 25px;
-    background-color: $td-blue;
-    text-align: center;
-    padding: 30px 0;
-    background-position: top;
-    background-attachment: fixed;
-
-    &__link {
-
-      &:hover {
-        img {
-          transform: translateX(10px);
-        }
-      }
-
-      img {
-        transition: all 0.5s ease;
-        width: 25px;
-      }
-
-      a {
-        color: black;
-        text-transform: uppercase;
-        font-weight: bolder;
-        text-decoration: none;
-      }
-    }
-  }
 
   &__numeric_content-panel {
     width: 100%;
