@@ -1,7 +1,0 @@
-query {
-  homePage {
-    articlesBackground {
-      url
-    }
-  }
-}

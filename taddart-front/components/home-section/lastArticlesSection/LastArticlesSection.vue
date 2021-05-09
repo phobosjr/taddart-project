@@ -1,6 +1,6 @@
 <template>
-  <section class="LastArticles" v-intersection :style="{backgroundImage: 'url('+background_image+')'}">
-    <SeparateLine :text-content="$t('last_article_title')" :text-color="'white'"/>
+  <section class="LastArticles" v-intersection>
+    <SeparateLine :text-content="$t('last_article_title')" :text-color="'black'"/>
     <div class="LastArticles__container">
       <div v-for="article in lastArticles" class="LastArticles__article"
            @click="redirectToArticle(article.slug)"
@@ -15,11 +15,11 @@
         <div class="LastArticles__article__title" :style="{borderColor: getArticleCategoryColor(article)}">
           {{ article.title }}
         </div>
-        <div class="LastArticles__article__short-content" v-html="article.summary"></div>
         <div class="LastArticles__article__article-info">
-          <span>{{ $t('article_author_label') }}<strong>{{ article.author }}</strong></span>
           <span>{{ article.created_at | formatDate(true) }}</span>
+          <span>{{ $t('article_author_label') }}<strong>{{ article.author }}</strong></span>
         </div>
+        <div class="LastArticles__article__short-content" v-html="article.summary"></div>
 
       </div>
     </div>
@@ -31,9 +31,6 @@ import lastArticlesQuery from "@/apollo/queries/article/lastArticles";
 
 export default {
   name: "LastArticlesSection",
-  props: {
-    background_image: {type: String, required: false}
-  },
   apollo: {
     lastArticles: {
       prefetch: true,
@@ -67,14 +64,6 @@ export default {
   background-attachment: fixed;
   background-position: top;
   overflow: hidden;
-  &:before {
-    content: ' ';
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background-color: $td-black-30;
-  }
-
   &__container {
     display: flex;
     flex-direction: row;
@@ -143,9 +132,9 @@ export default {
     &__article-info {
       text-align-last: end;
       color: white;
-      font-size: 15px;
+      font-size: 13px;
       display: flex;
-      justify-content: space-between;
+      gap: 10px;
       z-index: 1;
       padding: 10px;
       width: 100%;

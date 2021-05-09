@@ -140,7 +140,7 @@ export default {
     width: 100%;
     height: 110px;
     font-size: 25px;
-    background-color: $td-black-43;
+    background-color: $td-yellow;
     text-align: center;
     padding: 30px 0;
     background-position: top;

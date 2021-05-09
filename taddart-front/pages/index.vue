@@ -6,15 +6,13 @@
                   :horizontal-image="quoteSection.horizontalImage.formats | defaultImage"
                   :vertical-image="quoteSection.verticalImage.formats | defaultImage"
     ></QuoteSection>
-    <LastArticlesSection :background_image="homePage.articlesBackground.url"
-    ></LastArticlesSection>
+    <LastArticlesSection></LastArticlesSection>
     <LastAlbumSection></LastAlbumSection>
     <contact-form></contact-form>
     <google-maps></google-maps>
   </div>
 </template>
 <script>
-import homePageQuery from '@/apollo/queries/homePage/homePage.gql'
 import QuoteSection from "@/components/home-section/quoteSection/QuoteSection";
 import LastArticlesSection from "@/components/home-section/lastArticlesSection/LastArticlesSection";
 import LastAlbumSection from "@/components/home-section/lastAlbumSection/LastAlbumSection";
@@ -39,11 +37,6 @@ export default {
       variables() {
         return {locale: this.$i18n.locale}
       },
-      errorPolicy: "ignore"
-    },
-    homePage: {
-      prefetch: true,
-      query: homePageQuery,
       errorPolicy: "ignore"
     }
   }
