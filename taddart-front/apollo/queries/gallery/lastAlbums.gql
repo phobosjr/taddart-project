@@ -1,0 +1,7 @@
+query ($limit: Int) {
+  lastAlbum: albums(limit: $limit, sort: "created_at:desc") {
+    images {
+      url
+    }
+  }
+}

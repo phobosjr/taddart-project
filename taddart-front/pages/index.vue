@@ -6,22 +6,18 @@
                   :horizontal-image="quoteSection.horizontalImage.formats | defaultImage"
                   :vertical-image="quoteSection.verticalImage.formats | defaultImage"
     ></QuoteSection>
-    <LastArticlesSection></LastArticlesSection>
-    <div class="Home__gallery-panel">
-      <div class="Home__gallery-panel__link">
-        <a :href="localePath('/gallery', $i18n.locale)">
-          {{ $t('gallery_title') }}
-        </a>
-      </div>
-    </div>
+    <LastArticlesSection :background_image="homePage.articlesBackground.url"
+    ></LastArticlesSection>
+    <LastAlbumSection></LastAlbumSection>
     <contact-form></contact-form>
     <google-maps></google-maps>
   </div>
 </template>
 <script>
-import articlesQuery from '@/apollo/queries/articles/articles.gql'
+import homePageQuery from '@/apollo/queries/homePage/homePage.gql'
 import QuoteSection from "@/components/home-section/quoteSection/QuoteSection";
 import LastArticlesSection from "@/components/home-section/lastArticlesSection/LastArticlesSection";
+import LastAlbumSection from "@/components/home-section/lastAlbumSection/LastAlbumSection";
 import googleMaps from "@/components/home-section/maps/googleMaps";
 import quoteQuery from "@/apollo/queries/home-section/quote.gql";
 
@@ -30,7 +26,8 @@ export default {
   components: {
     QuoteSection,
     LastArticlesSection,
-    googleMaps
+    googleMaps,
+    LastAlbumSection
   },
   data() {
     return {}
@@ -43,6 +40,11 @@ export default {
         return {locale: this.$i18n.locale}
       },
       errorPolicy: "ignore"
+    },
+    homePage: {
+      prefetch: true,
+      query: homePageQuery,
+      errorPolicy: "ignore"
     }
   }
 }
@@ -50,34 +52,7 @@ export default {
 <style lang="scss" scoped>
 
 .Home {
-  padding-top: 70px;
   overflow-x: hidden;
-
-  &__gallery-panel {
-    width: 100%;
-    height: 110px;
-    font-size: 25px;
-    background-color: $td-blue;
-    text-align: center;
-    padding: 30px 0;
-    background-image: url("assets/images/gallery-backgroung-image.jpg");
-    background-position: top;
-    background-attachment: fixed;
-
-    &__link {
-      transition: all 0.5s ease;
-      &:hover {
-        transform: translateX(25px);
-      }
-
-      a {
-        color: black;
-        text-transform: uppercase;
-        font-weight: bolder;
-        text-decoration: none;
-      }
-    }
-  }
 
   &__numeric_content-panel {
     width: 100%;

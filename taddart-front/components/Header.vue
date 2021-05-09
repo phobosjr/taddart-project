@@ -64,8 +64,22 @@
         </div>
       </div>
     </nav>
-    <div class="Header__hero-slider">
-      <div v-for="(image, index) in header.background_image" :key="index"
+    <div class="Header__hero-slider" @click.stop="startSlider()">
+      <div class="Header__hero-slider__title">
+        <h1>{{$t('big_title')}}</h1>
+      </div>
+      <div class="Header__hero-slider__socialMedia">
+        <a :href="header.social_fb_link" >
+          <img class="Header__hero-slider__socialMedia__image" src="~/assets/images/facebook-logo-image.png">
+          {{ header.social_fb_label }}
+        </a>
+
+        <a href="mailTo:contact@tuddar-nat-abdelmumen.net" >
+          <img class="Header__hero-slider__socialMedia__image" src="~/assets/images/envelope-image.svg">
+          contact@tuddar-nat-abdelmumen.net
+        </a>
+      </div>
+      <div v-for="(image, index) in sliderImages" :key="index"
            :class="['Header__hero-slider__image-item', `Header__hero-slider__image-item--${index}`, {'Header__hero-slider__image-item--active': index === 0} ]"
            :style="{backgroundImage: 'url('+getPictureUrl(image)+')'}"></div>
     </div>
@@ -95,6 +109,9 @@ export default {
     }),
     username() {
       return this.$strapi?.user?.username;
+    },
+    sliderImages () {
+      return this.header?.background_image;
     }
   },
   apollo: {
@@ -196,6 +213,52 @@ $navbar-height-small: 60px;
     display: block;
     width: 100%;
     height: 100%;
+
+    &:before {
+      content: " ";
+      background-color: $td-black-30;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+    &__title {
+      position: absolute;
+      z-index: 2;
+      margin: auto;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      width: fit-content;
+      height: fit-content;
+      color: $td-yellow;
+      text-shadow: 0 0 3px $td-blue;
+      text-align: center;
+    }
+
+    &__socialMedia {
+      position: absolute;
+      z-index: 1;
+      bottom: 25px;
+      right: 10px;
+      width: fit-content;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+
+      a {
+        color: white;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      &__image {
+        width: 35px;
+        height: 35px;
+      }
+    }
 
     &__image-item {
       height: 100%;
@@ -341,6 +404,11 @@ $navbar-height-small: 60px;
         cursor: pointer;
         width: fit-content;
         float: right;
+        color: $td-yellow;
+        font-weight: 600;
+        display: flex;
+        gap: 10px;
+        align-items: center;
       }
 
       &__img {
@@ -354,7 +422,7 @@ $navbar-height-small: 60px;
         position: absolute;
         opacity: 0;
         visibility: hidden;
-        width: 152px;
+        width: auto;
         height: 132px;
         padding: 25px;
         background-color: rgb(0 0 0 / 20%);

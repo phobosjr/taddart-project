@@ -28,26 +28,56 @@
         <article-comments v-if="article.enableComments" :article-id="article.id"></article-comments>
       </div>
       <div class="Article__main__left-main">
-        <div ref="last-post"
-             :class="['Article__main__left-main__last-post', {'Article__main__left-main__last-post--fixed': fixedLeftMain}]">
-          <h4>{{ $t('last_article_title') }}</h4>
-          <div v-for="article in filteredLastArticles" :key="article.id"
-               class="Article__main__left-main__last-post__article">
-            <div class="Article__main__left-main__last-post__article__img"
-                 :style="{backgroundImage: 'url('+getArticlePicture(article)+')'}">
+        <div
+          :class="['Article__main__left-main__content',  {'Article__main__left-main__content--fixed': fixedLeftMain}]">
+          <div class="Article__main__left-main__infos">
+            <h4>{{ $t('author_label') }}</h4>
+            <div class="infos-item">
+              <img src="~/assets/images/user-image.svg">
+
+              <span><strong>{{ article.author }}</strong></span>
             </div>
-            <div class="Article__main__left-main__last-post__article__infos">
-              <h4 class="Article__main__left-main__last-post__article__infos__title">{{ article.title }}</h4>
-              <div class="Article__main__left-main__last-post__article__infos__author">
-                {{ article.author }}
+            <div class="infos-item">
+              <img src="~/assets/images/calendar-image.svg">
+              <span>{{ article.created_at | formatDate(true) }}</span>
+            </div>
+            <div class="infos-item">
+              <div class="Article__main__left-main__infos__category"
+                   :style="{backgroundColor: getArticleCategoryColor(article)}">
+                {{ getArticleCategory(article) }}
               </div>
-              <div class="Article__main__left-main__last-post__article__infos__date">{{
-                  article.created_at | formatDate
-                }}
+            </div>
+
+          </div>
+          <div ref="last-post"
+               class="Article__main__left-main__last-post">
+            <h4>{{ $t('last_article_title') }}</h4>
+            <div v-for="article in filteredLastArticles" :key="article.id"
+                 class="Article__main__left-main__last-post__article">
+              <div class="Article__main__left-main__last-post__article__img"
+                   :style="{backgroundImage: 'url('+getArticlePicture(article)+')'}">
               </div>
-              <a :href="article.slug" class="Article__main__left-main__last-post__article__infos__link">
-                {{ $t('read_article_label') }}
-              </a>
+              <div class="Article__main__left-main__last-post__article__infos">
+                <h4 class="Article__main__left-main__last-post__article__infos__title">{{ article.title }}</h4>
+                <div class="Article__main__left-main__last-post__article__infos__author">
+                  <div class="infos-item">
+                    <img src="~/assets/images/user-image.svg">
+                    <span>{{ article.author }}</span>
+                  </div>
+                </div>
+                <div class="Article__main__left-main__last-post__article__infos__date">
+                  <div class="infos-item">
+                    <img src="~/assets/images/calendar-image.svg">
+                    <span>{{
+                        article.created_at | formatDate
+                      }}</span>
+                  </div>
+
+                </div>
+                <a :href="article.slug" class="Article__main__left-main__last-post__article__infos__link">
+                  {{ $t('read_article_label') }}
+                </a>
+              </div>
             </div>
           </div>
         </div>
@@ -112,7 +142,7 @@ export default {
       return article?.article_categorie?.backgroundColor
     },
     handleScroll() {
-      window.scrollY >= 580 ? this.fixedLeftMain = true : this.fixedLeftMain = false;
+      window.scrollY >= 560 ? this.fixedLeftMain = true : this.fixedLeftMain = false;
     }
   },
   beforeMount() {
@@ -154,12 +184,16 @@ export default {
       position: absolute;
       bottom: 0;
       left: 0;
-      display: flex;
       flex-direction: row;
       padding: 12px;
       max-width: fit-content;
       color: white;
       align-items: center;
+      display: none;
+
+      @media screen and (max-width: 1390px) {
+        display: flex;
+      }
 
       > * {
         margin: 0 10px;
@@ -238,16 +272,35 @@ export default {
         display: none !important;
       }
 
+      &__content {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        &--fixed {
+          position: fixed;
+          top: 88px;
+        }
+      }
+
+      &__infos {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        &__category {
+          color: white;
+          padding: 10px;
+          margin: 10px;
+          border-radius: 15px;
+          font-weight: 600;
+        }
+      }
+
       &__last-post {
 
         display: flex;
         flex-direction: column;
         gap: 10px;
-
-        &--fixed {
-          position: fixed;
-          top: 88px;
-        }
 
         &__article {
           display: flex;
@@ -279,11 +332,17 @@ export default {
             }
 
             &__link {
-
+              float: right;
             }
           }
         }
       }
+    }
+
+    .infos-item {
+      display: flex;
+      align-items: stretch;
+      gap: 15px;
     }
   }
 }

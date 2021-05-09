@@ -41,7 +41,6 @@ export default {
 .Footer {
   width: 100%;
   height: 250px;
-  margin-top: 25px;
   padding: 35px 0;
   background-color: $td-gray-footer;
   position: relative;

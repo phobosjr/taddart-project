@@ -1,6 +1,6 @@
 <template>
-  <section class="LastArticles" v-intersection>
-    <SeparateLine :text-content="$t('last_article_title')"/>
+  <section class="LastArticles" v-intersection :style="{backgroundImage: 'url('+background_image+')'}">
+    <SeparateLine :text-content="$t('last_article_title')" :text-color="'white'"/>
     <div class="LastArticles__container">
       <div v-for="article in lastArticles" class="LastArticles__article"
            @click="redirectToArticle(article.slug)"
@@ -31,6 +31,9 @@ import lastArticlesQuery from "@/apollo/queries/article/lastArticles";
 
 export default {
   name: "LastArticlesSection",
+  props: {
+    background_image: {type: String, required: false}
+  },
   apollo: {
     lastArticles: {
       prefetch: true,
@@ -60,8 +63,17 @@ export default {
 <style lang="scss" scoped>
 .LastArticles {
 
-  min-height: 555px;
-  margin: 25px 0;
+  min-height: 750px;
+  background-attachment: fixed;
+  background-position: top;
+  overflow: hidden;
+  &:before {
+    content: ' ';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: $td-black-30;
+  }
 
   &__container {
     display: flex;
@@ -71,6 +83,8 @@ export default {
     transition: all 1s ease-in;
     transform: translateY(100%);
     opacity: 0;
+    max-width: 1300px;
+    margin: auto;
   }
 
   &.visible {
@@ -83,7 +97,7 @@ export default {
   &__article {
     $self: &;
     margin: 10px;
-    width: 413px;
+    width: 370px;
     height: 410px;
     cursor: pointer;
     display: flex;

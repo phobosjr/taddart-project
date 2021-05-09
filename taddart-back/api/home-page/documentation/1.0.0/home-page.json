@@ -1,18 +1,19 @@
 {
   "paths": {
-    "/header": {
+    "/home-page": {
       "get": {
         "deprecated": false,
-        "description": "Find all the header's records",
+        "description": "Find all the home-page's records",
         "responses": {
           "200": {
-            "description": "Retrieve header document(s)",
+            "description": "Retrieve home-page document(s)",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Header"
+                  "properties": {
+                    "foo": {
+                      "type": "string"
+                    }
                   }
                 }
               }
@@ -51,7 +52,7 @@
         },
         "summary": "",
         "tags": [
-          "Header"
+          "Home-page"
         ],
         "parameters": [
           {
@@ -194,14 +195,18 @@
       },
       "put": {
         "deprecated": false,
-        "description": "Update a single header record",
+        "description": "Update a single home-page record",
         "responses": {
           "200": {
-            "description": "Retrieve header document(s)",
+            "description": "Retrieve home-page document(s)",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Header"
+                  "properties": {
+                    "foo": {
+                      "type": "string"
+                    }
+                  }
                 }
               }
             }
@@ -239,7 +244,7 @@
         },
         "summary": "",
         "tags": [
-          "Header"
+          "Home-page"
         ],
         "requestBody": {
           "description": "",
@@ -247,7 +252,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewHeader"
+                "$ref": "#/components/schemas/NewHome-page"
               }
             }
           }
@@ -256,10 +261,10 @@
       },
       "delete": {
         "deprecated": false,
-        "description": "Delete a single header record",
+        "description": "Delete a single home-page record",
         "responses": {
           "200": {
-            "description": "deletes a single header based on the ID supplied",
+            "description": "deletes a single home-page based on the ID supplied",
             "content": {
               "application/json": {
                 "schema": {
@@ -302,7 +307,7 @@
         },
         "summary": "",
         "tags": [
-          "Header"
+          "Home-page"
         ],
         "parameters": []
       }
@@ -310,7 +315,7 @@
   },
   "components": {
     "schemas": {
-      "Header": {
+      "Home-page": {
         "required": [
           "id"
         ],
@@ -318,77 +323,7 @@
           "id": {
             "type": "string"
           },
-          "background_image": {
-            "type": "array",
-            "items": {
-              "required": [
-                "id",
-                "name",
-                "hash",
-                "mime",
-                "size",
-                "url",
-                "provider"
-              ],
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "name": {
-                  "type": "string"
-                },
-                "alternativeText": {
-                  "type": "string"
-                },
-                "caption": {
-                  "type": "string"
-                },
-                "width": {
-                  "type": "integer"
-                },
-                "height": {
-                  "type": "integer"
-                },
-                "formats": {
-                  "type": "object"
-                },
-                "hash": {
-                  "type": "string"
-                },
-                "ext": {
-                  "type": "string"
-                },
-                "mime": {
-                  "type": "string"
-                },
-                "size": {
-                  "type": "number"
-                },
-                "url": {
-                  "type": "string"
-                },
-                "previewUrl": {
-                  "type": "string"
-                },
-                "provider": {
-                  "type": "string"
-                },
-                "provider_metadata": {
-                  "type": "object"
-                },
-                "related": {
-                  "type": "string"
-                },
-                "created_by": {
-                  "type": "string"
-                },
-                "updated_by": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "logo_image": {
+          "articlesBackground": {
             "required": [
               "id",
               "name",
@@ -455,12 +390,6 @@
               }
             }
           },
-          "social_fb_label": {
-            "type": "string"
-          },
-          "social_fb_link": {
-            "type": "string"
-          },
           "localizations": {
             "type": "array",
             "items": {
@@ -471,19 +400,7 @@
                 "id": {
                   "type": "string"
                 },
-                "background_image": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "logo_image": {
-                  "type": "string"
-                },
-                "social_fb_label": {
-                  "type": "string"
-                },
-                "social_fb_link": {
+                "articlesBackground": {
                   "type": "string"
                 },
                 "localizations": {
@@ -516,14 +433,8 @@
           }
         }
       },
-      "NewHeader": {
+      "NewHome-page": {
         "properties": {
-          "social_fb_label": {
-            "type": "string"
-          },
-          "social_fb_link": {
-            "type": "string"
-          },
           "localizations": {
             "type": "array",
             "items": {
@@ -547,9 +458,5 @@
       }
     }
   },
-  "tags": [
-    {
-      "name": "Header"
-    }
-  ]
+  "tags": []
 }

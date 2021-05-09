@@ -156,10 +156,10 @@ export default {
       width: 100%;
 
       &:first-child {
-        height: 600px;
+        height: 100%;
         width: 100%;
         grid-row: span 2;
-        grid-column: span 2;
+        grid-column: span 1;
 
         @media screen and (max-width: 992px) {
           grid-row: span 1;

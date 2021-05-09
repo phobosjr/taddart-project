@@ -3,27 +3,38 @@
     <div class="Articles__breadcrumb">
       <a href="/">{{ $t('home_title') }}</a>
       /
-      <span >{{ $t('articles_title') }}</span>
+      <span>{{ $t('articles_title') }}</span>
 
     </div>
-    <div v-for="article in articles" class="Articles__item">
-      <div class="Articles__item__img" :style="{backgroundImage: 'url('+ getImageUrl(article)+')'}">
-        <div class="Articles__item__link">
-          <a :href="`/article/${article.slug}`">
-            {{ $t('read_article_label') }}
+    <div class="Articles__list" >
+      <div v-for="article in articles" class="Articles__item">
+        <div class="Articles__item__left-side">
+          <div class="Articles__item__left-side__img" :style="{backgroundImage: 'url('+ getImageUrl(article)+')'}">
+            <div class="Articles__item__left-side__category" :style="{backgroundColor: article.article_categorie.backgroundColor}">
+              {{article.article_categorie.category}}
+            </div>
+            <div class="Articles__item__left-side__infos">
+              <span class="author">{{ article.author }}</span>
+              <span class="date">{{ article.created_at | formatDate(true) }}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="Articles__item__right-side">
+          <div class="Articles__item__right-side__title">{{ article.title }}</div>
+          <div class="Articles__item__right-side__summary" v-html="article.summary"></div>
+          <a :href="`/article/${article.slug}`" class="Articles__item__right-side__link">
+            <span >
+              {{ $t('read_article_label') }}
+            </span>
+            <img src="~/assets/images/arrow-right-image.svg">
+
           </a>
         </div>
       </div>
-      <div class="Articles__item__title">{{ article.title }}</div>
-      <div class="Articles__item__summary" v-html="article.summary"></div>
-      <div class="Articles__item__infos">
-        <span>{{ article.author }}</span>
-        <span>{{ article.created_at | formatDate(true) }}</span>
-      </div>
+
     </div>
-
   </div>
-
 </template>
 
 <script>
@@ -52,6 +63,12 @@ export default {
   padding: 25px;
   width: 100%;
 
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 25px;
+  }
+
   &__breadcrumb {
     padding: 0 25px;
   }
@@ -59,88 +76,142 @@ export default {
   &__item {
     $self: &;
     position: relative;
-    max-width: 950px;
+    width: 550px;
     margin: 10px auto;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 2fr .5fr;
+    display: flex;
+    flex-direction: column;
     gap: 0 15px;
     border: 3px solid $td-gray-61;
 
-    @media screen and (max-width: 992px){
-      grid-template-columns: 1fr;
+    @media screen and (max-width: 992px) {
+      flex-direction: column;
+
+      & > div {
+        width: 100%;
+      }
     }
 
-    &__img {
+    &__left-side {
       width: 100%;
-      height: 300px;
-      background-size: cover;
-      background-color: $td-gray-61;
-      background-blend-mode: multiply;
-      grid-row: span 3;
-      position: relative;
-      &:before {
-        content: ' ';
+
+      &__img {
+        width: 100%;
+        height: 300px;
+        background-size: cover;
+        background-color: $td-gray-61;
+        background-blend-mode: multiply;
+        grid-row: span 3;
+        position: relative;
+        transition: all .3s ease-in;
+
+        &:before {
+          content: ' ';
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          background-color: $td-black-43;
+          z-index: 0;
+        }
+      }
+
+      &__category {
+        position: absolute;
+        margin: auto;
+        top: 10px;
+        left: 10px;
+        width: 100px;
+        height: 50px;
+        padding: 15px;
+        text-align: center;
+        color: white;
+        font-weight: bolder;
+      }
+      &__infos {
         position: absolute;
         width: 100%;
         height: 100%;
-        background-color: $td-black-43;
-        z-index: 0
-      ;
+
+        .author {
+          position: absolute;
+          top: 10px;
+          right: 10px;
+          color: white;
+        }
+
+        .date {
+          position: absolute;
+          top: 0px;
+          right: 0px;
+          bottom: 0;
+          left: 0;
+          width: fit-content;
+          height: fit-content;
+          color: white;
+          margin: auto;
+          font-weight: bolder;
+        }
+
       }
+
     }
 
-    &__title {
-      color: black;
-      font-weight: bolder;
-      font-size: 25px;
-      margin: auto 0;
-    }
-
-    &__summary {
-      text-align: left;
-      margin-bottom: 10px;
-      height: 144px;
-      text-overflow: ellipsis;
-      white-space: normal;
-      overflow: hidden;
-      z-index: 1;
-      padding: 0 10px;
-      display: -webkit-box;
-      -webkit-line-clamp: 6;
-      -webkit-box-orient: vertical;
-      text-align: justify;
-    }
-
-    &__infos {
-      color: black;
+    &__right-side {
+      width: 100%;
       display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      padding: 0 10px;
-    }
+      flex-direction: column;
 
-    &__link {
-      position: absolute;
-      margin: auto;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      width: fit-content;
-      height: fit-content;
-      background-color: brown;
-      padding: 15px;
+      &__title {
+        color: black;
+        font-weight: bolder;
+        font-size: 25px;
+        margin: auto 0;
+        padding: 0 10px;
+      }
 
-      a {
-        color: white;
-        text-shadow: 0 0 0 #680606;
-        font-size: 20px;
+      &__summary {
+        text-align: left;
+        margin-bottom: 10px;
+        height: 144px;
+        text-overflow: ellipsis;
+        white-space: normal;
+        overflow: hidden;
+        z-index: 1;
+        padding: 0 10px;
+        display: -webkit-box;
+        -webkit-line-clamp: 6;
+        -webkit-box-orient: vertical;
+        text-align: justify;
+      }
 
+      &__link {
+        width: 100%;
+        height: 50px;
+        padding: 0 25px;
+        border-top: 2px solid $td-gray-61;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        text-decoration: none;
+        &:hover {
+          img {
+            transform: translateX(10px);
+          }
+          span {
+            color: $td-green;
+          }
+        }
+        span {
+          color: $td-blue;
+          text-shadow: 0 0 0 #680606;
+          font-size: 20px;
+        }
+        img {
+          float: right;
+          color: $td-blue;
+          transition: all .3s ease-in;
+        }
       }
     }
-
   }
-
 }
 </style>

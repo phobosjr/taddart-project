@@ -120,7 +120,6 @@ export default {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
-  background-color: #77b5fe1f;
   padding: 0 25px;
 
   @media (max-width: 992px) {
