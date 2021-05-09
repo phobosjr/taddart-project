@@ -214,27 +214,20 @@ $navbar-height-small: 60px;
     width: 100%;
     height: 100%;
 
-    &:before {
-      content: " ";
-      background-color: $td-black-30;
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      z-index: 1;
-    }
     &__title {
       position: absolute;
       z-index: 2;
       margin: auto;
-      top: 0;
-      bottom: 0;
+      top: 60px;
       left: 0;
       right: 0;
-      width: fit-content;
+      width: 100%;
       height: fit-content;
-      color: $td-yellow;
+      color: $td-blue-dark;
+      text-transform: uppercase;
       text-shadow: 0 0 3px $td-blue;
       text-align: center;
+      background-color: $td-white-15;
     }
 
     &__socialMedia {
@@ -250,6 +243,7 @@ $navbar-height-small: 60px;
       a {
         color: white;
         display: flex;
+        font-weight: bold;
         align-items: center;
         gap: 10px;
       }
@@ -404,7 +398,7 @@ $navbar-height-small: 60px;
         cursor: pointer;
         width: fit-content;
         float: right;
-        color: $td-yellow;
+        color: $td-blue-dark;
         font-weight: 600;
         display: flex;
         gap: 10px;

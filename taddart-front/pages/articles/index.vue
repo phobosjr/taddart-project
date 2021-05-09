@@ -10,7 +10,7 @@
       <div v-for="article in articles" class="Articles__item">
         <div class="Articles__item__left-side">
           <div class="Articles__item__left-side__img" :style="{backgroundImage: 'url('+ getImageUrl(article)+')'}">
-            <div class="Articles__item__left-side__category" :style="{backgroundColor: article.article_categorie.backgroundColor}">
+            <div class="Articles__item__left-side__category" :style="{backgroundColor: getArticleBackgroundColor(article)}">
               {{article.article_categorie.category}}
             </div>
             <div class="Articles__item__left-side__infos">
@@ -52,6 +52,9 @@ export default {
   methods: {
     getImageUrl(article) {
       return article?.image?.url
+    },
+    getArticleBackgroundColor () {
+      return article?.article_categorie?.backgroundColor
     }
   }
 }
