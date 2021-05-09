@@ -19,7 +19,12 @@ export default {
   loading: '~/components/loading/Loading',
 
   publicRuntimeConfig: {
-    strapiBackendUrl: process.env.ENV === 'production' ? 'https://anebdal.tuddar-nat-abdelmumen.net' : 'http://localhost:1337'
+    serverSide: {
+      strapiBackendUrl: 'http://localhost:1337',
+    },
+    clientSide: {
+      strapiBackendUrl: process.env.ENV === 'production' ? 'https://anebdal.tuddar-nat-abdelmumen.net' : 'http://localhost:1337',
+    }
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
@@ -74,7 +79,7 @@ export default {
         file: 'fr-FR.js'
       }
     ],
-    lazy: true,
+    lazy: false,
     langDir: 'lang/',
     defaultLocale: 'kab',
     vueI18n: {
