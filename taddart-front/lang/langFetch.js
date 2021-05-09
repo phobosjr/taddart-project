@@ -4,7 +4,7 @@ function retrieveTranslation(translationData) {
   return obj;
 }
 
-export default async ($axios, locale) => {
-  const result = await $axios.get(`/translation-keys?_locale=${locale}`);
+export default async ($axios, locale, strapiBackendUrl) => {
+  const result = await $axios.get(`${strapiBackendUrl}/translation-keys?_locale=${locale}`);
   return retrieveTranslation(result.data);
 }
