@@ -11,8 +11,13 @@ export default {
     $cookies.remove('last_path');
     const acces_token_regex = new RegExp('(?<=access_token=).*?(?=&)');
     const [access_token] = acces_token_regex.exec(route.fullPath);
-    console.log(access_token);
-    const response = await $axios.$get(`${$config.strapiBackendUrl}/auth/google/callback?access_token=${access_token}`);
+    const strapiBackendUrl = process.client ? $config.clientSide.strapiBackendUrl : $config.serverSide.strapiBackendUrl;
+    const response = await $axios.$get(`${strapiBackendUrl}/auth/google/callback?access_token=${access_token}`);
+    console.log({
+      access_token,
+      strapiBackendUrl,
+      response
+    })
     $cookies.set('strapi_jwt', response.jwt);
     $cookies.set('user_access_token', access_token);
     return redirect(lastPath || '/');
