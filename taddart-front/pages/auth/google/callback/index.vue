@@ -20,7 +20,7 @@ export default {
     })
     this.$cookies.set('strapi_jwt', response.jwt);
     this.$cookies.set('user_access_token', access_token);
-    return this.redirect(lastPath || '/');
+    window.location = lastPath || '/';
   }
 }
 </script>
