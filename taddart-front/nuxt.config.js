@@ -20,7 +20,7 @@ export default {
 
   publicRuntimeConfig: {
     serverSide: {
-      strapiBackendUrl: 'http://localhost:1337',
+      strapiBackendUrl: process.env.ENV === 'production' ? 'http://10.0.3.24:1337' : 'http://localhost:1337',
     },
     clientSide: {
       strapiBackendUrl: process.env.ENV === 'production' ? 'https://anebdal.tuddar-nat-abdelmumen.net' : 'http://localhost:1337',
@@ -42,7 +42,6 @@ export default {
     {src: '~/plugins/gallery.js', ssr: true},
     {src: '~/plugins/tooltip.js', ssr: true},
     {src: '~/plugins/v-agile.js', ssr: false},
-    {src: '~/plugins/wayPoint.js', mode: 'client'},
     {src: '~/plugins/cookies.js', mode: 'client'},
     {src: '~/plugins/directives/v-intersection.js', mode: 'client'},
   ],
