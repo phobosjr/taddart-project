@@ -29,7 +29,7 @@ export default {
     connect(provider) {
       this.$cookies.set('last_path', this.$router.currentRoute.path);
       this.$store.dispatch('providers/hide');
-      window.location = `${this.$config.strapiBackendUrl}/connect/${provider}/`;
+      window.location = `${this.$config.clientSide.strapiBackendUrl}/connect/${provider}/`;
     },
     hide() {
       this.$store.dispatch('providers/hide');
