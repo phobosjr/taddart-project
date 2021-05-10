@@ -58,7 +58,6 @@ export default {
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     'bootstrap-vue/nuxt',
-    '@nuxtjs/strapi',
     '@nuxtjs/apollo',
     '@nuxtjs/style-resources',
     ['nuxt-i18n', {
