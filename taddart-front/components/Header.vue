@@ -28,9 +28,6 @@
                   d="M 20,70.999954 H 80.000231 C 80.000231,70.999954 94.498839,71.182648 94.532987,33.288669 94.543142,22.019327 90.966081,18.329754 85.259173,18.331003 79.552261,18.332249 75.000211,25.000058 75.000211,25.000058 L 25.000021,74.999942"/>
           </svg>
         </button>
-        <div v-if="username" class="Header__navbar__user">
-          <div class="Header__navbar__user__logout-btn" @click="logout()"></div>
-        </div>
       </div>
       <a class="Header__navbar__logo" href="/">
         <img :src="header.logo_image.formats | defaultImage"
@@ -61,6 +58,14 @@
             <img :class="['Header__navbar__lang__img']"
                  src="~/assets/images/header/fr-lang.svg" alt="FR">
           </a>
+        </div>
+      </div>
+      <div v-if="username" class="Header__navbar__user">
+        <div class="Header__navbar__user__logout-btn" @click="openUserMenu($event)" >{{username}}</div>
+        <div :class="['Header__navbar__user__menu',{'Header__navbar__user__menu--opened': userMenuListOpened}]">
+          <ul>
+            <li><div @click="logout()">{{$t('logout_label')}}</div></li>
+          </ul>
         </div>
       </div>
     </nav>
@@ -99,16 +104,18 @@ export default {
       navBarMenuOpened: false,
       navHeight: 120,
       langListOpened: false,
+      userMenuListOpened: false,
       sliderIndex: 0,
       sliderTimeoutMs: 30000
     }
   },
   computed: {
     ...mapGetters({
-      locale: 'locale'
+      locale: 'locale',
+      user: 'user/userData'
     }),
     username() {
-      return this.$strapi?.user?.username;
+      return this.user?.username;
     },
     sliderImages () {
       return this.header?.background_image;
@@ -132,13 +139,7 @@ export default {
         : (this.isScrolled = true);
     },
     logout() {
-      const userAccessToken = this.$cookies.get('user_access_token');
-      this.$axios.post(`https://oauth2.googleapis.com/revoke?token=${userAccessToken}`)
-        .finally(() => {
-          this.$cookies.remove('user_access_token');
-          this.$strapi.clearToken();
-          this.$router.go(0);
-        })
+      this.$store.dispatch('user/logout');
     },
     openSelectLang($event) {
       $event.stopPropagation();
@@ -155,6 +156,15 @@ export default {
       this.navBarMenuOpened = !this.navBarMenuOpened
       window.addEventListener('click', () => {
         this.navBarMenuOpened = false;
+      }, {
+        once: true
+      })
+    },
+    openUserMenu($event) {
+      $event.stopPropagation();
+      this.userMenuListOpened = !this.userMenuListOpened;
+      window.addEventListener('click', () => {
+        this.userMenuListOpened = false;
       }, {
         once: true
       })
@@ -451,14 +461,57 @@ $navbar-height-small: 60px;
       display: flex;
       flex-direction: row;
       margin-left: 10px;
+      position: relative;
 
       &__logout-btn {
-        background-image: url("assets/images/logout-image.svg");
-        width: 25px;
-        height: 25px;
-        margin: 0 4px;
-        background-size: contain;
         cursor: pointer;
+        color: $td-blue-dark;
+        width: fit-content;
+        display: flex;
+        align-items: center;
+        &:after {
+          display: inline-block;
+          width: 0;
+          height: 0;
+          margin-left: .255em;
+          vertical-align: .255em;
+          content: "";
+          border-top: .3em solid;
+          border-right: .3em solid transparent;
+          border-bottom: 0;
+          border-left: .3em solid transparent;
+        }
+      }
+      &__menu {
+        position: absolute;
+        opacity: 0;
+        visibility: hidden;
+        width: auto;
+        height: 132px;
+        padding: 25px;
+        background-color: rgb(0 0 0 / 20%);
+        right: 0;
+        top: 30px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-content: space-between;
+        align-items: center;
+        border-radius: 7px;
+
+        ul {
+          color: white;
+          list-style: none;
+          li {
+            cursor: pointer;
+          }
+        }
+
+
+        &--opened {
+          opacity: 1;
+          visibility: visible;
+        }
       }
     }
   }

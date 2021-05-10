@@ -117,6 +117,9 @@ export default {
       }
     }
   },
+  created() {
+    this.$store.dispatch("user/fetchUser");
+  },
   computed: {
     article() {
       return this.fetchedArticle ? this.fetchedArticle[0] : {}
