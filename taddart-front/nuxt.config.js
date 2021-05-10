@@ -99,9 +99,6 @@ export default {
   strapi: {
     entities: ['header'],
     url: process.env.ENV === 'production' ? 'https://anebdal.tuddar-nat-abdelmumen.net' : 'http://localhost:1337',
-    cookie: {
-      path: '/',
-    }
   },
 
   axios: {

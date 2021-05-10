@@ -133,6 +133,7 @@ export default {
       text-align-last: end;
       color: white;
       font-size: 13px;
+      font-style: italic;
       display: flex;
       gap: 10px;
       z-index: 1;
