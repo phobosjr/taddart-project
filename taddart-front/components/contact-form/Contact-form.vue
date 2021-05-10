@@ -92,7 +92,7 @@ export default {
       if (!this.$refs.form.validate()) {
         return;
       }
-      this.$strapi.create('contact-messages', {
+      this.$axios.$post(`${this.$config.clientSide.strapiBackendUrl}/contact-messages`, {
         name: this.name,
         email: this.email,
         message: this.message,

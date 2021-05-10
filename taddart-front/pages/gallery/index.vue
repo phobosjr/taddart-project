@@ -14,7 +14,7 @@
           <span>{{ album.title }}</span>
         </div>
         <div class="Gallery__panel__album__infos">
-           <div>
+          <div>
             <img src="~/assets/images/card-image.svg">
             <span>{{ computeNumberOfItemMedia(album) }}</span>
           </div>
@@ -82,7 +82,7 @@ export default {
       this.mediaIndex = 0;
       const viewedAlbums = this.$cookies.get('viewedAlbums');
       if (!viewedAlbums || !viewedAlbums.includes(albumId)) {
-        this.$strapi.update('albums', albumId, {
+        this.$axios.$put(`${this.$config.clientSide.strapiBackendUrl}/albums/${albumId}`, {
           nbView: nbView + 1
         }).then((result) => {
           this.albums.find(album => album.id === albumId).nbView = result.nbView;
@@ -167,6 +167,7 @@ export default {
           height: 350px;
         }
       }
+
       &:hover & {
         &__image {
           &:nth-child(2) {

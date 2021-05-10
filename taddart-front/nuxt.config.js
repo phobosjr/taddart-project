@@ -96,13 +96,6 @@ export default {
   styleResources: {
     scss: '~/assets/style/scss/variables/*.scss'
   },
-  strapi: {
-    entities: ['header'],
-    url: process.env.ENV === 'production' ? 'https://anebdal.tuddar-nat-abdelmumen.net' : 'http://localhost:1337',
-    cookie: {
-      path: '/'
-    }
-  },
 
   axios: {
     baseURL: process.env.ENV === 'production' ? 'http://10.0.3.24:1337' : 'http://localhost:1337'
