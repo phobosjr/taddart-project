@@ -19,6 +19,7 @@ export default {
         strapiBackendUrl,
         response
       })
+      this.$strapi.setToken(response.jwt);
       this.$cookies.set('strapi_jwt', response.jwt);
       this.$cookies.set('user_access_token', access_token);
       window.location = lastPath || '/';
