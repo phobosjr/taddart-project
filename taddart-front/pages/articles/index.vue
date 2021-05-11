@@ -27,8 +27,9 @@
             <span >
               {{ $t('read_article_label') }}
             </span>
-            <img src="~/assets/images/arrow-right-image.svg">
-
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="black" viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+            </svg>
           </a>
         </div>
       </div>
@@ -163,14 +164,14 @@ export default {
       &__summary {
         text-align: left;
         margin-bottom: 10px;
-        height: 144px;
+        height: 135px;
         text-overflow: ellipsis;
         white-space: normal;
         overflow: hidden;
         z-index: 1;
         padding: 0 10px;
         display: -webkit-box;
-        -webkit-line-clamp: 6;
+        -webkit-line-clamp: 7;
         -webkit-box-orient: vertical;
         text-align: justify;
       }
@@ -185,8 +186,9 @@ export default {
         align-items: center;
         text-decoration: none;
         &:hover {
-          img {
+          svg {
             transform: translateX(10px);
+            fill: $td-green;;
           }
           span {
             color: $td-green;
@@ -197,7 +199,7 @@ export default {
           text-shadow: 0 0 0 #680606;
           font-size: 20px;
         }
-        img {
+        svg {
           float: right;
           color: $td-blue;
           transition: all .3s ease-in;
