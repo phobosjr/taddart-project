@@ -53,8 +53,8 @@ export default {
     getImageUrl(article) {
       return article?.image?.url
     },
-    getArticleBackgroundColor () {
-      return this.article?.article_categorie?.backgroundColor
+    getArticleBackgroundColor (article) {
+      return article?.article_categorie?.backgroundColor
     }
   }
 }
@@ -131,27 +131,16 @@ export default {
       }
       &__infos {
         position: absolute;
-        width: 100%;
-        height: 100%;
+        bottom: 10px;
+        left: 10px;
 
         .author {
-          position: absolute;
-          top: 10px;
-          right: 10px;
           color: white;
+          font-weight: bolder;
         }
 
         .date {
-          position: absolute;
-          top: 0px;
-          right: 0px;
-          bottom: 0;
-          left: 0;
-          width: fit-content;
-          height: fit-content;
           color: white;
-          margin: auto;
-          font-weight: bolder;
         }
 
       }
