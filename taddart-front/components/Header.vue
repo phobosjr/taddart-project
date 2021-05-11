@@ -466,7 +466,7 @@ $navbar-height-small: 60px;
       &__logout-btn {
         cursor: pointer;
         color: $td-blue-dark;
-        width: fit-content;
+        width: max-content;
         display: flex;
         align-items: center;
         &:after {
@@ -488,7 +488,7 @@ $navbar-height-small: 60px;
         visibility: hidden;
         width: auto;
         height: 132px;
-        padding: 25px;
+        padding: 10px 0;
         background-color: rgb(0 0 0 / 20%);
         right: 0;
         top: 30px;
@@ -504,6 +504,10 @@ $navbar-height-small: 60px;
           list-style: none;
           li {
             cursor: pointer;
+            padding: 10px;
+            &:hover {
+              background-color: $td-black-43;
+            }
           }
         }
 

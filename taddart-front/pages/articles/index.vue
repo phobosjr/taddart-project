@@ -54,7 +54,7 @@ export default {
       return article?.image?.url
     },
     getArticleBackgroundColor () {
-      return article?.article_categorie?.backgroundColor
+      return this.article?.article_categorie?.backgroundColor
     }
   }
 }
