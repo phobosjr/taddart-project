@@ -42,7 +42,6 @@ export default {
     {src: '~/plugins/gallery.js', ssr: true},
     {src: '~/plugins/tooltip.js', ssr: true},
     {src: '~/plugins/v-agile.js', ssr: false},
-    {src: '~/plugins/cookies.js', mode: 'client'},
     {src: '~/plugins/directives/v-intersection.js', mode: 'client'},
   ],
 
@@ -59,6 +58,7 @@ export default {
   modules: [
     'bootstrap-vue/nuxt',
     '@nuxtjs/apollo',
+    'cookie-universal-nuxt',
     '@nuxtjs/style-resources',
     ['nuxt-i18n', {
       strategy: 'prefix_except_default',
