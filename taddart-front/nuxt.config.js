@@ -42,6 +42,7 @@ export default {
     {src: '~/plugins/gallery.js', ssr: true},
     {src: '~/plugins/tooltip.js', ssr: true},
     {src: '~/plugins/v-agile.js', ssr: false},
+    {src: '~/plugins/auth-check.js', ssr: false},
     {src: '~/plugins/directives/v-intersection.js', mode: 'client'},
   ],
 

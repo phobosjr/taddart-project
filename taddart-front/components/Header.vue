@@ -18,15 +18,9 @@
             {{ $t('numeric_content_title') }}
           </a>
         </div>
-        <button :class="['Header__navbar__menu__btn',{'Header__navbar__menu__btn--opened': navBarMenuOpened }]"
+        <button :class="['Header__navbar__menu__btn']"
                 aria-expanded="true" aria-label="Main Menu" @click="openNavBarMenu($event)">
-          <svg width="50" height="50" viewBox="0 0 100 100">
-            <path class="line line1"
-                  d="M 20,29.000046 H 80.000231 C 80.000231,29.000046 94.498839,28.817352 94.532987,66.711331 94.543142,77.980673 90.966081,81.670246 85.259173,81.668997 79.552261,81.667751 75.000211,74.999942 75.000211,74.999942 L 25.000021,25.000058"/>
-            <path class="line line2" d="M 20,50 H 80"/>
-            <path class="line line3"
-                  d="M 20,70.999954 H 80.000231 C 80.000231,70.999954 94.498839,71.182648 94.532987,33.288669 94.543142,22.019327 90.966081,18.329754 85.259173,18.331003 79.552261,18.332249 75.000211,25.000058 75.000211,25.000058 L 25.000021,74.999942"/>
-          </svg>
+          <td-menu :active="navBarMenuOpened"></td-menu>
         </button>
       </div>
       <a class="Header__navbar__logo" href="/">
@@ -34,52 +28,50 @@
              class="Header__navbar__logo__img"
              alt="">
       </a>
-      <div class="Header__navbar__lang">
-        <div class="Header__navbar__lang__selected" v-if="$i18n.locale === 'kab'" @click="openSelectLang($event)">
-          {{ $t('lang_kab_label') }}
-          <img :class="['Header__navbar__lang__img']"
+      <div class="Header__navbar__right-menu">
+        <div class="Header__navbar__right-menu__selected" v-if="$i18n.locale === 'kab'" @click="openRightMenu($event)">
+          <span v-if="!username">{{ $t('lang_kab_label') }}</span>
+          <img :class="['Header__navbar__right-menu__img']"
                src="~/assets/images/header/kb-lang-32-32.png" alt="KAB">
         </div>
-        <div class="Header__navbar__lang__selected" v-if=" $i18n.locale === 'fr'" @click="openSelectLang($event)">
-          {{ $t('lang_fr_label') }}
-          <img :class="['Header__navbar__lang__img']"
+        <div class="Header__navbar__right-menu__selected" v-if=" $i18n.locale === 'fr'" @click="openRightMenu($event)">
+          <span v-if="!username">{{ $t('lang_fr_label') }}</span>
+          <img :class="['Header__navbar__right-menu__img']"
                src="~/assets/images/header/fr-lang.svg" alt="FR">
         </div>
+        <div class="Header__navbar__right-menu__logout-btn" @click="openRightMenu($event)">{{ username }}</div>
 
         <div
-          :class="['Header__navbar__lang__list', 'td-transition', {'Header__navbar__lang__list--opened': langListOpened}]">
-          <a :href="switchLocalePath('kab')" :disabled="$i18n.locale === 'kab'">
+          :class="['Header__navbar__right-menu__list', 'td-transition', {'Header__navbar__right-menu__list--opened': langListOpened}]">
+          <a v-if="$i18n.locale === 'fr'" :href="switchLocalePath('kab')" class="item">
             {{ $t('lang_kab_label') }}
-            <img :class="['Header__navbar__lang__img']"
+            <img :class="['Header__navbar__right-menu__img']"
                  src="~/assets/images/header/kb-lang-32-32.png" alt="KAB">
           </a>
-          <a :href="switchLocalePath('fr')" :disabled="$i18n.locale === 'fr'">
+          <a v-if="$i18n.locale === 'kab'" :href="switchLocalePath('fr')" class="item">
             {{ $t('lang_fr_label') }}
-            <img :class="['Header__navbar__lang__img']"
+            <img :class="['Header__navbar__right-menu__img']"
                  src="~/assets/images/header/fr-lang.svg" alt="FR">
           </a>
-        </div>
-      </div>
-      <div v-if="username" class="Header__navbar__user">
-        <div class="Header__navbar__user__logout-btn" @click="openUserMenu($event)" >{{username}}</div>
-        <div :class="['Header__navbar__user__menu',{'Header__navbar__user__menu--opened': userMenuListOpened}]">
-          <ul>
-            <li><div @click="logout()">{{$t('logout_label')}}</div></li>
+          <ul class="Header__navbar__right-menu__list__user" v-if="username">
+            <li class="item">
+              <div @click="logout()">{{ $t('logout_label') }}</div>
+            </li>
           </ul>
         </div>
       </div>
     </nav>
     <div class="Header__hero-slider" @click.stop="startSlider()">
       <div class="Header__hero-slider__title">
-        <h1>{{$t('big_title')}}</h1>
+        <h1>{{ $t('big_title') }}</h1>
       </div>
       <div class="Header__hero-slider__socialMedia">
-        <a :href="header.social_fb_link" >
+        <a :href="header.social_fb_link">
           <img class="Header__hero-slider__socialMedia__image" src="~/assets/images/facebook-logo-image.png">
           {{ header.social_fb_label }}
         </a>
 
-        <a href="mailTo:contact@tuddar-nat-abdelmumen.net" >
+        <a href="mailTo:contact@tuddar-nat-abdelmumen.net">
           <img class="Header__hero-slider__socialMedia__image" src="~/assets/images/envelope-image.svg">
           contact@tuddar-nat-abdelmumen.net
         </a>
@@ -92,11 +84,15 @@
 </template>
 <script>
 import headerQuery from '@/apollo/queries/header/header.gql'
+import tdMenu from '@/components/icons/td-menu'
 import {mapGetters} from 'vuex'
 
 export default {
   props: {
     smallHeader: {type: Boolean, required: false, default: false}
+  },
+  components: {
+    tdMenu
   },
   data: () => {
     return {
@@ -117,7 +113,7 @@ export default {
     username() {
       return this.user?.username;
     },
-    sliderImages () {
+    sliderImages() {
       return this.header?.background_image;
     }
   },
@@ -141,7 +137,7 @@ export default {
     logout() {
       this.$store.dispatch('user/logout');
     },
-    openSelectLang($event) {
+    openRightMenu($event) {
       $event.stopPropagation();
       this.langListOpened = !this.langListOpened;
       window.addEventListener('click', () => {
@@ -156,15 +152,6 @@ export default {
       this.navBarMenuOpened = !this.navBarMenuOpened
       window.addEventListener('click', () => {
         this.navBarMenuOpened = false;
-      }, {
-        once: true
-      })
-    },
-    openUserMenu($event) {
-      $event.stopPropagation();
-      this.userMenuListOpened = !this.userMenuListOpened;
-      window.addEventListener('click', () => {
-        this.userMenuListOpened = false;
       }, {
         once: true
       })
@@ -299,6 +286,9 @@ $navbar-height-small: 60px;
         width: 70px;
         height: 70px;
       }
+      @media screen and (max-width: 992px){
+        display: none;
+      }
     }
 
     &__menu {
@@ -354,64 +344,43 @@ $navbar-height-small: 60px;
         padding: 0;
         width: 50px;
         z-index: 9;
-
-        .line {
-          fill: none;
-          stroke: black;
-          stroke-width: 6;
-          transition: stroke-dasharray 600ms cubic-bezier(0.4, 0, 0.2, 1),
-          stroke-dashoffset 600ms cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .line1 {
-          stroke-dasharray: 60 207;
-          stroke-width: 6;
-        }
-
-        .line2 {
-          stroke-dasharray: 60 60;
-          stroke-width: 6;
-        }
-
-        .line3 {
-          stroke-dasharray: 60 207;
-          stroke-width: 6;
-        }
-
-        &--opened {
-          .line1 {
-            stroke-dasharray: 90 207;
-            stroke-dashoffset: -134;
-            stroke-width: 6;
-          }
-
-          .line2 {
-            stroke-dasharray: 1 60;
-            stroke-dashoffset: -30;
-            stroke-width: 6;
-          }
-
-          .line3 {
-            stroke-dasharray: 90 207;
-            stroke-dashoffset: -134;
-            stroke-width: 6;
-          }
-        }
       }
     }
 
-    &__lang {
+    &__right-menu {
       width: calc(50% - 50px);
       position: relative;
+      display: flex;
+      flex-direction: row-reverse;
+      gap: 10px;
 
       &__selected {
         cursor: pointer;
         width: fit-content;
-        float: right;
         color: $td-blue-dark;
         font-weight: 600;
         display: flex;
-        gap: 10px;
+        gap: 5px;
+        align-items: center;
+
+        &:after {
+          display: inline-block;
+          width: 0;
+          height: 0;
+          vertical-align: .255em;
+          content: "";
+          border-top: .3em solid;
+          border-right: .3em solid transparent;
+          border-bottom: 0;
+          border-left: .3em solid transparent;
+        }
+      }
+
+      &__logout-btn {
+        cursor: pointer;
+        color: $td-blue-dark;
+        width: max-content;
+        display: flex;
         align-items: center;
       }
 
@@ -427,17 +396,16 @@ $navbar-height-small: 60px;
         opacity: 0;
         visibility: hidden;
         width: auto;
-        height: 132px;
-        padding: 25px;
-        background-color: rgb(0 0 0 / 20%);
+        height: auto;
+        padding: 15px 0;
+        background-color: $td-black-43;
         right: 0;
         top: 30px;
+        border-radius: 7px;
         display: flex;
         flex-direction: column;
-        justify-content: space-around;
-        align-content: space-between;
-        align-items: center;
-        border-radius: 7px;
+        justify-content: center;
+        gap: 10px;
 
         &--opened {
           opacity: 1;
@@ -447,74 +415,27 @@ $navbar-height-small: 60px;
         a {
           color: white;
           font-weight: bold;
-
-          &[disabled] {
-            pointer-events: none;
-            cursor: default;
-          }
+          display: flex;
+          gap: 10px;
         }
-      }
-    }
 
-    &__user {
-
-      display: flex;
-      flex-direction: row;
-      margin-left: 10px;
-      position: relative;
-
-      &__logout-btn {
-        cursor: pointer;
-        color: $td-blue-dark;
-        width: max-content;
-        display: flex;
-        align-items: center;
-        &:after {
-          display: inline-block;
-          width: 0;
-          height: 0;
-          margin-left: .255em;
-          vertical-align: .255em;
-          content: "";
-          border-top: .3em solid;
-          border-right: .3em solid transparent;
-          border-bottom: 0;
-          border-left: .3em solid transparent;
-        }
-      }
-      &__menu {
-        position: absolute;
-        opacity: 0;
-        visibility: hidden;
-        width: auto;
-        height: 132px;
-        padding: 10px 0;
-        background-color: rgb(0 0 0 / 20%);
-        right: 0;
-        top: 30px;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-around;
-        align-content: space-between;
-        align-items: center;
-        border-radius: 7px;
-
-        ul {
+        &__user {
           color: white;
           list-style: none;
+
           li {
             cursor: pointer;
-            padding: 10px;
-            &:hover {
-              background-color: $td-black-43;
-            }
           }
         }
 
-
-        &--opened {
-          opacity: 1;
-          visibility: visible;
+        .item {
+          padding: 8px 30px;
+          height: 35px;
+          border-right: 4px solid transparent;
+          &:hover {
+            background-color: $td-black-43;
+            border-right: 4px solid $td-yellow;
+          }
         }
       }
     }

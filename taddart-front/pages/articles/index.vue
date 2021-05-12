@@ -27,9 +27,7 @@
             <span >
               {{ $t('read_article_label') }}
             </span>
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="black" viewBox="0 0 16 16">
-              <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
-            </svg>
+            <td-arrow-right></td-arrow-right>
           </a>
         </div>
       </div>
@@ -40,9 +38,13 @@
 
 <script>
 import articlesQuery from "~/apollo/queries/articles/articles";
+import tdArrowRight from '@/components/icons/td-arrow-right';
 
 export default {
   name: "index",
+  components: {
+    tdArrowRight
+  },
   apollo: {
     articles: {
       prefetch: true,
@@ -68,9 +70,20 @@ export default {
   width: 100%;
 
   &__list {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
     margin-top: 25px;
+
+    @media screen and (max-width: 1700px) {
+      grid-template-columns: 1fr 1fr;
+
+    }
+
+    @media screen and (max-width: 1130px) {
+      grid-template-columns: 1fr;
+
+    }
+
   }
 
   &__breadcrumb {
@@ -86,6 +99,10 @@ export default {
     flex-direction: column;
     gap: 0 15px;
     border: 3px solid $td-gray-61;
+
+    @media screen and (max-width: 580px) {
+      width: 100%;
+    }
 
     @media screen and (max-width: 992px) {
       flex-direction: column;

@@ -16,9 +16,7 @@
         <a :href="localePath('/gallery', $i18n.locale)">
           {{ $t('gallery_title') }}
         </a>
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="white" viewBox="0 0 14 13">
-          <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
-        </svg>
+        <td-arrow-right background-color="white"></td-arrow-right>
       </div>
     </div>
 
@@ -28,9 +26,12 @@
 
 <script>
 import lastAlbumsQuery from "@/apollo/queries/gallery/lastAlbums.gql";
-
+import tdArrowRight from '@/components/icons/td-arrow-right'
 export default {
   name: "LastAlbumSection",
+  components: {
+    tdArrowRight
+  },
   apollo: {
     lastAlbum: {
       prefetch: true,
