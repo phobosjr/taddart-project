@@ -1,5 +1,5 @@
 <template>
-  <div class="Gallery container-fluid p-2">
+  <div class="Gallery">
     <separate-line :text-content="$t('gallery_title')"></separate-line>
     <div class="Gallery__panel">
       <div class="Gallery__panel__album" v-for="(album, index) in albums" :key="index">
@@ -14,7 +14,7 @@
           <span>{{ album.title }}</span>
         </div>
         <div class="Gallery__panel__album__infos">
-           <div>
+          <div>
             <img src="~/assets/images/card-image.svg">
             <span>{{ computeNumberOfItemMedia(album) }}</span>
           </div>
@@ -82,7 +82,7 @@ export default {
       this.mediaIndex = 0;
       const viewedAlbums = this.$cookies.get('viewedAlbums');
       if (!viewedAlbums || !viewedAlbums.includes(albumId)) {
-        this.$strapi.update('albums', albumId, {
+        this.$axios.$put(`${this.$config.clientSide.strapiBackendUrl}/albums/${albumId}`, {
           nbView: nbView + 1
         }).then((result) => {
           this.albums.find(album => album.id === albumId).nbView = result.nbView;
@@ -141,6 +141,7 @@ export default {
     display: grid;
     width: 75%;
     margin: auto;
+    padding: 10px 0;
     grid-template-columns: 1fr 1fr;
     grid-gap: 30px;
 
@@ -156,7 +157,7 @@ export default {
       width: 100%;
 
       &:first-child {
-        height: 100%;
+        height: 730px;
         width: 100%;
         grid-row: span 2;
         grid-column: span 1;
@@ -167,6 +168,7 @@ export default {
           height: 350px;
         }
       }
+
       &:hover & {
         &__image {
           &:nth-child(2) {

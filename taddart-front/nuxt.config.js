@@ -42,7 +42,7 @@ export default {
     {src: '~/plugins/gallery.js', ssr: true},
     {src: '~/plugins/tooltip.js', ssr: true},
     {src: '~/plugins/v-agile.js', ssr: false},
-    {src: '~/plugins/cookies.js', mode: 'client'},
+    {src: '~/plugins/auth-check.js', ssr: false},
     {src: '~/plugins/directives/v-intersection.js', mode: 'client'},
   ],
 
@@ -57,9 +57,8 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
-    'bootstrap-vue/nuxt',
-    '@nuxtjs/strapi',
     '@nuxtjs/apollo',
+    'cookie-universal-nuxt',
     '@nuxtjs/style-resources',
     ['nuxt-i18n', {
       strategy: 'prefix_except_default',
@@ -95,13 +94,6 @@ export default {
   },
   styleResources: {
     scss: '~/assets/style/scss/variables/*.scss'
-  },
-  strapi: {
-    entities: ['header'],
-    url: process.env.ENV === 'production' ? 'https://anebdal.tuddar-nat-abdelmumen.net' : 'http://localhost:1337',
-    cookie: {
-      path: '/',
-    }
   },
 
   axios: {

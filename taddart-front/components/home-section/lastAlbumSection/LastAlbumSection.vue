@@ -16,7 +16,7 @@
         <a :href="localePath('/gallery', $i18n.locale)">
           {{ $t('gallery_title') }}
         </a>
-        <img src="~/assets/images/arrow-right-image.svg">
+        <td-arrow-right background-color="white"></td-arrow-right>
       </div>
     </div>
 
@@ -26,9 +26,12 @@
 
 <script>
 import lastAlbumsQuery from "@/apollo/queries/gallery/lastAlbums.gql";
-
+import tdArrowRight from '@/components/icons/td-arrow-right'
 export default {
   name: "LastAlbumSection",
+  components: {
+    tdArrowRight
+  },
   apollo: {
     lastAlbum: {
       prefetch: true,
@@ -149,12 +152,12 @@ export default {
     &__link {
 
       &:hover {
-        img {
+        svg {
           transform: translateX(10px);
         }
       }
 
-      img {
+      svg {
         transition: all 0.5s ease;
         width: 25px;
       }

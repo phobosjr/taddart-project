@@ -1,5 +1,5 @@
 <template>
-  <div v-if="$strapi.user" class="article-comment">
+  <div v-if="username" class="article-comment">
     <textarea v-model="comment" class="article-comment__text" maxlength="255"
               :placeholder="$t('article_comment_placeholder')"></textarea>
     <button class="article-comment__btn" @click="submit()" :disabled="!validate">{{
@@ -17,6 +17,8 @@
 </template>
 
 <script>
+import {mapGetters} from "vuex";
+
 export default {
   name: "article-comment",
   props: {
@@ -28,16 +30,29 @@ export default {
     }
   },
   computed: {
+    ...mapGetters({
+      user: 'user/userData',
+      token: 'user/token',
+    }),
     validate() {
       return this.comment.split(' ').join('') !== ''
+    },
+    username() {
+      return this.user?.username;
     }
   },
   methods: {
     submit() {
-      this.$strapi.create('article-comments', {
-        comment: this.comment,
-        article: this.articleId
-      }).then((res) => {
+      this.$axios.$post(`${this.$config.clientSide.strapiBackendUrl}/article-comments`,
+        {
+          comment: this.comment,
+          article: this.articleId
+        },
+        {
+          headers: {
+            'Authorization': `Bearer ${this.token}`
+          }
+        }).then((res) => {
         this.$store.dispatch('articleComments/add', {
           comment: res?.comment,
           created_at: res?.created_at,

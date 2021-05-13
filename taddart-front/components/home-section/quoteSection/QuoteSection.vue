@@ -6,7 +6,7 @@
     </div>
     <div class="Description__text" v-intersection>
       <div class="Description__text__title">
-        <h2>{{ title }}</h2>
+        <h4>{{ title }}</h4>
       </div>
       <div class="Description__text__content">
         <blockquote>{{ content }}</blockquote>
@@ -96,8 +96,8 @@ export default {
       color: rgba(0, 0, 0, 1);
       top: 57px;
       left: 619px;
-      font-weight: bolder;
-      font-size: 48px;
+      font-weight: 100;
+      font-size: 25px;
       opacity: 1;
       text-align: center;
       text-transform: uppercase;

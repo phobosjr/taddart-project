@@ -1,6 +1,8 @@
 <template>
   <section class="LastArticles" v-intersection>
-    <SeparateLine :text-content="$t('last_article_title')" :text-color="'black'"/>
+    <div class="LastArticles__title">
+      <h2>{{ $t('last_article_title') }}</h2>
+    </div>
     <div class="LastArticles__container">
       <div v-for="article in lastArticles" class="LastArticles__article"
            @click="redirectToArticle(article.slug)"
@@ -64,6 +66,12 @@ export default {
   background-attachment: fixed;
   background-position: top;
   overflow: hidden;
+
+  &__title {
+    text-align: center;
+    margin: 25px 0;
+  }
+
   &__container {
     display: flex;
     flex-direction: row;
@@ -133,6 +141,7 @@ export default {
       text-align-last: end;
       color: white;
       font-size: 13px;
+      font-style: italic;
       display: flex;
       gap: 10px;
       z-index: 1;
@@ -154,15 +163,17 @@ export default {
     &__short-content {
       text-align: left;
       margin-bottom: 10px;
-      height: 144px;
+      height: 135px;
+      line-height: 20px;
       text-overflow: ellipsis;
       white-space: normal;
       overflow: hidden;
       z-index: 1;
       padding: 0 10px;
       display: -webkit-box;
-      -webkit-line-clamp: 6;
+      -webkit-line-clamp: 7;
       -webkit-box-orient: vertical;
+      font-size: 16px;
     }
   }
 }

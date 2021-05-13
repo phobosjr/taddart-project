@@ -39,7 +39,7 @@ export default {
       },
       errorPolicy: "ignore"
     }
-  }
+  },
 }
 </script>
 <style lang="scss" scoped>
