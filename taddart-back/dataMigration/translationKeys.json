@@ -12,13 +12,13 @@
     },
     {
       "name": "map_title",
-      "kabValue": "Tkarḍa n taddart",
-      "frValue": ""
+      "kabValue": "Takarḍa n taddart",
+      "frValue": "Carte du village"
     },
     {
       "name": "all_albums_title",
       "kabValue": "Akk",
-      "frValue": "Galerie"
+      "frValue": "Tous"
     },{
       "name": "last_article_title",
       "kabValue": "Imagraden ineggura",
