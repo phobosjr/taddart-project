@@ -2,12 +2,10 @@ query ($locale: String){
   quoteSection (locale: $locale) {
     title
     content
-    horizontalImage {
-      formats
-    }
-    verticalImage {
-      formats
-    }
     enable
+    image {
+      url
+    }
+    imagePosition
   }
 }

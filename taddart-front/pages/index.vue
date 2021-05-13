@@ -1,12 +1,12 @@
 <template>
   <div class="Home">
+    <LastArticlesSection></LastArticlesSection>
     <QuoteSection v-if="quoteSection.enable"
                   :content="quoteSection.content"
                   :title="quoteSection.title"
-                  :horizontal-image="quoteSection.horizontalImage.formats | defaultImage"
-                  :vertical-image="quoteSection.verticalImage.formats | defaultImage"
+                  :image="quoteSection.image"
+                  :image-position="quoteSection.imagePosition"
     ></QuoteSection>
-    <LastArticlesSection></LastArticlesSection>
     <LastAlbumSection></LastAlbumSection>
     <contact-form></contact-form>
     <google-maps></google-maps>
