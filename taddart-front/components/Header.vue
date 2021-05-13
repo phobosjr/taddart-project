@@ -326,6 +326,7 @@ $navbar-height-small: 60px;
           color: white;
           padding: 13px 0;
           font-weight: bold;
+          border-right: 5px solid transparent;
 
 
           &:hover {
