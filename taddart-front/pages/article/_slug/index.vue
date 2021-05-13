@@ -234,31 +234,6 @@ export default {
         padding: 0 25px;
         max-width: 867px;
         margin: 25px 0;
-
-        figure {
-          text-align: center;
-
-          &.image {
-            margin: auto;
-
-            &.image-style-side {
-              float: right;
-              margin-left: 1.5em;
-              max-width: 50%;
-
-              @media screen and (max-width: 992px) {
-                width: 70% !important;
-                margin: auto;
-                float: none;
-                display: contents;
-              }
-
-              &.image_resized {
-                max-width: 100%;
-              }
-            }
-          }
-        }
       }
     }
 

@@ -1,17 +1,13 @@
 <template>
   <section class="Description">
-    <div class="Description__picture">
-      <div class="Description__picture__vertical" :style="{backgroundImage: 'url('+ verticalImage+')'}"></div>
-      <div class="Description__picture__horizontal" :style="{backgroundImage: 'url('+ horizontalImage+')'}"></div>
+    <div class="Description__title">
+      <h4>{{ title }}</h4>
     </div>
-    <div class="Description__text" v-intersection>
-      <div class="Description__text__title">
-        <h4>{{ title }}</h4>
+    <div :class="['Description__content', {'Description__content--reverse': imagePosition === 'left'}]" v-intersection>
+      <div :class="['Description__content__text', {'Description__content__text--full': !image || imagePosition === 'Off' } ]">
+        <div v-html="content"></div>
       </div>
-      <div class="Description__text__content">
-        <blockquote>{{ content }}</blockquote>
-      </div>
-
+      <div v-if="image && imagePosition !== 'Off'" class="Description__content__image" :style="{backgroundImage: `url(${image.url})`}"></div>
     </div>
 
   </section>
@@ -23,8 +19,8 @@ export default {
   props: {
     title: {type: String, required: true},
     content: {type: String, required: true},
-    horizontalImage: {type: String, required: true},
-    verticalImage: {type: String, required: true}
+    image: {type: Object, required: true},
+    imagePosition: {type: String, required: true},
   },
 }
 </script>
@@ -36,83 +32,48 @@ export default {
   padding: 25px 0;
   position: relative;
   display: flex;
+  flex-direction: column;
 
-  &__picture {
-    width: 50%;
-    height: 100%;
-    position: relative;
-
-    @media screen and (max-width: 1480px){
-      display: none;
-    }
-
-    &__horizontal {
-      width: 500px;
-      height: 320px;
-      background-repeat: no-repeat;
-      background-position: center center;
-      background-size: cover;
-      opacity: 1;
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      margin: auto;
-      left: 200px;
-      overflow: hidden;
-    }
-
-    &__vertical {
-      width: 320px;
-      height: 500px;
-      background-repeat: no-repeat;
-      background-position: center center;
-      background-size: cover;
-      opacity: 1;
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 82px;
-      margin: auto;
-      overflow: hidden;
-    }
+  &__title {
+    width: 100%;
+    color: black;
+    font-size: 25px;
+    opacity: 1;
+    text-align: center;
+    text-transform: uppercase;
+    margin: 25px 0;
   }
 
-  &__text {
-    width: 50%;
-    height: 100%;
+  &__content {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    transition: all 1s ease-in;
-    transform: translateY(100px);
-    opacity: 0;
-
-
-    @media screen and (max-width: 1480px){
-      width: 100%;
-    }
-    &__title {
-      width: 100%;
-      color: rgba(0, 0, 0, 1);
-      top: 57px;
-      left: 619px;
-      font-weight: 100;
-      font-size: 25px;
-      opacity: 1;
-      text-align: center;
-      text-transform: uppercase;
+    flex-direction: row;
+    height: 100%;
+    padding: 10px;
+    &--reverse {
+      flex-direction: row-reverse;
     }
 
-    &__content {
-      padding: 10px;
-      @media screen and (max-width: 1480px){
+    &__text {
+      width: 50%;
+      @media screen and (max-width: 992px ){
         width: 100%;
       }
-      width: auto;
-      color: #9c9c9c;
-      font-size: 18px;
-      text-align: center;
-      line-height: 2em;
+      margin: auto;
+      &--full {
+        width: 100%;
+      }
+      div {
+        width: fit-content;
+        margin: auto;
+      }
+    }
+    &__image {
+      width: 50%;
+      background-position: center;
+      background-size: contain;
+      @media screen and (max-width: 992px ){
+        display: none;
+      }
     }
   }
 }

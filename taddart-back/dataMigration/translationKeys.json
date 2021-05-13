@@ -1,0 +1,186 @@
+{
+  "keys": [
+    {
+      "name": "home_title",
+      "kabValue": "Accueil",
+      "frValue": "Accueil"
+    },
+    {
+      "name": "gallery_title",
+      "kabValue": "Tagalrit",
+      "frValue": "Galerie"
+    },
+    {
+      "name": "map_title",
+      "kabValue": "Takarḍa n taddart",
+      "frValue": "Carte du village"
+    },
+    {
+      "name": "all_albums_title",
+      "kabValue": "Akk",
+      "frValue": "Tous"
+    },{
+      "name": "last_article_title",
+      "kabValue": "Imagraden ineggura",
+      "frValue": "Les derniers articles"
+    },
+    {
+      "name": "read_article_label",
+      "kabValue": "Ɣeṛ amagrad-a",
+      "frValue": "Lire l'article"
+    },{
+      "name": "article_author_label",
+      "kabValue": "Sγur: ",
+      "frValue": "Par: "
+    },
+    {
+      "name": "contact_title",
+      "kabValue": "Nermes-aɣ-d",
+      "frValue": "Nous contacter"
+    },{
+      "name": "contact_form_name",
+      "kabValue": "Isem",
+      "frValue": "Nom"
+    },
+    {
+      "name": "contact_form_name_required",
+      "kabValue": "Isem ilaq ad yili",
+      "frValue": "Nom obligatoire"
+    },{
+      "name": "contact_form_email",
+      "kabValue": "Lmay",
+      "frValue": "Email"
+    },
+    {
+      "name": "contact_form_email_required",
+      "kabValue": "Lmay ilaq ad yili",
+      "frValue": "Email obligatoire"
+    },{
+      "name": "contact_form_message",
+      "kabValue": "Izen",
+      "frValue": "Message"
+    },
+    {
+      "name": "contact_form_submit_btn",
+      "kabValue": "Azen",
+      "frValue": "Envoyer"
+    },{
+      "name": "contact_form_alert_success_message",
+      "kabValue": "Votre message à bien été envoyé",
+      "frValue": "Votre message à bien été envoyé"
+    },
+    {
+      "name": "contact_form_alert_failed_message",
+      "kabValue": "Envoi a échoué",
+      "frValue": "Envoi a echoué"
+    },{
+      "name": "loading_label",
+      "kabValue": "Asali ...",
+      "frValue": "Chargement ..."
+    },
+    {
+      "name": "numeric_content_author_label",
+      "kabValue": "Sγur: ",
+      "frValue": "Par: "
+    },{
+      "name": "numeric_content_title_label",
+      "kabValue": "Titre: ",
+      "frValue": "Titre: "
+    },
+    {
+      "name": "numeric_content_btn_label",
+      "kabValue": "Sader",
+      "frValue": "Télécharger"
+    },{
+      "name": "numeric_content_title",
+      "kabValue": "Temkerḍit",
+      "frValue": "Contenu numérique"
+    },
+    {
+      "name": "article_comment_btn_send_label",
+      "kabValue": "Azen",
+      "frValue": "Envoyer"
+    },{
+      "name": "article_comment_btn_login_label",
+      "kabValue": "Qqen",
+      "frValue": "Se connecter"
+    },
+    {
+      "name": "article_comment_text_login_label",
+      "kabValue": "Veuillez vous identifier pour ajouter un commentaire",
+      "frValue": "Veuillez vous identifier pour ajouter un commentaire"
+    },{
+      "name": "article_comment_placeholder",
+      "kabValue": "Aru awennit...",
+      "frValue": "Écris un commentaire..."
+    },
+    {
+      "name": "comments_count_title_label",
+      "kabValue": "Iwenniten",
+      "frValue": "Commentaires"
+    },{
+      "name": "provides_list_title_label",
+      "kabValue": "Tuqqna",
+      "frValue": "Connexion"
+    },
+    {
+      "name": "or_label",
+      "kabValue": "Neɣ",
+      "frValue": "Ou"
+    },{
+      "name": "lang_fr_label",
+      "kabValue": "Tafṛansist",
+      "frValue": "Français"
+    },
+    {
+      "name": "lang_kab_label",
+      "kabValue": "Taqbaylit",
+      "frValue": "Kabyle"
+    },{
+      "name": "maps_section_title_label",
+      "kabValue": "Tkarḍa taddart",
+      "frValue": "Carte du village"
+    },
+    {
+      "name": "follow_us_title_label",
+      "kabValue": "Ḍfeṛ-aɣ!",
+      "frValue": "Suivez-nous"
+    },{
+      "name": "footer_rubric-header_label",
+      "kabValue": "Rubriques",
+      "frValue": "Rubriques"
+    },
+    {
+      "name": "footer_about-header_label",
+      "kabValue": "Anwa-aɣ",
+      "frValue": "A propos"
+    },{
+      "name": "footer_copyrights_label",
+      "kabValue": "Tuddar n'at abdelmumen",
+      "frValue": "Tuddar n'at abdelmumen"
+    },
+    {
+      "name": "articles_title",
+      "kabValue": "Imagraden",
+      "frValue": "Articles"
+    },{
+      "name": "author_label",
+      "kabValue": "Ameskar",
+      "frValue": "Auteur"
+    },
+    {
+      "name": "article_contact_label",
+      "kabValue": "Vous souhaitez rédiger le votre ?",
+      "frValue": "Vous souhaitez rédiger le votre ?"
+    },{
+      "name": "big_title",
+      "kabValue": "Tuddar n'at abdelmumen",
+      "frValue": "Tuddar n'at abdelmumen"
+    },
+    {
+      "name": "logout_label",
+      "kabValue": "Ffeɣ",
+      "frValue": "Deconnexion"
+    }
+  ]
+}
