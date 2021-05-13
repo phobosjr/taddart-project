@@ -13,7 +13,7 @@
 const translationKeys = require('../../dataMigration/translationKeys.json');
 
 async function createKey(name, kbValue, frValue) {
-  const kab_entity = await strapi.query('translation-key').create({
+  const entityDefaultLocale = await strapi.query('translation-key').create({
     keyName: name,
     value: kbValue,
     locale: 'kab'
@@ -22,17 +22,20 @@ async function createKey(name, kbValue, frValue) {
     keyName: name,
     value: frValue,
     locale: 'fr',
-    localizations: [{id: kab_entity.id, locale: 'kab'}]
+    localizations: [{id: entityDefaultLocale.id, locale: 'kab'}]
   });
 
   await strapi.query('translation-key').update(
-    {id: kab_entity.id},
+    {id: entityDefaultLocale.id},
     {
       localizations: [{id: fr_entity.id, locale: 'fr'}]
     });
 }
 
 module.exports = async () => {
+  if (process.env.NODE_ENV === "development") {
+    return;
+  }
   for (const key of translationKeys.keys) {
     const entity = await strapi.query('translation-key').findOne({keyName: key.name});
     if (!entity) {
