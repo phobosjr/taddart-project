@@ -58,7 +58,8 @@ export default {
           created_at: res?.created_at,
           user: {
             username: res?.users_permissions_user?.username
-          }
+          },
+          commentStatus: res.commentStatus
         })
         this.comment = '';
       })

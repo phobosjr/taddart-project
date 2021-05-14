@@ -181,6 +181,11 @@
       "name": "logout_label",
       "kabValue": "Ffeɣ",
       "frValue": "Deconnexion"
+    },
+    {
+      "name": "comment_status_waiting",
+      "kabValue": "En attente",
+      "frValue": "En attente"
     }
   ]
 }

@@ -4,6 +4,8 @@ query ($articleId: String){
     created_at
     user: users_permissions_user {
       username
+      id
     }
+    commentStatus
   }
 }

@@ -2,12 +2,13 @@
   "kind": "collectionType",
   "collectionName": "article_comments",
   "info": {
-    "name": "article-comment"
+    "name": "article-comment",
+    "description": ""
   },
   "options": {
     "increments": true,
     "timestamps": true,
-    "draftAndPublish": true
+    "draftAndPublish": false
   },
   "pluginOptions": {},
   "attributes": {
@@ -20,6 +21,15 @@
     "users_permissions_user": {
       "plugin": "users-permissions",
       "model": "user"
+    },
+    "commentStatus": {
+      "type": "enumeration",
+      "enum": [
+        "waiting",
+        "refused",
+        "accepted"
+      ],
+      "default": "waiting"
     }
   }
 }
