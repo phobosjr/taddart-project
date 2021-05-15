@@ -21,7 +21,7 @@
           <span>{{ article.created_at | formatDate(true) }}</span>
           <span>{{ $t('article_author_label') }}<strong>{{ article.author }}</strong></span>
         </div>
-        <div class="LastArticles__article__short-content" v-html="article.summary"></div>
+        <div class="LastArticles__article__short-content" v-html="$options.filters.contentFilter(article.content)"></div>
 
       </div>
     </div>

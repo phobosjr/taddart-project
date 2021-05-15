@@ -8,7 +8,7 @@ query ($limit: Int) {
     }
     created_at
     author
-    summary
+    content
     article_categorie {
       category
       backgroundColor
