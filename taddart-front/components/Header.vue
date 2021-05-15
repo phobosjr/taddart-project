@@ -231,11 +231,15 @@ $navbar-height-small: 60px;
       position: absolute;
       z-index: 1;
       bottom: 25px;
-      right: 10px;
+      left: 10px;
       width: fit-content;
       display: flex;
-      flex-direction: column;
+      flex-direction: row;
       gap: 10px;
+
+      @media screen and (max-width: 992px){
+        flex-direction: column;
+      }
 
       a {
         color: white;

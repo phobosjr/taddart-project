@@ -15,7 +15,7 @@ query getArticle ($slug: String, $limit: Int){
     }
   }
 
-  lastArticles: articles(limit: $limit, sort: "created_at:desc") {
+  lastArticles: articles(where: {slug_ne: $slug}, limit: $limit, sort: "created_at:desc") {
     id
     title
     slug

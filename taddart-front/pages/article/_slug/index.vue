@@ -29,7 +29,7 @@
       </div>
       <div class="Article__main__left-main">
         <div
-          :class="['Article__main__left-main__content',  {'Article__main__left-main__content--fixed': fixedLeftMain}]">
+          :class="['Article__main__left-main__content']">
           <div class="Article__main__left-main__infos">
             <h4>{{ $t('author_label') }}</h4>
             <div class="infos-item">
@@ -97,7 +97,6 @@ export default {
   layout: 'layoutWithSmallHeader',
   data: () => {
     return {
-      fixedLeftMain: false,
       article: {}
     }
   },
@@ -135,16 +134,7 @@ export default {
     },
     getArticleCategoryColor(article) {
       return article?.article_categorie?.backgroundColor
-    },
-    handleScroll() {
-      window.scrollY >= 560 ? this.fixedLeftMain = true : this.fixedLeftMain = false;
     }
-  },
-  beforeMount() {
-    window.addEventListener('scroll', this.handleScroll);
-  },
-  beforeDestroy() {
-    window.removeEventListener('scroll', this.handleScroll);
   }
 }
 </script>
@@ -236,7 +226,6 @@ export default {
       width: 500px;
       display: flex;
       flex-direction: column;
-      position: relative;
       gap: 10px;
       @media screen and (max-width: 1390px) {
         display: none !important;
@@ -246,11 +235,8 @@ export default {
         display: flex;
         flex-direction: column;
         gap: 12px;
-
-        &--fixed {
-          position: fixed;
-          top: 88px;
-        }
+        position: sticky;
+        top: 88px;
       }
 
       &__infos {
