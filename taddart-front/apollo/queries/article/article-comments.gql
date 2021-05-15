@@ -1,5 +1,5 @@
 query ($articleId: String){
-  articleComments (where: {article: $articleId}, sort: "created_at:desc"){
+  articleComments (where: {article: $articleId}, sort: "created_at:asc"){
     comment
     created_at
     user: users_permissions_user {

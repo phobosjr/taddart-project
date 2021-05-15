@@ -33,9 +33,9 @@ async function createKey(name, kbValue, frValue) {
 }
 
 module.exports = async () => {
-  if (process.env.NODE_ENV === "development") {
-    return;
-  }
+  // if (process.env.NODE_ENV === "development") {
+  //   return;
+  // }
   for (const key of translationKeys.keys) {
     const entity = await strapi.query('translation-key').findOne({keyName: key.name});
     if (!entity) {

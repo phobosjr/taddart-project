@@ -11,14 +11,12 @@ module.exports = {
   async create(ctx) {
     let entity;
     ctx.request.body.users_permissions_user = ctx.state.user.id;
-    ctx.request.body.published_at = null;
     entity = await strapi.services['article-comment'].create(ctx.request.body);
     return sanitizeEntity(entity, {model: strapi.models['article-comment']});
   },
   async find(ctx) {
     let entities;
-    const populate = ['users_permissions_user.username'];
-    entities = await strapi.query('article-comment').find({article_eq: ctx.query.articleId}, populate);
+    entities = await strapi.query('article-comment').find({article_eq: ctx.query.articleId, _sort:ctx.query._sort});
     if (ctx.state?.user) {
       entities = _.filter(entities, (entity) => {
         if (entity.commentStatus === 'refused') {

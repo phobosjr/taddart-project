@@ -1,0 +1,33 @@
+query getArticle ($slug: String, $limit: Int){
+  fetchedArticle: articles(where: {slug: $slug}, limit: 1) {
+    id
+    title
+    content
+    created_at
+    author
+    enableComments
+    image {
+      formats
+    }
+    article_categorie {
+      backgroundColor
+      category
+    }
+  }
+
+  lastArticles: articles(limit: $limit, sort: "created_at:desc") {
+    id
+    title
+    slug
+    imageUrl: image {
+      formats
+    }
+    created_at
+    author
+    summary
+    article_categorie {
+      category
+      backgroundColor
+    }
+  }
+}

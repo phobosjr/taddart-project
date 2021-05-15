@@ -186,6 +186,16 @@
       "name": "comment_status_waiting",
       "kabValue": "En attente",
       "frValue": "En attente"
+    },
+    {
+      "name": "error_page_not_found",
+      "kabValue": "404 Asebter Ulac-it",
+      "frValue": "404 page introuvable"
+    },
+    {
+      "name": "error_page_error_occurred",
+      "kabValue": "Une erreur s'est produite",
+      "frValue": "Une erreur s'est produite"
     }
   ]
 }

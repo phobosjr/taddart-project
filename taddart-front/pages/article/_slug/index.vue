@@ -24,8 +24,8 @@
           <span>{{ article.title }}</span>
         </div>
         <div class="Article__main__content__text" v-html="article.content"></div>
-        <article-comment v-if="article.enableComments" :article-id="article.id"></article-comment>
         <article-comments v-if="article.enableComments" :article-id="article.id"></article-comments>
+        <article-comment v-if="article.enableComments" :article-id="article.id"></article-comment>
       </div>
       <div class="Article__main__left-main">
         <div
@@ -52,7 +52,7 @@
           <div ref="last-post"
                class="Article__main__left-main__last-post">
             <h4>{{ $t('last_article_title') }}</h4>
-            <div v-for="article in filteredLastArticles" :key="article.id"
+            <div v-for="article in lastArticles" :key="article.id"
                  class="Article__main__left-main__last-post__article">
               <div class="Article__main__left-main__last-post__article__img"
                    :style="{backgroundImage: 'url('+getArticlePicture(article)+')'}">
@@ -88,8 +88,7 @@
 </template>
 
 <script>
-import articleQuery from '@/apollo/queries/article/article.gql'
-import lastArticlesQuery from '@/apollo/queries/article/lastArticles.gql'
+import articlePageQuery from '@/apollo/queries/article/article-page.gql'
 import ArticleComments from "@/components/article-comments/article-comments";
 
 export default {
@@ -98,34 +97,30 @@ export default {
   layout: 'layoutWithSmallHeader',
   data: () => {
     return {
-      fixedLeftMain: false
+      fixedLeftMain: false,
+      article: {}
     }
   },
-  apollo: {
-    fetchedArticle: {
-      prefetch: true,
-      query: articleQuery,
-      variables() {
-        return {slug: this.$route.params.slug}
-      }
-    },
-    lastArticles: {
-      prefetch: true,
-      query: lastArticlesQuery,
-      variables() {
-        return {limit: 3}
+  async asyncData({app, route, error}) {
+    const result = await app.apolloProvider.defaultClient
+      .query({
+        query: articlePageQuery,
+        variables: {
+          slug: route.params.slug,
+          limit: 3
+        }
+      });
+    if (result.data.fetchedArticle.length) {
+      return {
+        article: result.data.fetchedArticle[0],
+        lastArticles: result.data.lastArticles?.filter(article => article.slug !== route.params.slug)
       }
     }
+    error({statusCode: 404, message: 'Post not found'})
   },
   computed: {
-    article() {
-      return this.fetchedArticle ? this.fetchedArticle[0] : {}
-    },
     articleImageUrl() {
       return this.article?.image?.formats
-    },
-    filteredLastArticles() {
-      return this.lastArticles?.filter(article => article.slug !== this.$route.params.slug);
     }
   },
   methods: {
@@ -251,6 +246,7 @@ export default {
         display: flex;
         flex-direction: column;
         gap: 12px;
+
         &--fixed {
           position: fixed;
           top: 88px;
