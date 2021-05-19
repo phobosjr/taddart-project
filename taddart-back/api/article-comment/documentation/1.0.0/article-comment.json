@@ -543,7 +543,6 @@
               "id",
               "title",
               "author",
-              "summary",
               "enableComments"
             ],
             "properties": {
@@ -563,9 +562,6 @@
                 "type": "string"
               },
               "author": {
-                "type": "string"
-              },
-              "summary": {
                 "type": "string"
               },
               "enableComments": {
@@ -630,9 +626,14 @@
               }
             }
           },
-          "published_at": {
+          "commentStatus": {
             "type": "string",
-            "format": "date-time"
+            "default": "waiting",
+            "enum": [
+              "waiting",
+              "refused",
+              "accepted"
+            ]
           }
         }
       },
@@ -647,9 +648,14 @@
           "users_permissions_user": {
             "type": "string"
           },
-          "published_at": {
+          "commentStatus": {
             "type": "string",
-            "format": "date-time"
+            "default": "waiting",
+            "enum": [
+              "waiting",
+              "refused",
+              "accepted"
+            ]
           },
           "created_by": {
             "type": "string"

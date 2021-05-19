@@ -38,6 +38,7 @@ export default {
     {src: '~/plugins/filters/dateTimeFilter/DateTimeFilter.js'},
     {src: '~/plugins/filters/strapiImage/defaultImage.js'},
     {src: '~/plugins/filters/numberView/NumberView.js'},
+    {src: '~/plugins/filters/contentFilter/ContentFilter.js'},
     {src: '~/plugins/filters/strapiImage/thumbnailImage.js'},
     {src: '~/plugins/gallery.js', ssr: true},
     {src: '~/plugins/tooltip.js', ssr: true},
@@ -88,7 +89,10 @@ export default {
     clientConfigs: {
       default: {
         httpEndpoint: process.env.ENV === 'production' ? 'http://10.0.3.24:1337/graphql' : 'http://localhost:1337/graphql'
-      }
+      },
+      clientSideClient: {
+        httpEndpoint: process.env.ENV === 'production' ? 'https://anebdal.tuddar-nat-abdelmumen.net/graphql' : 'http://localhost:1337/graphql'
+      },
     },
     errorHandler: '~/plugins/apollo-error-handler.js'
   },

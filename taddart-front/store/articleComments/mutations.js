@@ -3,6 +3,6 @@ export default {
     state.comments = comments;
   },
   add(state, comment) {
-    state.comments = [comment].concat(state.comments);
+    state.comments.push(comment);
   }
 }

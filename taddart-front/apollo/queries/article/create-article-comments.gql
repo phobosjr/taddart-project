@@ -1,0 +1,13 @@
+mutation ($comment: String, $article: ID) {
+  createArticleComment (input: {data: {comment: $comment, article: $article}}){
+    articleComment {
+      comment
+      created_at
+      user:users_permissions_user {
+        username
+      }
+      commentStatus
+    }
+  }
+}
+

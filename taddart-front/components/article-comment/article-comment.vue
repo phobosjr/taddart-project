@@ -42,26 +42,12 @@ export default {
     }
   },
   methods: {
-    submit() {
-      this.$axios.$post(`${this.$config.clientSide.strapiBackendUrl}/article-comments`,
-        {
-          comment: this.comment,
-          article: this.articleId
-        },
-        {
-          headers: {
-            'Authorization': `Bearer ${this.token}`
-          }
-        }).then((res) => {
-        this.$store.dispatch('articleComments/add', {
-          comment: res?.comment,
-          created_at: res?.created_at,
-          user: {
-            username: res?.users_permissions_user?.username
-          }
-        })
-        this.comment = '';
-      })
+    async submit() {
+      await this.$store.dispatch("articleComments/add-comment", {
+        comment: this.comment,
+        article: this.articleId
+      });
+      this.comment = '';
     },
     connect() {
       this.$store.dispatch('providers/show');

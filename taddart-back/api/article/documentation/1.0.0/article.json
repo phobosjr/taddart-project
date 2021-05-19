@@ -519,7 +519,6 @@
           "id",
           "title",
           "author",
-          "summary",
           "enableComments"
         ],
         "properties": {
@@ -606,9 +605,6 @@
             "type": "string",
             "maxLength": 50
           },
-          "summary": {
-            "type": "string"
-          },
           "enableComments": {
             "type": "boolean",
             "default": true
@@ -658,7 +654,6 @@
         "required": [
           "title",
           "author",
-          "summary",
           "enableComments"
         ],
         "properties": {
@@ -674,9 +669,6 @@
           "author": {
             "type": "string",
             "maxLength": 50
-          },
-          "summary": {
-            "type": "string"
           },
           "enableComments": {
             "type": "boolean",
