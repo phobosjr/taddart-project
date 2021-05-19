@@ -89,7 +89,6 @@ export default {
           let newViewedAlbums = [];
           newViewedAlbums.push(albumId);
           newViewedAlbums.push(viewedAlbums);
-          console.log(newViewedAlbums);
           this.$cookies.set('viewedAlbums', newViewedAlbums);
         })
       }

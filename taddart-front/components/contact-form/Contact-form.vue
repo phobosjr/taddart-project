@@ -4,65 +4,21 @@
       <h3>{{ $t('contact_title') }}</h3>
     </div>
     <div class="Contact-form__main">
-      <v-form class="Contact-form__main__form"
-              ref="form"
-              v-model="valid"
-              lazy-validation>
-        <v-text-field
-          v-model="name"
-          :label="$t('contact_form_name')"
-          :rules="nameRules"
-          class="Contact-form__main__form__text"
-          required
-        ></v-text-field>
-        <v-text-field
-          v-model="email"
-          :label="$t('contact_form_email')"
-          :rules="emailRules"
-          class="Contact-form__main__form__text"
-          required
-        ></v-text-field>
-        <v-textarea
-          v-model="message"
-          :counter="120"
-          :label="$t('contact_form_message')"
-          value=""
-          class="Contact-form__main__form__textarea"
-        ></v-textarea>
-        <button @click="submit()"
-                class="Contact-form__main__form__btn"
-        :disabled="!valid"
-        >
-          {{ $t('contact_form_submit_btn') }}
-        </button>
-        <div class="Contact-form__main__form__alert">
-          <v-alert
-            dense
-            outlined
-            type="success"
-            dismissible
-            v-if="alertSuccess"
-          >{{ $t('contact_form_alert_success_message') }}
-          </v-alert>
-
-          <v-alert
-            dense
-            outlined
-            type="warning"
-            dismissible
-            v-if="alertFailed"
-          >{{ $t('contact_form_alert_failed_message') }}
-          </v-alert>
-        </div>
-      </v-form>
+      <form class="Contact-form__main__form">
+        <input-form :label="$t('contact_form_name')" :label_error="$t('contact_form_name_required')" rule="^$"/>
+        <input-form :label="$t('contact_form_email')" :label_error="$t('contact_form_email_required')"/>
+      </form>
     </div>
   </div>
 </template>
 
 <script>
 
+import InputForm from "@/components/contact-form/InputForm";
+
 export default {
   name: "Contact-form",
+  components: {InputForm},
   data: () => {
     return {
       name: '',
@@ -161,14 +117,10 @@ export default {
     }
 
     &__form {
-      &__text {
-        color: #680606;
 
-        ::v-deep .error--text {
-          color: red;
-        }
-      }
-
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
       &__btn {
         position: relative;
         background-color: $td-yellow;

@@ -22,7 +22,7 @@
 
         <div class="Articles__item__right-side">
           <div class="Articles__item__right-side__title">{{ article.title }}</div>
-          <div class="Articles__item__right-side__summary" v-html="article.summary"></div>
+          <div class="Articles__item__right-side__summary" v-html="$options.filters.contentFilter(article.content)"></div>
           <a :href="`/article/${article.slug}`" class="Articles__item__right-side__link">
             <span >
               {{ $t('read_article_label') }}
