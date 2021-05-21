@@ -17,7 +17,7 @@ module.exports = {
   async find(ctx) {
     let entities;
     entities = await strapi.query('article-comment').find({article_eq: ctx.query.articleId, _sort:ctx.query._sort});
-    if (ctx.state?.user) {
+    if (ctx.state.user) {
       entities = _.filter(entities, (entity) => {
         if (entity.commentStatus === 'refused') {
           return false;
