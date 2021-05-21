@@ -1,6 +1,6 @@
 <template>
   <div
-    :class="['Article']" v-if="article">
+    :class="['Article']">
     <div class="Article__header" :style="{backgroundImage: 'url('+$options.filters.defaultImage(articleImageUrl)+')'}">
       <div class="td-overlay"></div>
       <div class="Article__header__title">
@@ -24,8 +24,8 @@
           <span>{{ article.title }}</span>
         </div>
         <div class="Article__main__content__text" v-html="article.content"></div>
-        <article-comments v-if="article.enableComments" :article-id="article.id"></article-comments>
-        <article-comment v-if="article.enableComments" :article-id="article.id"></article-comment>
+        <article-comments v-if="isCommentsEnabled" :article-id="article.id"></article-comments>
+        <article-comment v-if="isCommentsEnabled" :article-id="article.id"></article-comment>
       </div>
       <div class="Article__main__left-main">
         <div
@@ -84,7 +84,6 @@
       </div>
     </div>
   </div>
-  <not-found-error v-else></not-found-error>
 </template>
 
 <script>
@@ -95,11 +94,6 @@ export default {
   name: "Article",
   components: {ArticleComments},
   layout: 'layoutWithSmallHeader',
-  data: () => {
-    return {
-      article: {}
-    }
-  },
   async asyncData({app, route, error}) {
     const result = await app.apolloProvider.defaultClient
       .query({
@@ -120,6 +114,9 @@ export default {
   computed: {
     articleImageUrl() {
       return this.article?.image?.formats
+    },
+    isCommentsEnabled() {
+      return this.article?.enableComments;
     }
   },
   methods: {

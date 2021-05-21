@@ -31,9 +31,7 @@ export default {
     })
   },
   async mounted() {
-    if (process.client) {
-      await this.$store.dispatch("articleComments/find-by-articleId", this.articleId);
-    }
+    await this.$store.dispatch("articleComments/find-by-articleId", this.articleId);
   }
 }
 </script>

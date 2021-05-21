@@ -1,21 +1,23 @@
 <template>
   <div class="article-comment">
-    <div v-if="isAuthenticated" class="article-comment__connected">
+    <client-only>
+      <div v-if="isAuthenticated" class="article-comment__connected">
     <textarea v-model="comment" class="article-comment__connected__text" maxlength="255"
               :placeholder="$t('article_comment_placeholder')"></textarea>
-      <button class="article-comment__connected__btn" @click="submit()" :disabled="!validate">{{
-          $t('article_comment_btn_send_label')
-        }}
-      </button>
-    </div>
+        <button class="article-comment__connected__btn" @click="submit()" :disabled="!validate">{{
+            $t('article_comment_btn_send_label')
+          }}
+        </button>
+      </div>
 
-    <div v-else class="article-comment__disconnected">
-      <p>{{ $t('article_comment_text_login_label') }}</p>
-      <button class="article-comment__disconnected__btn" @click="showProvidersConnect()">{{
-          $t('article_comment_btn_login_label')
-        }}
-      </button>
-    </div>
+      <div v-else class="article-comment__disconnected">
+        <p>{{ $t('article_comment_text_login_label') }}</p>
+        <button class="article-comment__disconnected__btn" @click="showProvidersConnect()">{{
+            $t('article_comment_btn_login_label')
+          }}
+        </button>
+      </div>
+    </client-only>
   </div>
 </template>
 

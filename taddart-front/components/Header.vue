@@ -5,7 +5,7 @@
         <div :class="['Header__navbar__menu__item', 'td-transition',
           {'Header__navbar__menu__item--open': navBarMenuOpened},
           {'Header__navbar__menu__item--scrolled': isScrolled}]">
-          <a v-for="menu of menu_links" :href="localePath(menu.link, $i18n.locale)">{{ $t(`${menu.label_key}`)}}</a>
+          <a v-for="menu of menu_links" :href="localePath(menu.link, $i18n.locale)">{{ $t(`${menu.label_key}`) }}</a>
         </div>
         <button :class="['Header__navbar__menu__btn']"
                 aria-expanded="true" aria-label="Main Menu" @click="openNavBarMenu($event)">
@@ -28,21 +28,23 @@
         </div>
         <div
           :class="['Header__navbar__right-menu__list', 'td-transition', {'Header__navbar__right-menu__list--opened': langListOpened}]">
-          <a v-if="$i18n.locale === 'fr'" :href="switchLocalePath('kab')" class="item">
-            {{ $t('lang_kab_label') }}
-            <img :class="['Header__navbar__right-menu__img']"
-                 src="~/assets/images/header/kb-lang-32-32.png" alt="KAB">
-          </a>
-          <a v-if="$i18n.locale === 'kab'" :href="switchLocalePath('fr')" class="item">
-            {{ $t('lang_fr_label') }}
-            <img :class="['Header__navbar__right-menu__img']"
-                 src="~/assets/images/header/fr-lang.svg" alt="FR">
-          </a>
-          <ul class="Header__navbar__right-menu__list__user" v-if="isAuthenticated">
-            <li class="item">
-              <div @click="logout()">{{ $t('logout_label') }}</div>
-            </li>
-          </ul>
+          <client-only>
+            <a v-if="$i18n.locale === 'fr'" :href="switchLocalePath('kab')" class="item">
+              {{ $t('lang_kab_label') }}
+              <img :class="['Header__navbar__right-menu__img']"
+                   src="~/assets/images/header/kb-lang-32-32.png" alt="KAB">
+            </a>
+            <a v-if="$i18n.locale === 'kab'" :href="switchLocalePath('fr')" class="item">
+              {{ $t('lang_fr_label') }}
+              <img :class="['Header__navbar__right-menu__img']"
+                   src="~/assets/images/header/fr-lang.svg" alt="FR">
+            </a>
+            <ul class="Header__navbar__right-menu__list__user" v-if="isAuthenticated">
+              <li class="item">
+                <div @click="logout()">{{ $t('logout_label') }}</div>
+              </li>
+            </ul>
+          </client-only>
         </div>
       </div>
     </nav>
@@ -88,6 +90,7 @@ export default {
       userMenuListOpened: false,
       sliderIndex: 0,
       sliderTimeoutMs: 30000,
+      menuSelectedLabel: '',
       menu_links: [
         {
           link: 'index',
@@ -116,9 +119,6 @@ export default {
     }),
     sliderImages() {
       return this.header?.background_image;
-    },
-    menuSelectedLabel() {
-      return this.isAuthenticated ? this.username : this.$t(`lang_${this.$i18n.locale}_label`);
     }
   },
   apollo: {
@@ -130,7 +130,9 @@ export default {
   mounted() {
     setInterval(() => {
       this.startSlider();
-    }, this.sliderTimeoutMs)
+    }, this.sliderTimeoutMs);
+
+    this.menuSelectedLabel = this.isAuthenticated ? this.username : this.$t(`lang_${this.$i18n.locale}_label`);
   },
   methods: {
     handleScroll() {
@@ -176,7 +178,7 @@ export default {
       })
       this.$el.querySelector(`.Header__hero-slider__image-item--${this.sliderIndex}`).classList.add('Header__hero-slider__image-item--active');
     },
-    buildLinkPath (link) {
+    buildLinkPath(link) {
       return this.localePath(link, this.$i18n.locale);
     }
 
