@@ -2,7 +2,7 @@
   <div class="Input-form">
     <label>{{ label }}</label>
     <div class="Input-form__input">
-      <input type="text" v-model="inputValue" @blur="validateInput" @keyup="validateInput" :class="{'have-error': have_error}">
+      <textarea type="text" v-model="inputValue" @blur="validateInput" @keyup="validateInput" :class="{'have-error': have_error}"></textarea>
       <div v-if="have_error" class="Input-form__input__error">
         <span>{{ label_error }}</span>
       </div>
@@ -11,7 +11,7 @@
 </template>
 <script>
 export default {
-  name: 'input-form',
+  name: 'textarea-form',
   props: {
     label: {type: String, required: false, default: ''},
     label_error: {type: String, required: false, default: ''},
@@ -35,7 +35,6 @@ export default {
 <style lang="scss" scoped>
 .Input-form {
   width: 100%;
-  height: 50px;
   display: grid;
   grid-template-columns: 1fr 5fr;
   align-items: center;
@@ -51,10 +50,12 @@ export default {
     height: 100%;
     position: relative;
 
-    input {
+    textarea {
       border: 1px solid $td-black-43;
       padding: 15px;
       width: 100%;
+      min-height: 170px;
+      max-height: 250px;
 
       &.have-error {
         border: 1px solid #680606;

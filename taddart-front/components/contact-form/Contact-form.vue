@@ -5,49 +5,62 @@
     </div>
     <div class="Contact-form__main">
       <form class="Contact-form__main__form">
-        <input-form :label="$t('contact_form_name')" :label_error="$t('contact_form_name_required')" rule="^$"/>
-        <input-form :label="$t('contact_form_email')" :label_error="$t('contact_form_email_required')"/>
+        <input-form v-model="name" :label="$t('contact_form_name')" :label_error="$t('contact_form_name_required')"
+                    :rule="emptyRules"/>
+        <input-form v-model="email" :label="$t('contact_form_email')" :label_error="$t('contact_form_email_required')"
+                    :rule="emailRules"/>
+        <textarea-form v-model="message" :label="$t('contact_form_message')"
+                       :label_error="$t('contact_form_message_required')" :rule="emptyRules"/>
+        <div class="Contact-form__main__form__bottom">
+          <div :class="['Contact-form__main__form__alert',
+           {'Contact-form__main__form__alert--success': alertSuccess},
+           {'Contact-form__main__form__alert--failed': alertFailed}]">
+            <span v-if="alertSuccess">{{ $t('contact_form_alert_success_message') }}</span>
+            <span v-if="alertFailed">{{ $t('contact_form_alert_failed_message') }}</span>
+          </div>
+          <button class="Contact-form__main__form__btn" @click="postMessage()" :disabled="!isFormValid">
+            {{ $t('contact_form_submit_btn') }}
+          </button>
+        </div>
+
       </form>
     </div>
   </div>
 </template>
-
 <script>
 
 import InputForm from "@/components/contact-form/InputForm";
+import TextareaForm from "@/components/contact-form/TextareaForm";
 
 export default {
   name: "Contact-form",
-  components: {InputForm},
+  components: {InputForm, TextareaForm},
   data: () => {
     return {
       name: '',
       email: '',
       message: '',
+      emptyRules: '(.|\\s)*\\S(.|\\s)*',
+      emailRules: "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$",
       alertSuccess: false,
       alertFailed: false,
-      valid: true
     }
   },
   computed: {
-    nameRules() {
-      return [
-        v => !!v || this.$t('contact_form_name_required'),
-        v => v.length <= 10 || 'Name must be less than 10 characters',
-      ]
-    },
-    emailRules() {
-      return [
-        v => !!v || this.$t('contact_form_email_required'),
-        v => /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(v) || 'E-mail must be valid',
-      ]
+    isFormValid() {
+      const emptyRegExp = new RegExp(this.emptyRules);
+      const emailRegExp = new RegExp(this.emailRules);
+      return (this.name !== null && emptyRegExp.test(this.name)) &&
+        (this.email !== null && emailRegExp.test(this.email)) &&
+        (this.message !== null && emptyRegExp.test(this.message));
     }
   },
   methods: {
-    submit() {
-      if (!this.$refs.form.validate()) {
+    postMessage() {
+      if (!this.isFormValid) {
         return;
       }
+      debugger
       this.$axios.$post(`${this.$config.clientSide.strapiBackendUrl}/contact-messages`, {
         name: this.name,
         email: this.email,
@@ -107,6 +120,8 @@ export default {
   &__main {
     max-width: 500px;
     width: 100%;
+    height: 100%;
+    padding: 55px 0;
     margin: auto 0;
     transform: translatex(100%);
     opacity: 0;
@@ -120,18 +135,28 @@ export default {
 
       display: flex;
       flex-direction: column;
+      align-items: flex-end;
       gap: 25px;
+      position: relative;
+      height: inherit;
+
+      &__bottom {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
       &__btn {
-        position: relative;
         background-color: $td-yellow;
         width: 100px;
         height: 50px;
-        border: 1px solid $td-yellow;
         border-radius: 8px;
         color: white;
 
         &:hover {
           background-color: transparent;
+          border: 1px solid $td-yellow;
           color: black;
         }
 
@@ -144,11 +169,11 @@ export default {
       &__alert {
         margin: 10px 0;
 
-        .success--text {
+        &--success {
           color: $td-green;
         }
 
-        .warning--text {
+        &--failed {
           color: red;
         }
       }

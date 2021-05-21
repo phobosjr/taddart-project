@@ -115,7 +115,7 @@ export default {
     &__overlay {
       width: 100%;
       height: 100%;
-      background-color: rgb(0 0 0 / 45%);
+      background-color: $td-black-43;
       position: absolute;
     }
 

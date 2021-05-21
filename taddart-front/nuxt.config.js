@@ -29,8 +29,7 @@ export default {
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
-    '@/assets/style/scss/tooltip.scss',
-    '@/assets/style/scss/global.scss',
+    '~/assets/style/scss/global.scss',
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
@@ -41,7 +40,6 @@ export default {
     {src: '~/plugins/filters/contentFilter/ContentFilter.js'},
     {src: '~/plugins/filters/strapiImage/thumbnailImage.js'},
     {src: '~/plugins/gallery.js', ssr: true},
-    {src: '~/plugins/tooltip.js', ssr: true},
     {src: '~/plugins/v-agile.js', ssr: false},
     {src: '~/plugins/auth-check.js', ssr: false},
     {src: '~/plugins/directives/v-intersection.js', mode: 'client'},
@@ -52,8 +50,6 @@ export default {
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
-    // https://go.nuxtjs.dev/vuetify
-    '@nuxtjs/vuetify',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
