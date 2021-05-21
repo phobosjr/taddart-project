@@ -8,8 +8,23 @@ html, body {
   img {
     max-width: 100%;
   }
+
   a {
     color: $td-blue;
+  }
+
+  button, textarea, input {
+    border-style: none;
+    outline: none;
+  }
+
+  ul {
+    list-style-type: none;
+    margin-block-start: 0;
+    margin-block-end: 0;
+    margin-inline-start: 0;
+    margin-inline-end: 0;
+    padding-inline: 0;
   }
 }
 
@@ -24,6 +39,7 @@ html, body {
   transform: translate(0) !important;
   visibility: visible !important;
 }
+
 figure {
   text-align: center;
 

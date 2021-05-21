@@ -5,18 +5,7 @@
         <div :class="['Header__navbar__menu__item', 'td-transition',
           {'Header__navbar__menu__item--open': navBarMenuOpened},
           {'Header__navbar__menu__item--scrolled': isScrolled}]">
-          <a :href="localePath('index', $i18n.locale)">
-            {{ $t('home_title') }}
-          </a>
-          <a :href="localePath('/articles', $i18n.locale)">
-            {{ $t('articles_title') }}
-          </a>
-          <a :href="localePath('/gallery', $i18n.locale)">
-            {{ $t('gallery_title') }}
-          </a>
-          <a :href="localePath('/contenu-numerique', $i18n.locale)">
-            {{ $t('numeric_content_title') }}
-          </a>
+          <a v-for="menu of menu_links" :href="localePath(menu.link, $i18n.locale)">{{ $t(`${menu.label_key}`)}}</a>
         </div>
         <button :class="['Header__navbar__menu__btn']"
                 aria-expanded="true" aria-label="Main Menu" @click="openNavBarMenu($event)">
@@ -29,18 +18,14 @@
              alt="">
       </a>
       <div class="Header__navbar__right-menu">
-        <div class="Header__navbar__right-menu__selected" v-if="$i18n.locale === 'kab'" @click="openRightMenu($event)">
-          <span v-if="!username">{{ $t('lang_kab_label') }}</span>
-          <img :class="['Header__navbar__right-menu__img']"
+        <div class="Header__navbar__right-menu__selected" @click="openRightMenu($event)">
+          <span>{{ menuSelectedLabel }}</span>
+
+          <img v-if="$i18n.locale === 'kab'" :class="['Header__navbar__right-menu__img']"
                src="~/assets/images/header/kb-lang-32-32.png" alt="KAB">
-        </div>
-        <div class="Header__navbar__right-menu__selected" v-if=" $i18n.locale === 'fr'" @click="openRightMenu($event)">
-          <span v-if="!username">{{ $t('lang_fr_label') }}</span>
-          <img :class="['Header__navbar__right-menu__img']"
+          <img v-else :class="['Header__navbar__right-menu__img']"
                src="~/assets/images/header/fr-lang.svg" alt="FR">
         </div>
-        <div class="Header__navbar__right-menu__logout-btn" @click="openRightMenu($event)">{{ username }}</div>
-
         <div
           :class="['Header__navbar__right-menu__list', 'td-transition', {'Header__navbar__right-menu__list--opened': langListOpened}]">
           <a v-if="$i18n.locale === 'fr'" :href="switchLocalePath('kab')" class="item">
@@ -102,7 +87,26 @@ export default {
       langListOpened: false,
       userMenuListOpened: false,
       sliderIndex: 0,
-      sliderTimeoutMs: 30000
+      sliderTimeoutMs: 30000,
+      menu_links: [
+        {
+          link: 'index',
+          label_key: 'home_title'
+        },
+        {
+          link: '/articles',
+          label_key: 'articles_title'
+        },
+        {
+          link: '/gallery',
+          label_key: 'gallery_title'
+        },
+        {
+          link: '/contenu-numerique',
+          label_key: 'numeric_content_title'
+        }
+
+      ]
     }
   },
   computed: {
@@ -170,6 +174,9 @@ export default {
         entry.classList.remove('Header__hero-slider__image-item--active');
       })
       this.$el.querySelector(`.Header__hero-slider__image-item--${this.sliderIndex}`).classList.add('Header__hero-slider__image-item--active');
+    },
+    buildLinkPath (link) {
+      return this.localePath(link, this.$i18n.locale);
     }
 
   },
@@ -356,7 +363,8 @@ $navbar-height-small: 60px;
       width: calc(50% - 50px);
       position: relative;
       display: flex;
-      flex-direction: row-reverse;
+      flex-direction: row;
+      justify-content: flex-end;
       gap: 10px;
 
       &__selected {
