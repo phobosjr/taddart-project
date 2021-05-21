@@ -61,6 +61,11 @@
       "frValue": "Message"
     },
     {
+      "name": "contact_form_message_required",
+      "kabValue": "Izen ilaq ad yili",
+      "frValue": "Message obligatoire"
+    },
+    {
       "name": "contact_form_submit_btn",
       "kabValue": "Azen",
       "frValue": "Envoyer"

@@ -24,7 +24,6 @@ query getArticle ($slug: String, $limit: Int){
     }
     created_at
     author
-    summary
     article_categorie {
       category
       backgroundColor

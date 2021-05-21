@@ -107,7 +107,6 @@ export default {
   },
   computed: {
     ...mapGetters({
-      locale: 'locale',
       user: 'user/userData'
     }),
     username() {
@@ -237,7 +236,7 @@ $navbar-height-small: 60px;
       flex-direction: row;
       gap: 10px;
 
-      @media screen and (max-width: 992px){
+      @media screen and (max-width: 992px) {
         flex-direction: column;
       }
 
@@ -290,7 +289,8 @@ $navbar-height-small: 60px;
         width: 70px;
         height: 70px;
       }
-      @media screen and (max-width: 992px){
+
+      @media screen and (max-width: 992px) {
         display: none;
       }
     }
@@ -437,6 +437,7 @@ $navbar-height-small: 60px;
           padding: 8px 30px;
           height: 35px;
           border-right: 4px solid transparent;
+
           &:hover {
             background-color: $td-black-43;
             border-right: 4px solid $td-yellow;

@@ -2,8 +2,8 @@ query {
   articles {
     title
     slug
-    summary
     author
+    content
     created_at
     image {
       url

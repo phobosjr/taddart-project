@@ -39,7 +39,7 @@
             </div>
             <div class="infos-item">
               <img src="~/assets/images/calendar-image.svg">
-              <span>{{ article.created_at | formatDate(true) }}</span>
+              <span>{{ article.created_at | formatDate(false,"MMMM DD, YYYY") }}</span>
             </div>
             <div class="infos-item">
               <div class="Article__main__left-main__infos__category"
@@ -69,7 +69,7 @@
                   <div class="infos-item">
                     <img src="~/assets/images/calendar-image.svg">
                     <span>{{
-                        article.created_at | formatDate
+                        article.created_at | formatDate(false,"MMMM DD, YYYY")
                       }}</span>
                   </div>
 

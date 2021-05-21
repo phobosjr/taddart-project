@@ -43,7 +43,7 @@ export default {
     display: inline-block;
     width: 4.5rem;
     height: 4.5rem;
-    border: 6px solid rgba(9, 133, 81, 0.705);
+    border: 6px solid $td-loading-green;
     border-radius: 50%;
     border-top-color: #158876;
     animation: spin 1s ease-in-out infinite;
