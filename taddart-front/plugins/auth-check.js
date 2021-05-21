@@ -1,3 +1,3 @@
 export default async function (context) {
-  await context.store.dispatch("user/fetchUser");
+  await context.store.dispatch("user/fetch");
 }

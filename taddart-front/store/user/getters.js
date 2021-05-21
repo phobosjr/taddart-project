@@ -1,4 +1,5 @@
 export default {
-  userData: state => state.userData,
-  token: state => state.token
+  username: state => state.username,
+  token: state => state.token,
+  isAuthenticated: state => state.isAuthenticated
 }

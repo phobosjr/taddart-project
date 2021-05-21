@@ -28,7 +28,6 @@ export default {
   computed: {
     ...mapGetters({
       comments: 'articleComments/comments',
-      token: 'user/token',
     })
   },
   async mounted() {

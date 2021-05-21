@@ -38,7 +38,7 @@
             <img :class="['Header__navbar__right-menu__img']"
                  src="~/assets/images/header/fr-lang.svg" alt="FR">
           </a>
-          <ul class="Header__navbar__right-menu__list__user" v-if="username">
+          <ul class="Header__navbar__right-menu__list__user" v-if="isAuthenticated">
             <li class="item">
               <div @click="logout()">{{ $t('logout_label') }}</div>
             </li>
@@ -111,13 +111,14 @@ export default {
   },
   computed: {
     ...mapGetters({
-      user: 'user/userData'
+      username: 'user/username',
+      isAuthenticated: 'user/isAuthenticated'
     }),
-    username() {
-      return this.user?.username;
-    },
     sliderImages() {
       return this.header?.background_image;
+    },
+    menuSelectedLabel() {
+      return this.isAuthenticated ? this.username : this.$t(`lang_${this.$i18n.locale}_label`);
     }
   },
   apollo: {

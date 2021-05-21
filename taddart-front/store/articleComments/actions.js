@@ -4,16 +4,20 @@ import createArticleComments from "@/apollo/queries/article/create-article-comme
 export default {
   async 'find-by-articleId'({commit, rootState}, articleId) {
     const headers = rootState.user.token ? {'Authorization': `Bearer ${rootState.user.token}`} : {}
-    const result = await this.app.apolloProvider.clients.clientSideClient.query({
-      query: articleCommentsQuery,
-      variables: {
-        article: articleId,
-      },
-      context: {
-        headers
-      }
-    })
-    commit('init', result.data.articleComments);
+    try {
+      const result = await this.app.apolloProvider.clients.clientSideClient.query({
+        query: articleCommentsQuery,
+        variables: {
+          article: articleId,
+        },
+        context: {
+          headers
+        }
+      })
+      commit('SET_COMMENTS', result.data.articleComments);
+    } catch (err) {
+      console.error(err);
+    }
   },
   async 'add-comment'({commit, rootState}, payload) {
     const headers = rootState.user.token ? {'Authorization': `Bearer ${rootState.user.token}`} : {}
@@ -28,7 +32,7 @@ export default {
           headers
         }
       })
-      commit('add', result.data.createArticleComment.articleComment);
+      commit('ADD_COMMENT', result.data.createArticleComment.articleComment);
     } catch (err) {
       console.error(err);
     }

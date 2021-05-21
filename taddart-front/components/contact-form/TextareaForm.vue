@@ -46,16 +46,32 @@ export default {
   }
 
   &__input {
-    width: 100%;
+    max-width: 100%;
     height: 100%;
     position: relative;
+    overflow: hidden;
 
     textarea {
       border: 1px solid $td-black-30;
       padding: 15px;
       width: 100%;
-      min-height: 170px;
-      max-height: 250px;
+      max-width: 100%;
+      min-width: 100%;
+      min-height: 164px;
+      max-height: 200px;
+      &::-webkit-scrollbar {
+        width: 8px;
+        cursor: pointer;
+      }
+
+      &::-webkit-scrollbar-track {
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background-color: $td-black-30;
+        outline: 1px solid white;
+      }
 
       &.have-error {
         border: 1px solid #680606;

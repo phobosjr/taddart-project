@@ -1,8 +1,8 @@
 export default {
-  init(state, comments) {
+  SET_COMMENTS(state, comments) {
     state.comments = comments;
   },
-  add(state, comment) {
+  ADD_COMMENT(state, comment) {
     state.comments.push(comment);
   }
 }

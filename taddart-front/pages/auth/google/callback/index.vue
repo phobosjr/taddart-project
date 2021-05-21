@@ -9,7 +9,7 @@ export default {
   name: "index",
   layout: 'layoutWithSmallHeader',
   mixins: [authCallback],
-  async created() {
+  async mounted() {
     await this.callback('google');
   }
 }

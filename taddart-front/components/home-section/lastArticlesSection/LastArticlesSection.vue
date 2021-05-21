@@ -21,7 +21,8 @@
           <span>{{ article.created_at | formatDate(true) }}</span>
           <span>{{ $t('article_author_label') }}<strong>{{ article.author }}</strong></span>
         </div>
-        <div class="LastArticles__article__short-content" v-html="$options.filters.contentFilter(article.content)"></div>
+        <div class="LastArticles__article__short-content"
+             v-html="$options.filters.contentFilter(article.content)"></div>
 
       </div>
     </div>
@@ -174,6 +175,12 @@ export default {
       -webkit-line-clamp: 7;
       -webkit-box-orient: vertical;
       font-size: 16px;
+
+      &::v-deep {
+        p{
+          color: white !important;
+        }
+      }
     }
   }
 }
