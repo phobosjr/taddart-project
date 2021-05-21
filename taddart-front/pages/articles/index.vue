@@ -6,25 +6,31 @@
       <span>{{ $t('articles_title') }}</span>
 
     </div>
-    <div class="Articles__list" >
+    <div class="Articles__list">
       <div v-for="article in articles" class="Articles__item">
         <div class="Articles__item__left-side">
           <div class="Articles__item__left-side__img" :style="{backgroundImage: 'url('+ getImageUrl(article)+')'}">
-            <div class="Articles__item__left-side__category" :style="{backgroundColor: getArticleBackgroundColor(article)}">
-              {{article.article_categorie.category}}
-            </div>
-            <div class="Articles__item__left-side__infos">
-              <span class="author">{{ article.author }}</span>
-              <span class="date">{{ article.created_at | formatDate(true) }}</span>
+            <div class="Articles__item__left-side__category"
+                 :style="{backgroundColor: getArticleBackgroundColor(article)}">
+              {{ article.article_categorie.category }}
             </div>
           </div>
         </div>
 
         <div class="Articles__item__right-side">
+          <div class="Articles__item__right-side__infos">
+            <span class="author">
+            <img src="~/assets/images/user-image.svg">
+              {{ article.author }}
+            </span>
+            /
+            <span class="date">{{ article.created_at | formatDate(false,"MMMM DD, YYYY") }}</span>
+          </div>
           <div class="Articles__item__right-side__title">{{ article.title }}</div>
-          <div class="Articles__item__right-side__summary" v-html="$options.filters.contentFilter(article.content)"></div>
+          <div class="Articles__item__right-side__summary"
+               v-html="$options.filters.contentFilter(article.content)"></div>
           <a :href="`/article/${article.slug}`" class="Articles__item__right-side__link">
-            <span >
+            <span>
               {{ $t('read_article_label') }}
             </span>
             <td-arrow-right></td-arrow-right>
@@ -56,7 +62,7 @@ export default {
     getImageUrl(article) {
       return article?.image?.url
     },
-    getArticleBackgroundColor (article) {
+    getArticleBackgroundColor(article) {
       return article?.article_categorie?.backgroundColor
     }
   }
@@ -71,19 +77,14 @@ export default {
 
   &__list {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    margin-top: 25px;
+    grid-template-columns: 1fr 1fr;
+    max-width: 1000px;
+    width: 100%;
+    margin: 25px auto;
 
-    @media screen and (max-width: 1700px) {
-      grid-template-columns: 1fr 1fr;
-
-    }
-
-    @media screen and (max-width: 1130px) {
+    @media screen and (max-width: 992px) {
       grid-template-columns: 1fr;
-
     }
-
   }
 
   &__breadcrumb {
@@ -93,12 +94,20 @@ export default {
   &__item {
     $self: &;
     position: relative;
-    width: 550px;
+    width: 100%;
     margin: 10px auto;
     display: flex;
     flex-direction: column;
     gap: 0 15px;
     border: 3px solid $td-gray-61;
+
+    &:first-child {
+      width: 100%;
+      grid-column-end: 2 span;
+      @media screen and (max-width: 992px) {
+        grid-column-end: 1 span;
+      }
+    }
 
     @media screen and (max-width: 580px) {
       width: 100%;
@@ -139,7 +148,7 @@ export default {
         position: absolute;
         margin: auto;
         top: 10px;
-        left: 10px;
+        right: 10px;
         width: 100px;
         height: 50px;
         padding: 15px;
@@ -147,28 +156,32 @@ export default {
         color: white;
         font-weight: bolder;
       }
-      &__infos {
-        position: absolute;
-        bottom: 10px;
-        left: 10px;
-
-        .author {
-          color: white;
-          font-weight: bolder;
-        }
-
-        .date {
-          color: white;
-        }
-
-      }
-
     }
 
     &__right-side {
       width: 100%;
       display: flex;
       flex-direction: column;
+
+      &__infos {
+        padding: 0 10px;
+        margin: 5px 0;
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+
+        .author {
+          color: black;
+          font-weight: bolder;
+          display: flex;
+          gap: 5px;
+        }
+
+        .date {
+          color: black;
+        }
+
+      }
 
       &__title {
         color: black;
@@ -202,20 +215,24 @@ export default {
         justify-content: space-between;
         align-items: center;
         text-decoration: none;
+
         &:hover {
           svg {
             transform: translateX(10px);
             fill: $td-green;;
           }
+
           span {
             color: $td-green;
           }
         }
+
         span {
           color: $td-blue;
           text-shadow: 0 0 0 #680606;
           font-size: 20px;
         }
+
         svg {
           float: right;
           color: $td-blue;

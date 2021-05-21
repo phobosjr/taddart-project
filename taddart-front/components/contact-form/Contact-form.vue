@@ -152,7 +152,9 @@ export default {
         width: 100px;
         height: 50px;
         border-radius: 8px;
+        border-style: none;
         color: white;
+        cursor: pointer;
 
         &:hover {
           background-color: transparent;

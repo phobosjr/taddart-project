@@ -41,6 +41,7 @@ export default {
     {src: '~/plugins/filters/strapiImage/thumbnailImage.js'},
     {src: '~/plugins/gallery.js', ssr: true},
     {src: '~/plugins/v-agile.js', ssr: false},
+    {src: '~/plugins/moment.js', ssr: false},
     {src: '~/plugins/auth-check.js', ssr: false},
     {src: '~/plugins/directives/v-intersection.js', mode: 'client'},
   ],

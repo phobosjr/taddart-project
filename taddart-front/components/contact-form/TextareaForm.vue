@@ -51,7 +51,7 @@ export default {
     position: relative;
 
     textarea {
-      border: 1px solid $td-black-43;
+      border: 1px solid $td-black-30;
       padding: 15px;
       width: 100%;
       min-height: 170px;

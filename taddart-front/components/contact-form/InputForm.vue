@@ -52,9 +52,11 @@ export default {
     position: relative;
 
     input {
-      border: 1px solid $td-black-43;
+      border: 1px solid $td-black-30;
       padding: 15px;
       width: 100%;
+      font-size: 15px;
+      font-family: 'Montserrat', sans-serif;
 
       &.have-error {
         border: 1px solid #680606;
