@@ -10,6 +10,10 @@
           <li><a :href="localePath('/contenu-numerique', $i18n.locale)">
             {{ $t('numeric_content_title') }}
           </a></li>
+          <li><a :href="localePath('/articles', $i18n.locale)">
+            {{ $t('articles_title') }}
+          </a></li>
+
         </ul>
       </div>
       <div class="Footer__content__col">
@@ -20,13 +24,13 @@
           <li>
             <a href="www.facebook.com">
               {{ $t('follow_us_title_label') }}
-            <img class="Footer__content__col__list__img" src="~/assets/images/facebook-logo-image.png">
-          </a></li>
+              <img class="Footer__content__col__list__img" src="~/assets/images/facebook-logo-image.png">
+            </a></li>
         </ul>
       </div>
     </div>
     <div class="Footer__copyright">
-      <span>{{$t('footer_copyrights_label')}} &copy; {{ new Date().getFullYear() }}</span>
+      <span>{{ $t('footer_copyrights_label') }} &copy; {{ new Date().getFullYear() }}</span>
     </div>
   </nav>
 </template>
@@ -48,17 +52,22 @@ export default {
   &__content {
     display: flex;
     flex-direction: row;
-    padding: 35px;
     margin: auto;
     color: white;
     max-width: 1000px;
 
     &__col {
       margin: 0 25px;
+
       &__list {
         list-style: none;
         padding-left: 10px;
+        line-height: 30px;
 
+        a {
+         display: flex;
+          gap: 10px;
+        }
         &__img {
           width: 30px;
           height: 30px;
